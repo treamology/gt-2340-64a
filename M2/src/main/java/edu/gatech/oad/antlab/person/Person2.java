@@ -31,8 +31,8 @@ public class Person2 {
 	 */
 	private String calc(String input) {
 	  //Person 2 put your implementation here
-        Random rng = new System.Random();
-        char[] letters = input.ToCharArray();
+        Random rng = new Random();
+        char[] letters = input.toCharArray();
         int index;
         String output = "";
         for (int i = 0; i < input.length(); i++) {
