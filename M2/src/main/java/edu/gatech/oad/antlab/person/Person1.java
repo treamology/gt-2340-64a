@@ -31,7 +31,7 @@ public class Person1 {
 	 */
 	private String calc(String input) {
 	  //Person 1 put your implementation here
-		rotatedString = input.substring(2);
+		String rotatedString = input.substring(2);
 		rotatedString.concat(input.substring(0,2));
 	  return rotatedString;
 	}
