@@ -36,7 +36,7 @@ public class Person2 {
         int index;
         String output = "";
         for (int i = 0; i < input.length(); i++) {
-            index = rng.NextInt(input.length() - i);
+            index = rng.nextInt(input.length() - i);
             output = output + letters[index];
             letters[index] = letters[input.length() - i - 1];
         }
