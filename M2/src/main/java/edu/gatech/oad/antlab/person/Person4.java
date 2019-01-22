@@ -1,5 +1,7 @@
 package edu.gatech.oad.antlab.person;
 
+import java.util.stream.Collectors;
+
 /**
  *  A simple class for person 4
  *  returns their name and a
@@ -31,7 +33,12 @@ public class Person4 {
      */
     private String calc(String input) {
       //Person 4 put your implementation here
-      return null;
+      StringBuilder stringBuilder = new StringBuilder();
+      for (int i = 0; i < input.length(); i++) {
+        char newChar = (char)(input.charAt(i) + 1);
+        stringBuilder.append(newChar);
+      }
+      return stringBuilder.toString();
     }
     
     /**
