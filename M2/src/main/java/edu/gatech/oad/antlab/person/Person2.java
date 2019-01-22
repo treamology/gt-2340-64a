@@ -1,5 +1,5 @@
 package edu.gatech.oad.antlab.person;
-
+import java.util.Random;
 /**
  *  A simple class for person 2
  *  returns their name and a
@@ -31,7 +31,16 @@ public class Person2 {
 	 */
 	private String calc(String input) {
 	  //Person 2 put your implementation here
-	  return null;
+        Random rng = new System.Random();
+        char[] letters = input.ToCharArray();
+        int index;
+        String output = "";
+        for (int i = 0; i < input.length(); i++) {
+            index = rng.NextInt(input.length() - i);
+            output = output + letters[index];
+            letters[index] = letters[input.length() - i - 1];
+        }
+	    return output;
 	}
 	/**
 	 * Return a string rep of this object
