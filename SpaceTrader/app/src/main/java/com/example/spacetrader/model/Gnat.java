@@ -1,4 +1,4 @@
-package Model;
+package com.example.spacetrader.model;
 
 //import Ship;
 

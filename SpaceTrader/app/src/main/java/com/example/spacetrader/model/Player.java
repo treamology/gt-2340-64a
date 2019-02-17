@@ -1,4 +1,4 @@
-package Model;
+package com.example.spacetrader.model;
 
 /**
  * Class that  holds information about the player character
