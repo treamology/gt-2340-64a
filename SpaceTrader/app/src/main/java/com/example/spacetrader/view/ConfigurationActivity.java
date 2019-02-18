@@ -1,6 +1,8 @@
 package com.example.spacetrader.view;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -76,6 +78,30 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         skillPointsTextview.setText(getSkillPointsString());
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Confirmation");
+        builder.setMessage("Continue?");
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                viewModel.createGame(nameTextbox.getText().toString(),
+                        skillPoints[0],
+                        skillPoints[1],
+                        skillPoints[2],
+                        skillPoints[3],
+                        GameState.Difficulty.values()[difficultySpinner
+                                .getSelectedItemPosition()]);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog confirmDialog = builder.create();
+
         createGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,13 +119,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                     return;
                 }
 
-                viewModel.createGame(nameTextbox.getText().toString(),
-                                     skillPoints[0],
-                                     skillPoints[1],
-                                     skillPoints[2],
-                                     skillPoints[3],
-                                     GameState.Difficulty.values()[difficultySpinner
-                                             .getSelectedItemPosition()]);
+                confirmDialog.show();
             }
         });
     }

@@ -35,7 +35,8 @@ public class ConfigurationViewModel extends AndroidViewModel {
         //Sets game attributes
         GameState game = new GameState(player, difficulty);
         Log.d("APP",String.format("Player name: %s\n Pilot: %d\n Fighter: %d\n Trader: %d\n Engineer: %d\n Difficulty: %s",
-                playerName, pilotSkill, fighterSkill, traderSkill, engineerSkill, difficulty.toString()));
+                player.getName(), player.getPilot(), player.getFighter(),
+                player.getTrader(), player.getEngineer(), game.currentDifficulty.toString()));
     }
 
     //Increases or decreases Engineer Skill by int EngineerSkill
