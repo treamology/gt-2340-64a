@@ -18,4 +18,5 @@
         <item>Impossible</item>
     </string-array>
     <string name="skillpoints_notify">You haven\'t used all your skillpoints yet!</string>
+    <string name="empty_name_notify">You need to enter a name!</string>
 </resources>

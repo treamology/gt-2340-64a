@@ -16,8 +16,6 @@ import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.Player;
 import com.example.spacetrader.viewmodel.ConfigurationViewModel;
 
-import java.util.stream.IntStream;
-
 public class ConfigurationActivity extends AppCompatActivity {
 
     private EditText nameTextbox;
@@ -81,7 +79,14 @@ public class ConfigurationActivity extends AppCompatActivity {
         createGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Check if we've allocated all the skill points and notify the user if we haven't.
+                // Check that the player has entered a name.
+                if (nameTextbox.getText().toString().length() == 0) {
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.empty_name_notify, Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+
+                // Check that the player has allocated all skill points.
                 if (getTotalSkill() < Player.getSkillPointMax()) {
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.skillpoints_notify, Toast.LENGTH_SHORT);
                     toast.show();
