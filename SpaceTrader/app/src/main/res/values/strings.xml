@@ -10,4 +10,11 @@
     <string name="engineer_skill">Engineer</string>
     <string name="difficulty_option">Difficulty</string>
     <string name='create_game'>Create Game</string>
+    <string-array name="difficulty">
+        <item>Beginner</item>
+        <item>Easy</item>
+        <item>Normal</item>
+        <item>Hard</item>
+        <item>Impossible</item>
+    </string-array>
 </resources>

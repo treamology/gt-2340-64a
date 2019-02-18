@@ -1,15 +1,19 @@
 package com.example.spacetrader.view;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.spacetrader.R;
+import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.Player;
+import com.example.spacetrader.viewmodel.ConfigurationViewModel;
 
 import java.util.stream.IntStream;
 
@@ -17,20 +21,27 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     private EditText nameTextbox;
     private TextView skillPointsTextview;
+    private Spinner difficultySpinner;
+    private Button createGameButton;
 
     private int[] skillPoints = new int[Player.Skill.values().length];
     private Button[] plusButtons = new Button[Player.Skill.values().length];
     private Button[] minusButtons = new Button[Player.Skill.values().length];
     private TextView[] pointTextViews = new TextView[Player.Skill.values().length];
 
+    private ConfigurationViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.configuration_activity);
 
+        viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
 
         nameTextbox = findViewById(R.id.nameTextbox);
         skillPointsTextview = findViewById(R.id.skillPointsText);
+        difficultySpinner = findViewById(R.id.difficultySpinner);
+        createGameButton = findViewById(R.id.createButton);
 
         plusButtons[0] = findViewById(R.id.pilotPlusButton);
         minusButtons[0] = findViewById(R.id.pilotMinusButton);
@@ -65,6 +76,19 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
 
         skillPointsTextview.setText(getSkillPointsString());
+
+        createGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.createGame(nameTextbox.getText().toString(),
+                                     skillPoints[0],
+                                     skillPoints[1],
+                                     skillPoints[2],
+                                     skillPoints[3],
+                                     GameState.Difficulty.values()[difficultySpinner
+                                             .getSelectedItemPosition()]);
+            }
+        });
     }
 
     void changeSkillPoints(int byAmount, Player.Skill skillType) {
