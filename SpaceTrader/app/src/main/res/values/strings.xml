@@ -9,7 +9,7 @@
     <string name="trader_skill">Trader</string>
     <string name="engineer_skill">Engineer</string>
     <string name="difficulty_option">Difficulty</string>
-    <string name='create_game'>Create Game</string>
+    <string name="create_game">Create Game</string>
     <string-array name="difficulty">
         <item>Beginner</item>
         <item>Easy</item>
@@ -17,4 +17,5 @@
         <item>Hard</item>
         <item>Impossible</item>
     </string-array>
+    <string name="skillpoints_notify">You haven\'t used all your skillpoints yet!</string>
 </resources>

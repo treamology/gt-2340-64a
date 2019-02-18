@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.model.GameState;
@@ -80,6 +81,13 @@ public class ConfigurationActivity extends AppCompatActivity {
         createGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if we've allocated all the skill points and notify the user if we haven't.
+                if (getTotalSkill() < Player.getSkillPointMax()) {
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.skillpoints_notify, Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+
                 viewModel.createGame(nameTextbox.getText().toString(),
                                      skillPoints[0],
                                      skillPoints[1],
