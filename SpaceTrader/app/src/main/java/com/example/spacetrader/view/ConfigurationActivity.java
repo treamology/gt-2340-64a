@@ -3,6 +3,7 @@ package com.example.spacetrader.view;
 import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -92,6 +93,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                         skillPoints[3],
                         GameState.Difficulty.values()[difficultySpinner
                                 .getSelectedItemPosition()]);
+                transitionToGameState();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -122,6 +124,13 @@ public class ConfigurationActivity extends AppCompatActivity {
                 confirmDialog.show();
             }
         });
+    }
+
+    void transitionToGameState() {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+        startActivity(intent);
+        finish();
     }
 
     void changeSkillPoints(int byAmount, Player.Skill skillType) {

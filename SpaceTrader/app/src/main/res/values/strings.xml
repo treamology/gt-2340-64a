@@ -19,4 +19,7 @@
     </string-array>
     <string name="skillpoints_notify">You haven\'t used all your skillpoints yet!</string>
     <string name="empty_name_notify">You need to enter a name!</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="title_planet_info">Planet Info</string>
+    <string name="title_universe">Universe</string>
 </resources>
