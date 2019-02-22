@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_planet_info"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="@string/title_planet_info"/>
+
+    <item
+        android:id="@+id/navigation_warp"
+        android:icon="@drawable/baseline_flight_takeoff_black_24dp"
+        android:title="@string/title_universe"/>
+
+</menu>
+

@@ -42,16 +42,8 @@ public class GameActivity extends FragmentActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Menu menu = navigation.getMenu();
-        for (int i = 0; i < menu.size(); i++) {
-            MenuItem item = menu.getItem(i);
-            switch (item.getItemId()) {
-                case R.id.navigation_planet_info:
-                    fragmentMap.put(R.id.navigation_planet_info, new PlanetInfoFragment());
-                case R.id.navigation_warp:
-                    fragmentMap.put(R.id.navigation_warp, new UniverseFragment());
-            }
-        }
+        fragmentMap.put(R.id.navigation_planet_info, new PlanetInfoFragment());
+        fragmentMap.put(R.id.navigation_warp, new UniverseFragment());
 
         replaceCurrentFragment(fragmentMap.get(R.id.navigation_planet_info));
     }

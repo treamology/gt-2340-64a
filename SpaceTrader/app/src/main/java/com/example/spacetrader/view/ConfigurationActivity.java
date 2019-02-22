@@ -127,6 +127,8 @@ public class ConfigurationActivity extends AppCompatActivity {
     }
 
     void transitionToGameState() {
+        // The flags being set indicate that we don't want to go back to the previous activity
+        // when we press the back button. Once the game starts, it's started.
         Intent intent = new Intent(this, GameActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
         startActivity(intent);
