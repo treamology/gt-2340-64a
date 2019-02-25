@@ -1,4 +1,4 @@
-package com.example.spacetrader.model;
+package com.example.spacetrader.model.system;
 
 public abstract class SolarSystem {
     String name;

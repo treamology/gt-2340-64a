@@ -1,4 +1,4 @@
-package com.example.spacetrader.model.PlanetData;
+package com.example.spacetrader.model.system;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -25,7 +25,7 @@ public class PlanetGeneration {
     /**
      * Resets the set of taken names, should be done upon game creation
      */
-    public static void ClearNames() {
+    public static void clearNames() {
         takenNames = new HashSet<Integer>();
     }
 
@@ -33,7 +33,7 @@ public class PlanetGeneration {
      * Randomly picks a name from the planet without allowing duplicates
      * @return the name
      */
-    public static String GenerateName () {
+    public static String generateName () {
         String name = null;
         int index = new Random().nextInt(names.length);
         int endLoop = index;

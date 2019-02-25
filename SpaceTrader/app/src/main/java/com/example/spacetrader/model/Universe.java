@@ -1,13 +1,12 @@
 package com.example.spacetrader.model;
 
-import com.example.spacetrader.model.PlanetData.Planet;
-import com.example.spacetrader.model.PlanetData.PlanetGeneration;
-import com.example.spacetrader.model.PlanetData.Position;
+import com.example.spacetrader.model.system.Planet;
+import com.example.spacetrader.model.system.PlanetGeneration;
+import com.example.spacetrader.model.system.Position;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Holds the world map and all systems in it
@@ -19,8 +18,8 @@ public class Universe {
     private static final int sizeY = 100;
     private static HashSet<Position> takenPositions;
 
-    public static void OnCreation () {
-        PlanetGeneration.ClearNames();
+    public static void createUniverse () {
+        PlanetGeneration.clearNames();
         takenPositions = new HashSet<>();
         planets = new ArrayList<>();
         for (int i = 0; i < Planet.getNumPlanets(); i++) {
@@ -29,13 +28,13 @@ public class Universe {
         }
     }
 
-    public static Position GeneratePosition() {
+    public static Position generatePosition() {
         Random rng = new Random();
         int x = rng.nextInt(sizeX);
         int y = rng.nextInt(sizeY);
         Position pos = new Position(x, y);
         if (takenPositions.contains(pos)) {
-            return GeneratePosition();
+            return generatePosition();
         } else {
             takenPositions.add(pos);
             return pos;
