@@ -1,30 +1,32 @@
 package com.example.spacetrader.model.system;
 
-public abstract class SolarSystem {
-    String name;
-    int locationX;
-    int locationY;
-    int techLevel;
-    int resource;
+import com.example.spacetrader.model.GameState;
+import com.example.spacetrader.model.Universe;
 
-    final int[] techLevels = new int[]{0,1,2,3,4,5,6,7};
-    final int[] resources = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,12};
+public abstract class SolarSystem {
+
+    String name;
+    Position position;
+    TechLevel techLevel;
+    ResourceBias resourceBias;
 
     public SolarSystem(String name, int x, int y) {
         this.name = name;
-        techLevel = (int)(Math.random() * 7);
-        resource = (int)(Math.random() * 12);
-        locationX = x;
-        locationY = y;
+        techLevel = TechLevel.values()[GameState.rng.nextInt(TechLevel.values().length)];
+        resourceBias = ResourceBias.values()[GameState.rng.nextInt(ResourceBias.values().length)];
+        position = Universe.generatePosition();
     }
 
-    public int getTechLevel() {
+    public TechLevel getTechLevel() {
         return techLevel;
     }
-    public int getResource() {
-        return resource;
+    public ResourceBias getResourceBias() {
+        return resourceBias;
     }
     public String getName() {
         return name;
+    }
+    public Position getPosition() {
+        return position;
     }
 }

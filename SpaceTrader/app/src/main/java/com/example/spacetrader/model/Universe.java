@@ -29,9 +29,8 @@ public class Universe {
     }
 
     public static Position generatePosition() {
-        Random rng = new Random();
-        int x = rng.nextInt(sizeX);
-        int y = rng.nextInt(sizeY);
+        int x = GameState.rng.nextInt(sizeX);
+        int y = GameState.rng.nextInt(sizeY);
         Position pos = new Position(x, y);
         if (takenPositions.contains(pos)) {
             return generatePosition();
