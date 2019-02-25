@@ -1,7 +1,7 @@
 package com.example.spacetrader.model;
 
-import com.example.spacetrader.model.system.Planet;
-import com.example.spacetrader.model.system.PlanetGeneration;
+import android.util.Log;
+
 import com.example.spacetrader.model.system.Position;
 import com.example.spacetrader.model.system.ResourceBias;
 import com.example.spacetrader.model.system.SolarSystem;
@@ -9,20 +9,23 @@ import com.example.spacetrader.model.system.TechLevel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Random;
 
 /**
  * Holds the world map and all systems in it
  */
 public class Universe {
 
-    private static ArrayList<SolarSystem> systems;
-    private static final int sizeX = 150; //sizeX and sizeY are the maximum coordinates of the map
-    private static final int sizeY = 100;
-    private static HashSet<Position> takenPositions;
-    private static HashSet<Integer> takenNames;
+    private ArrayList<SolarSystem> systems;
+    private final int sizeX = 150; //sizeX and sizeY are the maximum coordinates of the map
+    private final int sizeY = 100;
+    private HashSet<Position> takenPositions;
+    private HashSet<Integer> takenNames;
 
-    public static void createUniverse() {
+    /**
+     * Generates a new universe with systems at various positions. This constructor shouldn't be
+     * called directly, but rather through the creation of a new game.
+     */
+    Universe() {
         takenPositions = new HashSet<>();
         takenNames = new HashSet<>();
         systems = new ArrayList<>();
@@ -37,17 +40,24 @@ public class Universe {
      *
      * @return A new, randomly generated solar system.
      */
-    private static SolarSystem generateSystem() {
-        TechLevel techLevel = TechLevel.values()[GameState.rng.nextInt(TechLevel.values().length)];
-        ResourceBias resourceBias = ResourceBias.values()[GameState.rng.nextInt(ResourceBias.values().length)];
+    private SolarSystem generateSystem() {
+        GameState game = GameState.getState();
+
+        TechLevel techLevel = TechLevel.values()[game.rng.nextInt(TechLevel.values().length)];
+        ResourceBias resourceBias = ResourceBias.values()[game.rng.nextInt(ResourceBias.values().length)];
         Position position = generateSystemPosition();
         String name = generateSystemName();
+
+        Log.d("APP", String.format("Generated system with name %s and position (%d, %d).", name, position.getX(), position.getY()));
+
         return new SolarSystem(name, position, techLevel, resourceBias);
     }
 
-    public static Position generateSystemPosition() {
-        int x = GameState.rng.nextInt(sizeX);
-        int y = GameState.rng.nextInt(sizeY);
+    private Position generateSystemPosition() {
+        GameState game = GameState.getState();
+
+        int x = game.rng.nextInt(sizeX);
+        int y = game.rng.nextInt(sizeY);
         Position pos = new Position(x, y);
         if (takenPositions.contains(pos)) {
             return generateSystemPosition();
@@ -61,9 +71,9 @@ public class Universe {
      * Randomly picks a name from the planet without allowing duplicates
      * @return the name
      */
-    public static String generateSystemName() {
+    private String generateSystemName() {
         String name = null;
-        int index = GameState.rng.nextInt(SolarSystem.NAMES.length);
+        int index = GameState.getState().rng.nextInt(SolarSystem.NAMES.length);
         int endLoop = index;
         do {
             if (!takenNames.contains(index)) {
