@@ -88,4 +88,8 @@ public class Universe {
         }
         return name;
     }
+
+    public ArrayList<SolarSystem> getSystems() {
+        return systems;
+    }
 }
