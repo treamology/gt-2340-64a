@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">Space Trader</string>
+    <string name="new_game_header">New Game</string>
+    <string name="name_option">Name</string>
+    <string name="name_textbox_placeholder">Your Name</string>
+    <string name="skill_points_option">Skill Points (%d remaining)</string>
+    <string name="pilot_skill">Pilot</string>
+    <string name="fighter_skill">Fighter</string>
+    <string name="trader_skill">Trader</string>
+    <string name="engineer_skill">Engineer</string>
+    <string name="difficulty_option">Difficulty</string>
+    <string name="create_game">Create Game</string>
+    <string-array name="difficulty">
+        <item>Beginner</item>
+        <item>Easy</item>
+        <item>Normal</item>
+        <item>Hard</item>
+        <item>Impossible</item>
+    </string-array>
+    <string name="skillpoints_notify">You haven\'t used all your skillpoints yet!</string>
+    <string name="empty_name_notify">You need to enter a name!</string>
+
+    <!-- Tabs -->
+    <string name="title_planet_info">System Info</string>
+    <string name="title_universe">Universe</string>
+
+    <!-- System Info -->
+    <string name="si_location_header">Location:</string>
+    <string name="si_tech_level_header">Tech Level:</string>
+    <string name="si_resources_header">Resources:</string>
 </resources>

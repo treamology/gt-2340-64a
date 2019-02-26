@@ -9,6 +9,18 @@ package com.example.spacetrader.model;
  * skillPointMax: The maximum allocatable points across the four skills
  */
 public class Player {
+    public enum Skill {
+        PILOT("Pilot"),
+        FIGHTER("Fighter"),
+        TRADER("Trader"),
+        ENGINEER("Engineer");
+
+        private String stringRep;
+        Skill(String stringRep) {
+            this.stringRep = stringRep;
+        }
+    }
+
     String name;
     int pilot;
     int fighter;
