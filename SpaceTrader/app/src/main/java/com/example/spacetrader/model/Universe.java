@@ -9,15 +9,16 @@ import com.example.spacetrader.model.system.TechLevel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Holds the world map and all systems in it
  */
 public class Universe {
 
-    private ArrayList<SolarSystem> systems;
-    private final int sizeX = 150; //sizeX and sizeY are the maximum coordinates of the map
-    private final int sizeY = 100;
+    public static final int SIZE_X = 150; //sizeX and sizeY are the maximum coordinates of the map
+    public static final int SIZE_Y = 100;
+    private List<SolarSystem> systems;
     private HashSet<Position> takenPositions;
     private HashSet<Integer> takenNames;
 
@@ -56,8 +57,8 @@ public class Universe {
     private Position generateSystemPosition() {
         GameState game = GameState.getState();
 
-        int x = game.rng.nextInt(sizeX);
-        int y = game.rng.nextInt(sizeY);
+        int x = game.rng.nextInt(SIZE_X);
+        int y = game.rng.nextInt(SIZE_Y);
         Position pos = new Position(x, y);
         if (takenPositions.contains(pos)) {
             return generateSystemPosition();
@@ -89,7 +90,7 @@ public class Universe {
         return name;
     }
 
-    public ArrayList<SolarSystem> getSystems() {
+    public List<SolarSystem> getSystems() {
         return systems;
     }
 }
