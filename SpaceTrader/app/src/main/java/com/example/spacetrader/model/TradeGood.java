@@ -1,6 +1,7 @@
 package com.example.spacetrader.model;
 
 import com.example.spacetrader.model.system.ResourceBias;
+import com.example.spacetrader.model.system.SolarSystem;
 
 /**
  * Holds the 10 trade goods in the game, incluing their names, base prices, and if they
@@ -29,17 +30,18 @@ public enum TradeGood {
     ROBOTS("Robots", 6, 4, 7, 5000, -150, 100, "lackOfWorkers",
             null, null, 3500, 5000);
 
-    public String name;
-    public int MTLP;
-    public int MTLU;
-    public int TPP;
-    public int IPL;
-    public int var;
-    public String IE;
-    public ResourceBias CR;
-    public ResourceBias ER;
-    public int MTL;
-    public int MTH;
+    private String name;
+    private int MTLP;
+    private int MTLU;
+    private int TPP;
+    private int basePrice;
+    private int IPL;
+    private int var;
+    private String IE;
+    private ResourceBias CR;
+    private ResourceBias ER;
+    private int MTL;
+    private int MTH;
 
     /**
      * Initializes a trade good
@@ -56,12 +58,14 @@ public enum TradeGood {
      * @param MTL lowest price a space trader can value it
      * @param MTH highest price a space trader can value it
      */
+
     TradeGood(String name, int MTLP, int MTLU, int TPP, int basePrice, int IPL, int var, String IE,
               ResourceBias CR, ResourceBias ER, int MTL, int MTH) {
         this.name = name;
         this.MTLP = MTLP;
         this.MTLU = MTLU;
         this.TPP = TPP;
+        this.basePrice = basePrice;
         this.IPL = IPL;
         this.var = var;
         this.IE = IE;
@@ -70,4 +74,42 @@ public enum TradeGood {
         this.MTL = MTL;
         this.MTH = MTH;
     }
+
+    //IE has yet to be implemented on a planet scale and should be updated in price change if so.
+    //Price for space traders also needs to be implemented when we add random events.
+    /**
+     * returns the price of each good depending on the planets factors
+     * @param planet represents the current planet the player is on
+     * @return int representation of the items price
+     */
+    public int getPrice(SolarSystem planet) {
+        int price = basePrice;
+        int range =  basePrice * var;
+        int maxPrice = basePrice + range;
+        int minPrice = basePrice - range;
+
+        //the higher the tech level, the more expensive the good.
+        if (planet.getTechLevel().level > 0) {
+            price += IPL * planet.getTechLevel().level;
+        }
+
+        //checks if planets resource makes the item cheaper
+        if (planet.getResourceBias() == CR) {
+            price -= Math.random() * range;
+        }
+
+        //checks if planets resource makes the item more expensive
+        if (planet.getResourceBias() == ER) {
+            price += Math.random() * range;
+        }
+
+        //prevents the price from exceeding the set max price or falling below the set min price
+        if (price > maxPrice) {
+            price = maxPrice;
+        } else if (price < minPrice) {
+            price = minPrice;
+        }
+        return price;
+    }
 }
+
