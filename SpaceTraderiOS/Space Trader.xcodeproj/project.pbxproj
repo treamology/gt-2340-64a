@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F174CC2A222B483900C424FF /* SkillPointsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F174CC29222B483900C424FF /* SkillPointsDelegate.swift */; };
+		F174CC2C222B4E8E00C424FF /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F174CC2B222B4E8E00C424FF /* GameState.swift */; };
 		F1A073E7221C6D18001473CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A073E6221C6D18001473CB /* AppDelegate.swift */; };
 		F1A073E9221C6D18001473CB /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A073E8221C6D18001473CB /* ConfigurationViewController.swift */; };
 		F1A073EC221C6D18001473CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A073EA221C6D18001473CB /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F174CC29222B483900C424FF /* SkillPointsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillPointsDelegate.swift; sourceTree = "<group>"; };
+		F174CC2B222B4E8E00C424FF /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameState.swift; path = "Space Trader/View/GameState.swift"; sourceTree = SOURCE_ROOT; };
 		F1A073E3221C6D18001473CB /* Space Trader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Trader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A073E6221C6D18001473CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1A073E8221C6D18001473CB /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 			children = (
 				F1BF96E6221C7ACE008BBDB8 /* xib */,
 				F1A073FC221C7191001473CB /* SkillPointsTableViewCell.swift */,
+				F174CC29222B483900C424FF /* SkillPointsDelegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -90,6 +95,7 @@
 		F1BF96E9221C8359008BBDB8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F174CC2B222B4E8E00C424FF /* GameState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,6 +174,8 @@
 			files = (
 				F1A073FD221C7191001473CB /* SkillPointsTableViewCell.swift in Sources */,
 				F1A073E9221C6D18001473CB /* ConfigurationViewController.swift in Sources */,
+				F174CC2C222B4E8E00C424FF /* GameState.swift in Sources */,
+				F174CC2A222B483900C424FF /* SkillPointsDelegate.swift in Sources */,
 				F1A073E7221C6D18001473CB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

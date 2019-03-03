@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--New Game-->
+        <!--Parent Controller-->
         <scene sceneID="d0Y-KP-YBR">
             <objects>
                 <tableViewController id="Smu-0q-nJw" customClass="ConfigurationViewController" customModule="Space_Trader" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,7 +30,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gfZ-ku-sjX" userLabel="Name Text Field">
                                                     <rect key="frame" x="20" y="0.0" width="335" height="43.5"/>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
@@ -56,6 +56,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="pointsTitle" value="oiewfboiew"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="parentController" destination="Smu-0q-nJw" id="tTn-et-KLm"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="5wS-SO-6ai" userLabel="Fighter Cell" customClass="SkillPointsTableViewCell" customModule="Space_Trader" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="199.5" width="375" height="44"/>
@@ -67,6 +70,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="pointsTitle" value="oiewfboiew"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="parentController" destination="Smu-0q-nJw" id="yxt-tR-QWN"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="WAU-ut-7xv" userLabel="Trader Cell" customClass="SkillPointsTableViewCell" customModule="Space_Trader" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="243.5" width="375" height="44"/>
@@ -78,6 +84,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="pointsTitle" value="oiewfboiew"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="parentController" destination="Smu-0q-nJw" id="dHm-xG-UdR"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="5r2-Xa-i05" userLabel="Engineer Cell" customClass="SkillPointsTableViewCell" customModule="Space_Trader" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="287.5" width="375" height="44"/>
@@ -89,6 +98,36 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="pointsTitle" value="oiewfboiew"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="parentController" destination="Smu-0q-nJw" id="BWm-9X-mL0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Difficulty" id="ISh-UJ-re4">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="Gqi-wO-yl5" userLabel="Name Cell">
+                                        <rect key="frame" x="0.0" y="387.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gqi-wO-yl5" id="Ik5-hT-EyL">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Beginner" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TbA-fG-Zoy" userLabel="Name Text Field">
+                                                    <rect key="frame" x="20" y="0.0" width="335" height="43.5"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="TbA-fG-Zoy" secondAttribute="bottom" id="2Fb-Mr-6AL"/>
+                                                <constraint firstItem="TbA-fG-Zoy" firstAttribute="top" secondItem="Ik5-hT-EyL" secondAttribute="top" id="92J-Dr-6Iw"/>
+                                                <constraint firstItem="TbA-fG-Zoy" firstAttribute="leading" secondItem="Ik5-hT-EyL" secondAttribute="leading" constant="20" symbolic="YES" id="aiY-Ek-2DJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="TbA-fG-Zoy" secondAttribute="trailing" constant="20" symbolic="YES" id="tWp-AI-CfV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -102,6 +141,7 @@
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Chn-Nl-QLC"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="difficultySelectorTextField" destination="TbA-fG-Zoy" id="NzZ-IG-fGL"/>
                         <outlet property="engineerCell" destination="5r2-Xa-i05" id="C8Z-RT-qBa"/>
                         <outlet property="fighterCell" destination="5wS-SO-6ai" id="U0s-Gn-3Yq"/>
                         <outlet property="pilotCell" destination="zwC-80-AAh" id="BLF-aw-T1c"/>
