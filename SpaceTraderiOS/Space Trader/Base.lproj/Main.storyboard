@@ -44,7 +44,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Skill Points" id="bTI-J3-8n1">
+                            <tableViewSection headerTitle="Skill Points - 16 Remaining" id="bTI-J3-8n1">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="zwC-80-AAh" userLabel="Pilot Cell" customClass="SkillPointsTableViewCell" customModule="Space_Trader" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="155.5" width="375" height="44"/>

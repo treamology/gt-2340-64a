@@ -66,11 +66,13 @@ class SkillPointsTableViewCell: UITableViewCell {
       assertionFailure("SkillPointsTableViewCell parent controller must conform to SkillPointsController protocol.")
       return
     }
-    if spController.totalSkillPoints > spController.maxSkillPoints {
+    let totalSkill = spController.totalSkillPoints
+    if totalSkill > spController.maxSkillPoints {
       sender.value -= sender.stepValue
       return
     }
     pointsCountLabel?.text = String(pointsCount)
+    spController.skillPointsDidChange(toValue: Int(sender.value))
   }
   
   public func getNumPoints() -> Int {

@@ -49,6 +49,10 @@ class ConfigurationViewController: UITableViewController, SkillPointsDelegate, U
     difficultySelectorTextField.inputAccessoryView = doneToolbar
   }
   
+  func skillPointsDidChange(toValue value: Int) {
+    tableView.headerView(forSection: 1)?.textLabel?.text = String(format: "SKILL POINTS - %d REMAINING", maxSkillPoints - totalSkillPoints)
+  }
+  
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
