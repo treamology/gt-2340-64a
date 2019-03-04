@@ -109,6 +109,11 @@ public enum TradeGood {
         } else if (price < minPrice) {
             price = minPrice;
         }
+
+        boolean IE = planet.getIE();
+        if (IE) {
+            price = price * 10;
+        }
         return price;
     }
 }
