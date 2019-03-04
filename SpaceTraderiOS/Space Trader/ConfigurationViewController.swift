@@ -15,6 +15,7 @@ class ConfigurationViewController: UITableViewController, SkillPointsDelegate, U
   @IBOutlet var traderCell: SkillPointsTableViewCell!
   @IBOutlet var engineerCell: SkillPointsTableViewCell!
   @IBOutlet var difficultySelectorTextField: UITextField!
+  @IBOutlet var nameTextField: UITextField!
   
   var difficultyPicker: UIPickerView!
   
@@ -67,6 +68,24 @@ class ConfigurationViewController: UITableViewController, SkillPointsDelegate, U
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     difficultySelectorTextField.text = GameState.Difficulty.allCases[row].rawValue
+  }
+  
+  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    var alertText: String?
+    if (nameTextField.text == nil || nameTextField.text == "") {
+      alertText = "You haven't input a name yet!"
+    } else if (totalSkillPoints < maxSkillPoints) {
+      alertText = "You haven't used all of your skill points yet!"
+    }
+    
+    if (alertText != nil) {
+      let alert = UIAlertController(title: alertText, message: nil, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+      present(alert, animated: true, completion: nil)
+      return false
+    }
+    
+    return true
   }
 }
 
