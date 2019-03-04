@@ -1,14 +1,18 @@
 package com.example.spacetrader.model;
 
+import com.example.spacetrader.model.system.SolarSystem;
+
 /**
  * Class that  holds information about the player character
  * name: the name of the player
  * pilot, fighter, trader, engineer: number of skill points assigned to these skills
  * ship: stores the current spaceship of the player
  * credits: the amount of money the player has
- * skillPointMax: The maximum allocatable points across the four skills
+ * SKILL_POINT_MAX: The maximum allocatable points across the four skills
  */
 public class Player {
+    public static final int SKILL_POINT_MAX = 16;
+
     public enum Skill {
         PILOT("Pilot"),
         FIGHTER("Fighter"),
@@ -21,14 +25,14 @@ public class Player {
         }
     }
 
-    String name;
-    int pilot;
-    int fighter;
-    int trader;
-    int engineer;
-    Ship ship;
-    int credits;
-    static final int skillPointMax = 16;
+    private String name;
+    private int pilot;
+    private int fighter;
+    private int trader;
+    private int engineer;
+    private Ship ship;
+    private int credits;
+    private int currentSystemIndex;
 
     /**
      * Initializes a player class, including a Gnat ship and 1000 credits
@@ -46,6 +50,7 @@ public class Player {
         this.engineer = engineer;
         ship = new Gnat();
         credits = 1000;
+        currentSystemIndex = 0;
     }
 
     /**
@@ -69,8 +74,8 @@ public class Player {
     public void setShip(Ship ship) {this.ship = ship;}
     public int getCredits() {return credits;}
     public void setCredits(int credits) {this.credits = credits;}
-    public static int getSkillPointMax() {return skillPointMax;}
-
+    public SolarSystem getCurrentSystem() {return GameState.getState().getUniverse().getSystems().get(currentSystemIndex);}
+    public int getCurrentSystemIndex() {return currentSystemIndex;}
     /**
      * Used to calculate the number of skill points the player has
      * @return the number of skill points allocated

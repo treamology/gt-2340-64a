@@ -115,7 +115,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                 }
 
                 // Check that the player has allocated all skill points.
-                if (getTotalSkill() < Player.getSkillPointMax()) {
+                if (getTotalSkill() < Player.SKILL_POINT_MAX) {
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.skillpoints_notify, Toast.LENGTH_SHORT);
                     toast.show();
                     return;
@@ -137,7 +137,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     void changeSkillPoints(int byAmount, Player.Skill skillType) {
         // Do nothing if we're already at the max skill point amount, or would go below zero.
-        if (getTotalSkill() + byAmount > Player.getSkillPointMax()
+        if (getTotalSkill() + byAmount > Player.SKILL_POINT_MAX
             || skillPoints[skillType.ordinal()] + byAmount < 0) {
             return;
         }
@@ -156,7 +156,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     String getSkillPointsString() {
         return String.format(getResources().getString(R.string.skill_points_option),
-                             Player.getSkillPointMax() - getTotalSkill());
+                             Player.SKILL_POINT_MAX - getTotalSkill());
     }
 
 }

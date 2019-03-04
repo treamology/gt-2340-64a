@@ -31,12 +31,14 @@ public class SolarSystem {
     Position position;
     TechLevel techLevel;
     ResourceBias resourceBias;
+    boolean visited;
 
     public SolarSystem(String name, Position position, TechLevel techLevel, ResourceBias resourceBias) {
         this.name = name;
         this.position = position;
         this.techLevel = techLevel;
         this.resourceBias = resourceBias;
+        this.visited = false;
     }
 
     public TechLevel getTechLevel() {
@@ -51,4 +53,5 @@ public class SolarSystem {
     public Position getPosition() {
         return position;
     }
+    public boolean getVisited() { return visited; }
 }

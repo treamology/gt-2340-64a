@@ -16,7 +16,7 @@ public enum ResourceBias {
     ARTISTIC ("Artistic"),
     WARLIKE ("Warlike");
 
-    private final String name;
+    public final String name;
 
     ResourceBias(String name) {
         this.name = name;
