@@ -11,6 +11,10 @@
 		F174CC30222C9C0800C424FF /* GameTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F174CC2F222C9C0800C424FF /* GameTabBarController.swift */; };
 		F19AEF33222CA7DF00B0BC04 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19AEF32222CA7DF00B0BC04 /* GameState.swift */; };
 		F19AEF37222CACF100B0BC04 /* SystemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19AEF36222CACF100B0BC04 /* SystemInfoViewController.swift */; };
+		F19AEF41222CB6AC00B0BC04 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19AEF3E222CB6AC00B0BC04 /* Player.swift */; };
+		F19AEF42222CB6AC00B0BC04 /* SolarSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19AEF3F222CB6AC00B0BC04 /* SolarSystem.swift */; };
+		F19AEF45222CCAAC00B0BC04 /* Universe.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19AEF44222CCAAC00B0BC04 /* Universe.swift */; };
+		F19AEF47222CCCD800B0BC04 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19AEF46222CCCD800B0BC04 /* Position.swift */; };
 		F1A073E7221C6D18001473CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A073E6221C6D18001473CB /* AppDelegate.swift */; };
 		F1A073E9221C6D18001473CB /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A073E8221C6D18001473CB /* ConfigurationViewController.swift */; };
 		F1A073EC221C6D18001473CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A073EA221C6D18001473CB /* Main.storyboard */; };
@@ -25,6 +29,10 @@
 		F174CC2F222C9C0800C424FF /* GameTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTabBarController.swift; sourceTree = "<group>"; };
 		F19AEF32222CA7DF00B0BC04 /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameState.swift; path = "Space Trader/Model/GameState.swift"; sourceTree = SOURCE_ROOT; };
 		F19AEF36222CACF100B0BC04 /* SystemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfoViewController.swift; sourceTree = "<group>"; };
+		F19AEF3E222CB6AC00B0BC04 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = "Space Trader/Model/Player.swift"; sourceTree = SOURCE_ROOT; };
+		F19AEF3F222CB6AC00B0BC04 /* SolarSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SolarSystem.swift; path = "Space Trader/Model/SolarSystem.swift"; sourceTree = SOURCE_ROOT; };
+		F19AEF44222CCAAC00B0BC04 /* Universe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Universe.swift; path = "Space Trader/Model/Universe.swift"; sourceTree = SOURCE_ROOT; };
+		F19AEF46222CCCD800B0BC04 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Position.swift; path = "Space Trader/Model/Position.swift"; sourceTree = SOURCE_ROOT; };
 		F1A073E3221C6D18001473CB /* Space Trader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Trader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A073E6221C6D18001473CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1A073E8221C6D18001473CB /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +58,11 @@
 		F19AEF31222CA7C000B0BC04 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F19AEF3E222CB6AC00B0BC04 /* Player.swift */,
+				F19AEF3F222CB6AC00B0BC04 /* SolarSystem.swift */,
 				F19AEF32222CA7DF00B0BC04 /* GameState.swift */,
+				F19AEF44222CCAAC00B0BC04 /* Universe.swift */,
+				F19AEF46222CCCD800B0BC04 /* Position.swift */,
 			);
 			name = Model;
 			path = "New Group";
@@ -179,13 +191,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F19AEF47222CCCD800B0BC04 /* Position.swift in Sources */,
 				F1A073FD221C7191001473CB /* SkillPointsTableViewCell.swift in Sources */,
 				F1A073E9221C6D18001473CB /* ConfigurationViewController.swift in Sources */,
+				F19AEF45222CCAAC00B0BC04 /* Universe.swift in Sources */,
 				F174CC30222C9C0800C424FF /* GameTabBarController.swift in Sources */,
 				F19AEF37222CACF100B0BC04 /* SystemInfoViewController.swift in Sources */,
+				F19AEF41222CB6AC00B0BC04 /* Player.swift in Sources */,
 				F19AEF33222CA7DF00B0BC04 /* GameState.swift in Sources */,
 				F174CC2A222B483900C424FF /* SkillPointsDelegate.swift in Sources */,
 				F1A073E7221C6D18001473CB /* AppDelegate.swift in Sources */,
+				F19AEF42222CB6AC00B0BC04 /* SolarSystem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,11 +10,13 @@ import UIKit
 import QuartzCore
 
 class InformationTableViewController: UITableViewController {
-  
+  @IBOutlet var locationLabel: UILabel!
+  @IBOutlet var techLevelLabel: UILabel!
+  @IBOutlet var resourcesLabel: UILabel!
 }
 
 class SystemInfoViewController: UIViewController {
-
+  
   @IBOutlet var planetImageView: UIImageView!
   @IBOutlet var planetNameLabel: UILabel!
   

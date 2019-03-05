@@ -18,4 +18,16 @@ class GameState {
   }
   static let MAX_POINTS: Int = 16
   
+  let currentDifficulty: Difficulty
+  let universe: Universe
+  let player: Player
+  
+  init(difficulty: Difficulty) {
+    currentDifficulty = difficulty
+    
+    universe = Universe()
+    universe.generateUniverse()
+    
+    player = Player(currentSystem: universe.solarSystems[0])
+  }
 }

@@ -352,6 +352,11 @@
                             <outlet property="delegate" destination="EZ5-uR-er2" id="NiS-mm-69n"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="locationLabel" destination="GA3-Qh-jaf" id="EXM-4L-Uao"/>
+                        <outlet property="resourcesLabel" destination="Kf4-d4-uig" id="yC9-tR-5sb"/>
+                        <outlet property="techLevelLabel" destination="Ix6-oI-u8s" id="XZp-NT-yfA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FSD-Tz-0Ze" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

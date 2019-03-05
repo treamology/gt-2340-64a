@@ -87,5 +87,12 @@ class ConfigurationViewController: UITableViewController, SkillPointsDelegate, U
     
     return true
   }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let gameState = GameState(difficulty: GameState.Difficulty(rawValue: difficultySelectorTextField.text!)!)
+    let tabBarController = segue.destination as! GameTabBarController
+    let systemInfoController = tabBarController.viewControllers![0] as! SystemInfoViewController
+    systemInfoController.gameState = gameState
+  }
 }
 
