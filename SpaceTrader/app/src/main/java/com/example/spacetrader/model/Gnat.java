@@ -9,5 +9,6 @@ public class Gnat extends Ship {
 
     public Gnat () {
         type = "Gnat";
+        cargoSlots = 15;
     }
 }
