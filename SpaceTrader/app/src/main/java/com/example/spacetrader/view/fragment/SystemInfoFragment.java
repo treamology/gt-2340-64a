@@ -1,13 +1,17 @@
 package com.example.spacetrader.view.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.spacetrader.R;
@@ -22,6 +26,7 @@ public class SystemInfoFragment extends Fragment {
     private TextView positionTextView;
     private TextView resourcesTextView;
     private TextView techLevelTextView;
+    private ImageView systemImageView;
 
     public static SystemInfoFragment newInstance() {
         return new SystemInfoFragment();
@@ -43,11 +48,17 @@ public class SystemInfoFragment extends Fragment {
         positionTextView = view.findViewById(R.id.locationValue);
         resourcesTextView = view.findViewById(R.id.resourcesValue);
         techLevelTextView = view.findViewById(R.id.techLevelValue);
+        systemImageView = view.findViewById(R.id.systemImage);
 
         systemNameTextView.setText(mViewModel.getSystemName());
         positionTextView.setText(String.format("%d, %d", mViewModel.getSystemX(), mViewModel.getSystemY()));
         resourcesTextView.setText(mViewModel.getResourceBias());
         techLevelTextView.setText(mViewModel.getTechLevel());
+
+        int imageID = getResources().getIdentifier(String.format("planet%d", mViewModel.getImageIndex()), "drawable", "com.example.spacetrader");
+        BitmapDrawable image = (BitmapDrawable)getResources().getDrawable(imageID);
+        image.getPaint().setFilterBitmap(false);
+        systemImageView.setImageDrawable(image);
     }
 
 }

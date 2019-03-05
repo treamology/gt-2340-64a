@@ -1,6 +1,9 @@
 package com.example.spacetrader.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.system.SolarSystem;
@@ -28,4 +31,5 @@ public class SystemInfoViewModel extends ViewModel {
     public String getTechLevel() {
         return currentSystem.getTechLevel().name;
     }
+    public int getImageIndex() { return currentSystem.getImageIndex(); }
 }

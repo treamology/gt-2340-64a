@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.spacetrader.R;
-import com.example.spacetrader.view.custom.SpaceMap;
+import com.example.spacetrader.view.custom.SpaceMapView;
 import com.example.spacetrader.viewmodel.UniverseViewModel;
 
 public class UniverseFragment extends Fragment {
@@ -32,8 +32,8 @@ public class UniverseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(UniverseViewModel.class);
 
-        SpaceMap spaceMap = getView().findViewById(R.id.spaceMap);
-        spaceMap.setViewModel(mViewModel);
+        SpaceMapView spaceMapView = getView().findViewById(R.id.spaceMap);
+        spaceMapView.setViewModel(mViewModel);
     }
 
 }

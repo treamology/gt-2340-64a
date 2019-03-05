@@ -116,5 +116,9 @@ public enum TradeGood {
         }
         return price;
     }
+
+    public String getName() {
+        return name;
+    }
 }
 

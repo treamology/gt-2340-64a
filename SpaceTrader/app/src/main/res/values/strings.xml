@@ -32,4 +32,7 @@
     <!-- Map -->
     <string name="map_system_type">System</string>
     <string name="map_universe_type">Universe</string>
+
+    <!-- Shop -->
+    <string name="shop_item_status">$%d, %d available.</string>
 </resources>

@@ -1,10 +1,11 @@
 package com.example.spacetrader.model.system;
 
 import com.example.spacetrader.model.GameState;
-import com.example.spacetrader.model.TradeGoodShopQuantity;
 import com.example.spacetrader.model.TradeGood;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class SolarSystem {
@@ -31,9 +32,10 @@ public class SolarSystem {
     TechLevel techLevel;
     ResourceBias resourceBias;
     boolean visited;
-    HashMap<TradeGood, Integer> quantities;
-    HashMap<TradeGood, Integer> prices;
+    LinkedHashMap<TradeGood, Integer> quantities;
+    LinkedHashMap<TradeGood, Integer> prices;
     boolean IE;
+    int imageIndex;
 
     public SolarSystem(String name, Position position, TechLevel techLevel, ResourceBias resourceBias) {
         this.name = name;
@@ -41,8 +43,11 @@ public class SolarSystem {
         this.techLevel = techLevel;
         this.resourceBias = resourceBias;
         this.visited = false;
-        this.quantities = new HashMap<>();
-        this.prices = new HashMap<>();
+        this.quantities = new LinkedHashMap<>();
+        this.prices = new LinkedHashMap<>();
+
+        Random rng = GameState.getState().rng;
+        this.imageIndex = rng.nextInt(10) + 1;
 
         generateNewTradeGoods();
     }
@@ -171,11 +176,21 @@ public class SolarSystem {
     }
     public boolean getVisited() { return visited; }
 
-    public HashMap getResourceCount() {
+    public Map<TradeGood, Integer> getResourceCount() {
+        return quantities;
+    }
+    public boolean getIE() {
+        return IE;
+    }
+    public int getImageIndex() {
+        return imageIndex;
+    }
+
+    public LinkedHashMap<TradeGood, Integer> getQuantities() {
         return quantities;
     }
 
-    public boolean getIE() {
-        return IE;
+    public LinkedHashMap<TradeGood, Integer> getPrices() {
+        return prices;
     }
 }

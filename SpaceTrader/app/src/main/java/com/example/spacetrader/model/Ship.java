@@ -8,7 +8,7 @@ import java.util.List;
  */
 public abstract class Ship {
 
-    private String type;
+    String type;
     private HashMap<TradeGood, Integer> inventory;
     private int totalCargoBays;
 

@@ -8,6 +8,7 @@ package com.example.spacetrader.model;
 public class Gnat extends Ship {
 
     public Gnat () {
+        super();
         type = "Gnat";
     }
 }
