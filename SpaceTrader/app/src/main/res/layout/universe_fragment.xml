@@ -23,7 +23,7 @@
             app:title="@string/title_universe"
             app:titleTextColor="@android:color/primary_text_dark" />
 
-        <com.example.spacetrader.view.custom.SpaceMap
+        <com.example.spacetrader.view.custom.SpaceMapView
             android:id="@+id/spaceMap"
             android:layout_width="0dp"
             android:layout_height="0dp"

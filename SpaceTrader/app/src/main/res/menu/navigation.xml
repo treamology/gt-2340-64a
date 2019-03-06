@@ -11,6 +11,10 @@
         android:id="@+id/navigation_warp"
         android:icon="@drawable/baseline_flight_takeoff_black_24dp"
         android:title="@string/title_universe"/>
+    <item
+        android:id="@+id/navigation_buysell"
+        android:icon="@drawable/baseline_attach_money_black_18dp"
+        android:title="Buy/Sell" />
 
 </menu>
 

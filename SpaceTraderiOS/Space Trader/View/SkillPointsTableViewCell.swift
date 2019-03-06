@@ -27,6 +27,8 @@ class SkillPointsTableViewCell: UITableViewCell {
   @IBOutlet var pointsTitleLabel: UILabel?
   @IBOutlet var pointsCountLabel: UILabel?
   
+  @IBOutlet var parentController: UIViewController?
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     let view = self.loadNib()
@@ -38,6 +40,7 @@ class SkillPointsTableViewCell: UITableViewCell {
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    
   }
   
   override func awakeAfter(using aDecoder: NSCoder) -> Any? {
@@ -59,6 +62,20 @@ class SkillPointsTableViewCell: UITableViewCell {
   }
   
   @IBAction func stepperValueChanged(_ sender: UIStepper) {
+    guard let spController = parentController as? SkillPointsDelegate else {
+      assertionFailure("SkillPointsTableViewCell parent controller must conform to SkillPointsController protocol.")
+      return
+    }
+    let totalSkill = spController.totalSkillPoints
+    if totalSkill > spController.maxSkillPoints {
+      sender.value -= sender.stepValue
+      return
+    }
     pointsCountLabel?.text = String(pointsCount)
+    spController.skillPointsDidChange(toValue: Int(sender.value))
+  }
+  
+  public func getNumPoints() -> Int {
+    return Int(stepper!.value)
   }
 }

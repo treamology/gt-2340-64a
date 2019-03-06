@@ -13,22 +13,22 @@ public enum TradeGood {
             ResourceBias.LOTSOFWATER, ResourceBias.DESERT, 30, 50),
     FURS("Furs", 0,0, 0, 250, 10, 10, "cold",
             ResourceBias.RICHFAUNA, ResourceBias.LIFELESS, 230, 280),
-    FOOD("Food", 1, 0, 1, 100, 5, 5, "cropFail",
-            ResourceBias.RICHSOIL, ResourceBias.POORSOIL, 90, 160),
     ORE("Ore", 2, 2, 3, 350, 20, 10, "war",
             ResourceBias.MINERALRICH, ResourceBias.MINERALPOOR, 350, 420),
+    FOOD("Food", 1, 0, 1, 100, 5, 5, "cropFail",
+            ResourceBias.RICHSOIL, ResourceBias.POORSOIL, 90, 160),
     GAMES("Games", 3, 1, 6, 250, -10, 5, "boredom",
             ResourceBias.ARTISTIC, null, 160, 270),
     FIREWARMS("Firearms", 3, 1, 5, 1250, -75, 100, "war",
             ResourceBias.WARLIKE, null, 600, 1100),
     MEDICINE("Medicine", 4, 1, 6, 650, -20, 10, "plague",
             ResourceBias.LOTSOFHERBS, null, 400, 700),
-    MACHINES("Machines", 4, 3, 5, 900, -30, 5, "lackOfWorkers",
-            null,null, 600,800),
     NARCOTICS("Narcotics", 5, 0, 5, 3500, -125, 150, "boredom",
             ResourceBias.WEIRDMUSHROOMS, null, 2000, 3000),
     ROBOTS("Robots", 6, 4, 7, 5000, -150, 100, "lackOfWorkers",
-            null, null, 3500, 5000);
+            null, null, 3500, 5000),
+    MACHINES("Machines", 4, 3, 5, 900, -30, 5, "lackOfWorkers",
+                     null,null, 600,800);
 
     private String name;
     private int MTLP;
@@ -108,7 +108,16 @@ public enum TradeGood {
         } else if (price < minPrice || price < 0) {
             price = minPrice;
         }
+
+        boolean IE = planet.getIE();
+        if (IE) {
+            price = price * 10;
+        }
         return price;
+    }
+
+    public String getName() {
+        return name;
     }
 }
 

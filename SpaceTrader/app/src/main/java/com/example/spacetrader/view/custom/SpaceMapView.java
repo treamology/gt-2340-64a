@@ -10,14 +10,14 @@ import android.view.View;
 
 import com.example.spacetrader.model.Universe;
 import com.example.spacetrader.viewmodel.ISpaceMapViewModel;
-import com.example.spacetrader.viewmodel.representation.SolarSystemRepresentation;
+import com.example.spacetrader.viewmodel.modeldisplay.DisplayedSolarSystem;
 
 import java.util.List;
 
 /**
  * TODO: document your custom view class.
  */
-public class SpaceMap extends View {
+public class SpaceMapView extends View {
 
     private ISpaceMapViewModel viewModel;
 
@@ -46,17 +46,17 @@ public class SpaceMap extends View {
     private Paint dotPaint;
     private Paint textPaint;
 
-    public SpaceMap(Context context) {
+    public SpaceMapView(Context context) {
         super(context);
         init(null, 0);
     }
 
-    public SpaceMap(Context context, AttributeSet attrs) {
+    public SpaceMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs, 0);
     }
 
-    public SpaceMap(Context context, AttributeSet attrs, int defStyle) {
+    public SpaceMapView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
     }
@@ -129,11 +129,11 @@ public class SpaceMap extends View {
             canvas.drawLine(marginX, marginY + i * scaleFactor, marginX + viewportWidth * scaleFactor, marginY + i * scaleFactor, gridlinePaint);
         }
 
-        List<SolarSystemRepresentation> systems = viewModel.getSystems();
+        List<DisplayedSolarSystem> systems = viewModel.getSystems();
 
         // Draw the planets.
         for (int i = 0; i < systems.size(); i++) {
-            SolarSystemRepresentation system = systems.get(i);
+            DisplayedSolarSystem system = systems.get(i);
             canvas.drawCircle(marginX + system.x * scaleFactor, marginY + system.y * scaleFactor, 8, dotPaint);
             canvas.drawText(system.name, marginX + system.x * scaleFactor, marginY + system.y * scaleFactor + 48, textPaint);
         }
