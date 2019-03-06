@@ -37,4 +37,6 @@
     <string name="shop_item_status">$%d, %d</string>
     <string name="shop_quantity_buy_suffix">available</string>
     <string name="shop_quantity_sell_suffix">in inventory</string>
+    <string name="shop_remaining_cargo">Remaining cargo: %d/%d</string>
+    <string name="shop_cash">Credits: $%d</string>
 </resources>

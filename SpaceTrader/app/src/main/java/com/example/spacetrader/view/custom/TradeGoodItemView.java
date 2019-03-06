@@ -42,4 +42,8 @@ public class TradeGoodItemView extends ConstraintLayout {
         itemDescriptionTextView.setText(String.format(getResources().getString(R.string.shop_item_status) + " " + getResources().getString(suffixResource), price, amount));
         buyButton.setText(mode.name());
     }
+
+    public Button getActionButton() {
+        return buyButton;
+    }
 }

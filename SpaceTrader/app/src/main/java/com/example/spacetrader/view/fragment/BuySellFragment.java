@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.view.custom.TradeGoodItemView;
@@ -21,6 +22,9 @@ import java.util.List;
 public class BuySellFragment extends Fragment {
 
     private BuySellViewModel mViewModel;
+
+    private TextView remainingCargoText;
+    private TextView creditsText;
 
     public static BuySellFragment newInstance() {
         return new BuySellFragment();
@@ -78,6 +82,16 @@ public class BuySellFragment extends Fragment {
 
             }
         });
+
+        remainingCargoText = view.findViewById(R.id.remainingCargoText);
+        creditsText = view.findViewById(R.id.shopCashText);
+
+        updateStatusText(mViewModel.getAvailableCargo(), mViewModel.getTotalCargo(), mViewModel.getCash());
+    }
+
+    private void updateStatusText(int cargoRemaining, int totalCargo, int numCredits) {
+        remainingCargoText.setText(String.format(getResources().getString(R.string.shop_remaining_cargo), cargoRemaining, totalCargo));
+        creditsText.setText(String.format(getResources().getString(R.string.shop_cash), numCredits));
     }
 
 }

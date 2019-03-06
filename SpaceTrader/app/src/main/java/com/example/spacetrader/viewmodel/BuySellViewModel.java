@@ -39,4 +39,16 @@ public class BuySellViewModel extends ViewModel {
     public List<DisplayedTradeGood> getGoods() {
         return goods;
     }
+
+    public int getTotalCargo() {
+        return GameState.getState().getPlayer().getShip().getTotalCargoBays();
+    }
+
+    public int getAvailableCargo() {
+        return GameState.getState().getPlayer().getShip().getNumOpenCargoBays();
+    }
+
+    public int getCash() {
+        return GameState.getState().getPlayer().getCredits();
+    }
 }
