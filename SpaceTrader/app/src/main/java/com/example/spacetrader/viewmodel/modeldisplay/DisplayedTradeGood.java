@@ -4,11 +4,14 @@ public class DisplayedTradeGood {
     String name;
     int price;
     int quantity;
+    int shipQuantity;
 
-    public DisplayedTradeGood(String name, int price, int quantity) {
+    public DisplayedTradeGood(String name, int price, int quantity, int shipQuantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.shipQuantity = shipQuantity;
+
     }
 
     public String getName() {
@@ -21,5 +24,9 @@ public class DisplayedTradeGood {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public int getShipQuantity() {
+        return shipQuantity;
     }
 }

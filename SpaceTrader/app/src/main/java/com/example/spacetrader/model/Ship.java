@@ -9,8 +9,8 @@ import java.util.List;
 public abstract class Ship {
 
     String type;
-    private HashMap<TradeGood, Integer> inventory;
-    private int totalCargoBays;
+    HashMap<TradeGood, Integer> inventory;
+    int totalCargoBays;
 
     public Ship () {
         this.inventory = new HashMap<>();
@@ -62,11 +62,21 @@ public abstract class Ship {
      * @return true if update succeeded, false if too many of the item is being removed.
      */
     public boolean removeFromInventory(TradeGood good, int amount) {
-        if (getTotalCargoBays() - getNumOpenCargoBays() - amount < 0) {
+        if (getTotalCargoBays() - getNumOpenCargoBays() - amount < 0
+            || getQuantityOfTradeGood(good) - amount < 0) {
             return false;
         }
-        inventory.put(good, inventory.get(good) - amount);
+        inventory.put(good, getQuantityOfTradeGood(good) - amount);
         return true;
+    }
+
+    /**
+     * Returns the quantity of a particular trade good.
+     * @param good The trade good in our inventory
+     * @return The number of goods in our cargo bay.
+     */
+    public int getQuantityOfTradeGood(TradeGood good) {
+        return inventory.get(good);
     }
 
     /**

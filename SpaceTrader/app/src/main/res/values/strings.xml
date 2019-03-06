@@ -34,5 +34,7 @@
     <string name="map_universe_type">Universe</string>
 
     <!-- Shop -->
-    <string name="shop_item_status">$%d, %d available.</string>
+    <string name="shop_item_status">$%d, %d</string>
+    <string name="shop_quantity_buy_suffix">available</string>
+    <string name="shop_quantity_sell_suffix">in inventory</string>
 </resources>

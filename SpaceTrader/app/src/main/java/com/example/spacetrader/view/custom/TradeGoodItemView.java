@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.view.fragment.BuySellFragment;
+import com.example.spacetrader.viewmodel.BuySellViewModel;
 
 public class TradeGoodItemView extends ConstraintLayout {
 
@@ -35,9 +36,10 @@ public class TradeGoodItemView extends ConstraintLayout {
         buyButton = findViewById(R.id.buyButton);
     }
 
-    public void setAttributes(String itemName, int price, int amount, BuySellFragment.ShopMode mode) {
+    public void setAttributes(String itemName, int price, int amount, BuySellViewModel.ShopMode mode) {
         itemNameTextView.setText(itemName);
-        itemDescriptionTextView.setText(String.format(getResources().getString(R.string.shop_item_status), price, amount));
+        int suffixResource = mode == BuySellViewModel.ShopMode.BUY ? R.string.shop_quantity_buy_suffix : R.string.shop_quantity_sell_suffix;
+        itemDescriptionTextView.setText(String.format(getResources().getString(R.string.shop_item_status) + " " + getResources().getString(suffixResource), price, amount));
         buyButton.setText(mode.name());
     }
 }

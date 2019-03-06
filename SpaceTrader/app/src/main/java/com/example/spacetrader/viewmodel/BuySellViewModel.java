@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 public class BuySellViewModel extends ViewModel {
+    public enum ShopMode {
+        BUY, SELL
+    }
+
     List<DisplayedTradeGood> goods;
 
     public BuySellViewModel() {
@@ -25,8 +29,9 @@ public class BuySellViewModel extends ViewModel {
 
         for (TradeGood good : quantities.keySet()) {
             int quantity = quantities.get(good);
+            int shipQuantity = GameState.getState().getPlayer().getShip().getQuantityOfTradeGood(good);
             int price = prices.get(good);
-            DisplayedTradeGood displayedGood = new DisplayedTradeGood(good.getName(), price, quantity);
+            DisplayedTradeGood displayedGood = new DisplayedTradeGood(good.getName(), price, quantity, shipQuantity);
             goods.add(displayedGood);
         }
     }

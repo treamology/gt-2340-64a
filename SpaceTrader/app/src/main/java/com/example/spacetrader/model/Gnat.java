@@ -10,5 +10,6 @@ public class Gnat extends Ship {
     public Gnat () {
         super();
         type = "Gnat";
+        totalCargoBays = 40;
     }
 }
