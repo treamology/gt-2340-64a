@@ -84,9 +84,8 @@ public enum TradeGood {
      */
     public int getPrice(SolarSystem planet) {
         int price = basePrice;
-        int range =  basePrice * var;
-        int maxPrice = basePrice + range;
-        int minPrice = basePrice - range;
+        int maxPrice = basePrice + var;
+        int minPrice = basePrice - var;
 
         //the higher the tech level, the more expensive the good.
         if (planet.getTechLevel().level > 0) {
@@ -95,18 +94,18 @@ public enum TradeGood {
 
         //checks if planets resource makes the item cheaper
         if (planet.getResourceBias() == CR) {
-            price -= Math.random() * range;
+            price -= Math.random() * var;
         }
 
         //checks if planets resource makes the item more expensive
         if (planet.getResourceBias() == ER) {
-            price += Math.random() * range;
+            price += Math.random() * var;
         }
 
         //prevents the price from exceeding the set max price or falling below the set min price
         if (price > maxPrice) {
             price = maxPrice;
-        } else if (price < minPrice) {
+        } else if (price < minPrice || price < 0) {
             price = minPrice;
         }
 
