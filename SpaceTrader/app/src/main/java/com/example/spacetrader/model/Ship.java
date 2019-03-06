@@ -48,7 +48,7 @@ public abstract class Ship {
      * @return true if update succeeded, false if not enough inventory space.
      */
     public boolean addToInventory(TradeGood good, int amount) {
-        if (getNumOpenCargoBays() + amount > getTotalCargoBays()) {
+        if (getNumOpenCargoBays() - amount < 0) {
             return false;
         }
         inventory.put(good, inventory.get(good) + amount);
@@ -62,8 +62,7 @@ public abstract class Ship {
      * @return true if update succeeded, false if too many of the item is being removed.
      */
     public boolean removeFromInventory(TradeGood good, int amount) {
-        if (getTotalCargoBays() - getNumOpenCargoBays() - amount < 0
-            || getQuantityOfTradeGood(good) - amount < 0) {
+        if (getQuantityOfTradeGood(good) - amount < 0) {
             return false;
         }
         inventory.put(good, getQuantityOfTradeGood(good) - amount);

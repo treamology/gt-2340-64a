@@ -193,4 +193,16 @@ public class SolarSystem {
     public LinkedHashMap<TradeGood, Integer> getPrices() {
         return prices;
     }
+
+    public boolean decreaseQuantity(TradeGood good, int quantity) {
+        if (quantities.get(good) - quantity >= 0) {
+            quantities.put(good, quantities.get(good) - quantity);
+            return true;
+        }
+        return false;
+    }
+
+    public void increaseQuantity(TradeGood good, int quantity) {
+        quantities.put(good, quantities.get(good) + quantity);
+    }
 }

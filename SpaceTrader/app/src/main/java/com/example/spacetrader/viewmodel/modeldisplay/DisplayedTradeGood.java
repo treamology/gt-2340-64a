@@ -29,4 +29,12 @@ public class DisplayedTradeGood {
     public int getShipQuantity() {
         return shipQuantity;
     }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setShipQuantity(int shipQuantity) {
+        this.shipQuantity = shipQuantity;
+    }
 }
