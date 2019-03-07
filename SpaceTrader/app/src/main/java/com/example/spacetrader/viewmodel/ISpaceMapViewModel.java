@@ -1,10 +1,10 @@
 package com.example.spacetrader.viewmodel;
 
-import com.example.spacetrader.viewmodel.representation.SolarSystemRepresentation;
+import com.example.spacetrader.viewmodel.modeldisplay.DisplayedSolarSystem;
 
 import java.util.List;
 
 public interface ISpaceMapViewModel {
-    List<SolarSystemRepresentation> getSystems();
-    List<SolarSystemRepresentation> getSystems(int boundsX, int boundsY);
+    List<DisplayedSolarSystem> getSystems();
+    List<DisplayedSolarSystem> getSystems(int boundsX, int boundsY);
 }

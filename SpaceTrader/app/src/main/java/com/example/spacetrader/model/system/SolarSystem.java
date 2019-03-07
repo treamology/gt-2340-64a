@@ -1,11 +1,11 @@
 package com.example.spacetrader.model.system;
 
 import com.example.spacetrader.model.GameState;
-import com.example.spacetrader.model.Universe;
 import com.example.spacetrader.model.TradeGood;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class SolarSystem {
@@ -27,15 +27,15 @@ public class SolarSystem {
             , "Triacus", "Turkana", "Tyrus", "Umberlee", "Utopia", "Vadera", "Vagra", "Vandor"
             , "Ventax", "Xenon", "Xerxes", "Yew", "Yojimbo", "Zalkon", "Zuul"};
 
-
-
     String name;
     Position position;
     TechLevel techLevel;
     ResourceBias resourceBias;
     boolean visited;
-    HashMap quantity;
+    LinkedHashMap<TradeGood, Integer> quantities;
+    LinkedHashMap<TradeGood, Integer> prices;
     boolean IE;
+    int imageIndex;
 
     public SolarSystem(String name, Position position, TechLevel techLevel, ResourceBias resourceBias) {
         this.name = name;
@@ -43,7 +43,16 @@ public class SolarSystem {
         this.techLevel = techLevel;
         this.resourceBias = resourceBias;
         this.visited = false;
+        this.quantities = new LinkedHashMap<>();
+        this.prices = new LinkedHashMap<>();
 
+        Random rng = GameState.getState().rng;
+        this.imageIndex = rng.nextInt(10) + 1;
+
+        generateNewTradeGoods();
+    }
+
+    public void generateNewTradeGoods() {
         TradeGood water = TradeGood.WATER;
         TradeGood furs = TradeGood.FURS;
         TradeGood food = TradeGood.FOOD;
@@ -55,8 +64,7 @@ public class SolarSystem {
         TradeGood narcotics = TradeGood.NARCOTICS;
         TradeGood robots = TradeGood.ROBOTS;
 
-
-        Random rand = new Random();
+        Random rand = GameState.getState().rng;
 
         double level = techLevel.level;
         int levelInt = techLevel.level;
@@ -113,21 +121,16 @@ public class SolarSystem {
             foodNum = 0;
         }
 
-
-
-        HashMap<TradeGood, Integer> quantity = new HashMap<>();
-
-        quantity.put(water, waterNum);
-        quantity.put(furs, furNum);
-        quantity.put(ore, oreNum);
-        quantity.put(food, foodNum);
-        quantity.put(games, gamesNum);
-        quantity.put(firearms, firearmsNum);
-        quantity.put(medicine, medicineNum);
-        quantity.put(narcotics, narcoticsNum);
-        quantity.put(robots, robotsNum);
-        quantity.put(machines, machinesNum);
-
+        quantities.put(water, waterNum);
+        quantities.put(furs, furNum);
+        quantities.put(ore, oreNum);
+        quantities.put(food, foodNum);
+        quantities.put(games, gamesNum);
+        quantities.put(firearms, firearmsNum);
+        quantities.put(medicine, medicineNum);
+        quantities.put(narcotics, narcoticsNum);
+        quantities.put(robots, robotsNum);
+        quantities.put(machines, machinesNum);
 
         int IEChance = rand.nextInt(100);
         if (IEChance < 15) {
@@ -135,6 +138,28 @@ public class SolarSystem {
         } else {
             IE = false;
         }
+
+        int waterPrice = water.getPrice(this);
+        int fursPrice = furs.getPrice(this);
+        int orePrice = ore.getPrice(this);
+        int foodPrice = food.getPrice(this);
+        int gamesPrice = games.getPrice(this);
+        int firearmsPrice = firearms.getPrice(this);
+        int medicinePrice = medicine.getPrice(this);
+        int narcoticsPrice = narcotics.getPrice(this);
+        int robotsPrice = robots.getPrice(this);
+        int machinesPrice = machines.getPrice(this);
+
+        prices.put(water, waterPrice);
+        prices.put(furs, fursPrice);
+        prices.put(ore, orePrice);
+        prices.put(food, foodPrice);
+        prices.put(games, gamesPrice);
+        prices.put(firearms, firearmsPrice);
+        prices.put(medicine, medicinePrice);
+        prices.put(narcotics, narcoticsPrice);
+        prices.put(robots, robotsPrice);
+        prices.put(machines, machinesPrice);
     }
 
     public TechLevel getTechLevel() {
@@ -151,11 +176,33 @@ public class SolarSystem {
     }
     public boolean getVisited() { return visited; }
 
-    public HashMap getResourceCount() {
-        return quantity;
+    public Map<TradeGood, Integer> getResourceCount() {
+        return quantities;
     }
-
     public boolean getIE() {
         return IE;
+    }
+    public int getImageIndex() {
+        return imageIndex;
+    }
+
+    public LinkedHashMap<TradeGood, Integer> getQuantities() {
+        return quantities;
+    }
+
+    public LinkedHashMap<TradeGood, Integer> getPrices() {
+        return prices;
+    }
+
+    public boolean decreaseQuantity(TradeGood good, int quantity) {
+        if (quantities.get(good) - quantity >= 0) {
+            quantities.put(good, quantities.get(good) - quantity);
+            return true;
+        }
+        return false;
+    }
+
+    public void increaseQuantity(TradeGood good, int quantity) {
+        quantities.put(good, quantities.get(good) + quantity);
     }
 }

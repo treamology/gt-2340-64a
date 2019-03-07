@@ -1,6 +1,7 @@
 package com.example.spacetrader.model;
 
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Class that holds a spaceship. The different ship types are subclasses
@@ -8,11 +9,14 @@ import java.util.LinkedList;
 public abstract class Ship {
 
     String type;
-    LinkedList<TradeGood> cargoBay;
-    int cargoSlots;
+    HashMap<TradeGood, Integer> inventory;
+    int totalCargoBays;
 
     public Ship () {
-        cargoBay = new LinkedList<>();
+        this.inventory = new HashMap<>();
+        for (TradeGood good : TradeGood.values()) {
+            inventory.put(good, 0);
+        }
     }
 
     @Override
@@ -20,39 +24,66 @@ public abstract class Ship {
         return type;
     }
 
+    public int getTotalCargoBays() {
+        return totalCargoBays;
+    }
+
     /**
-     * Puts a bought trade good into the cargo bay
-     * @param t the trade good to add
+     * Counts the number of items currently in the inventory and returns the number of slots
+     * remaining.
+     * @return Number of open inventory slots remaining.
      */
-    public void addCargo(TradeGood t) {
-        if (cargoBay.size() < cargoSlots) {
-            cargoBay.addLast(t);
-        } else {
-            //Throw new exception or something
+    public int getNumOpenCargoBays() {
+        int numInventoryItems = 0;
+        for (TradeGood good : inventory.keySet()) {
+            numInventoryItems += inventory.get(good);
         }
+        return totalCargoBays - numInventoryItems;
     }
 
     /**
-     * @return the number of free slots in the cargo bay
+     * Adds a certain amount of an item to the ship's cargo bay.
+     * @param good The type of good.
+     * @param amount The amount of the good to add to the existing amount.
+     * @return true if update succeeded, false if not enough inventory space.
      */
-    public int getInventorySpace() {
-        return cargoSlots - cargoBay.size();
-    }
-
-    /**
-     * Attempts to remove a specific type of cargo from the ship
-     * @param t the type of cargo to remove
-     * @return the removed type of cargo, or null if it isn't present
-     */
-    public TradeGood sellCargo(TradeGood t) {
-        if (cargoBay.removeFirstOccurrence(t)) {
-            return t;
-        } else {
-            return null;
+    public boolean addToInventory(TradeGood good, int amount) {
+        if (getNumOpenCargoBays() - amount < 0) {
+            return false;
         }
+        inventory.put(good, inventory.get(good) + amount);
+        return true;
     }
 
-    public LinkedList getStorage() {
-        return cargoBay;
+    /**
+     * Removes a certain amount of an item to the ship's cargo bay.
+     * @param good The type of good.
+     * @param amount The amount of the good to remove from the existing amount.
+     * @return true if update succeeded, false if too many of the item is being removed.
+     */
+    public boolean removeFromInventory(TradeGood good, int amount) {
+        if (getQuantityOfTradeGood(good) - amount < 0) {
+            return false;
+        }
+        inventory.put(good, getQuantityOfTradeGood(good) - amount);
+        return true;
+    }
+
+    /**
+     * Returns the quantity of a particular trade good.
+     * @param good The trade good in our inventory
+     * @return The number of goods in our cargo bay.
+     */
+    public int getQuantityOfTradeGood(TradeGood good) {
+        return inventory.get(good);
+    }
+
+    /**
+     * This is a package-private method that is meant for moving inventory from one ship to another
+     * when purchasing a new ship.
+     * @param inventory The old ship's inventory.
+     */
+    protected void setInventory(HashMap<TradeGood, Integer> inventory) {
+        this.inventory = inventory;
     }
 }

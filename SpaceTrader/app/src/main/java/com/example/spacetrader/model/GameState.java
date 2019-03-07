@@ -43,5 +43,4 @@ public class GameState {
         return currentDifficulty;
     }
 
-
 }

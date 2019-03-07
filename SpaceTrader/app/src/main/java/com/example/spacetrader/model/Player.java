@@ -49,7 +49,7 @@ public class Player {
         this.trader = trader;
         this.engineer = engineer;
         ship = new Gnat();
-        credits = 1000;
+        credits = 10000;
         currentSystemIndex = 0;
     }
 
@@ -82,6 +82,18 @@ public class Player {
      */
     public int skillPointSum() {
         return pilot + fighter + trader + engineer;
+    }
+
+    public boolean removeCredits(int quantity) {
+        if (credits - quantity >= 0) {
+            credits -= quantity;
+            return true;
+        }
+        return false;
+    }
+
+    public void addCredits(int quantity) {
+        credits += quantity;
     }
 
 }
