@@ -3,7 +3,6 @@ package com.example.spacetrader.model.system;
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.TradeGood;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
@@ -58,7 +57,7 @@ public class SolarSystem {
         TradeGood food = TradeGood.FOOD;
         TradeGood ore = TradeGood.ORE;
         TradeGood games = TradeGood.GAMES;
-        TradeGood firearms = TradeGood.FIREWARMS;
+        TradeGood firearms = TradeGood.FIREARMS;
         TradeGood medicine = TradeGood.MEDICINE;
         TradeGood machines = TradeGood.MACHINES;
         TradeGood narcotics = TradeGood.NARCOTICS;
