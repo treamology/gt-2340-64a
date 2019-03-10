@@ -74,8 +74,7 @@ public enum TradeGood {
         this.MTL = MTL;
         this.MTH = MTH;
     }
-
-    //IE has yet to be implemented on a planet scale and should be updated in price change if so.
+        
     //Price for space traders also needs to be implemented when we add random events.
     /**
      * returns the price of each good depending on the planets factors
@@ -84,8 +83,9 @@ public enum TradeGood {
      */
     public int getPrice(SolarSystem planet) {
         int price = basePrice;
-        int maxPrice = basePrice + var;
-        int minPrice = basePrice - var;
+        int range = basePrice * (double)(var / 100)
+        int maxPrice = basePrice + range;
+        int minPrice = basePrice - range;
 
         //the higher the tech level, the more expensive the good.
         if (planet.getTechLevel().level > 0) {
@@ -102,6 +102,10 @@ public enum TradeGood {
             price += Math.random() * var;
         }
 
+        //compares IE of planet to the IE that effects the price of the good
+        if (IE == planet.getIE()) {
+            price = price + Math.random() * range;
+        }
         //prevents the price from exceeding the set max price or falling below the set min price
         if (price > maxPrice) {
             price = maxPrice;
@@ -109,10 +113,6 @@ public enum TradeGood {
             price = minPrice;
         }
 
-        boolean IE = planet.getIE();
-        if (IE) {
-            price = price * 10;
-        }
         return price;
     }
 
