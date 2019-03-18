@@ -28,6 +28,7 @@
     <string name="si_location_header">Location:</string>
     <string name="si_tech_level_header">Tech Level:</string>
     <string name="si_resources_header">Resources:</string>
+    <string name="si_increaseevents_header">Special Event:</string>
 
     <!-- Map -->
     <string name="map_system_type">System</string>
