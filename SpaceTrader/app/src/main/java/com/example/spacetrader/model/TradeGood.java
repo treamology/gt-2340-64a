@@ -19,7 +19,7 @@ public enum TradeGood {
             ResourceBias.RICHSOIL, ResourceBias.POORSOIL, 90, 160),
     GAMES("Games", 3, 1, 6, 250, -10, 5, "boredom",
             ResourceBias.ARTISTIC, null, 160, 270),
-    FIREWARMS("Firearms", 3, 1, 5, 1250, -75, 100, "war",
+    FIREARMS("Firearms", 3, 1, 5, 1250, -75, 100, "war",
             ResourceBias.WARLIKE, null, 600, 1100),
     MEDICINE("Medicine", 4, 1, 6, 650, -20, 10, "plague",
             ResourceBias.LOTSOFHERBS, null, 400, 700),
