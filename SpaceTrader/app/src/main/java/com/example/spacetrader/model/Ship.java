@@ -11,6 +11,7 @@ public abstract class Ship {
     String type;
     HashMap<TradeGood, Integer> inventory;
     int totalCargoBays;
+    int maxJumpDistance;
 
     public Ship () {
         this.inventory = new HashMap<>();

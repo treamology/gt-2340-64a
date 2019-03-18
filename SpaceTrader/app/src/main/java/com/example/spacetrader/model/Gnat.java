@@ -11,5 +11,6 @@ public class Gnat extends Ship {
         super();
         type = "Gnat";
         totalCargoBays = 5;
+        maxJumpDistance = 30;
     }
 }
