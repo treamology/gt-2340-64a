@@ -57,4 +57,9 @@ public class UniverseViewModel extends ViewModel implements ISpaceMapViewModel {
         }
         return reps;
     }
+
+    @Override
+    public int getCurrentShipFuel() {
+        return GameState.getState().getPlayer().getShip().getCurrentFuel();
+    }
 }

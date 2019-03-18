@@ -3,6 +3,7 @@ package com.example.spacetrader.view.custom;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -44,7 +45,9 @@ public class SpaceMapView extends View {
     private Paint boundaryPaint;
     private Paint gridlinePaint;
     private Paint dotPaint;
+    private Paint currentSystemDotPaint;
     private Paint textPaint;
+    private Paint travelBoundPaint;
 
     public SpaceMapView(Context context) {
         super(context);
@@ -93,8 +96,18 @@ public class SpaceMapView extends View {
         dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         dotPaint.setColor(Color.BLUE);
 
+        currentSystemDotPaint = new Paint();
+        currentSystemDotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        currentSystemDotPaint.setColor(Color.RED);
+
         textPaint = new TextPaint();
         textPaint.setTextSize(48);
+
+        travelBoundPaint = new Paint();
+        travelBoundPaint.setStrokeWidth(2.0f);
+        travelBoundPaint.setStyle(Paint.Style.STROKE);
+        travelBoundPaint.setColor(Color.BLACK);
+        travelBoundPaint.setPathEffect(new DashPathEffect(new float[] {10,20}, 0));
 
         setZoomType(ZoomType.UNIVERSE);
     }
@@ -131,12 +144,22 @@ public class SpaceMapView extends View {
 
         List<DisplayedSolarSystem> systems = viewModel.getSystems();
 
+        DisplayedSolarSystem currentSystem = null;
+
         // Draw the planets.
         for (int i = 0; i < systems.size(); i++) {
             DisplayedSolarSystem system = systems.get(i);
-            canvas.drawCircle(marginX + system.x * scaleFactor, marginY + system.y * scaleFactor, 8, dotPaint);
             canvas.drawText(system.name, marginX + system.x * scaleFactor, marginY + system.y * scaleFactor + 48, textPaint);
+            if (system.currentlyVisiting) {
+                canvas.drawCircle(marginX + system.x * scaleFactor, marginY + system.y * scaleFactor, 8, currentSystemDotPaint);
+                currentSystem = system;
+            } else {
+                canvas.drawCircle(marginX + system.x * scaleFactor, marginY + system.y * scaleFactor, 8, dotPaint);
+            }
         }
+
+        // Draw circle indicating where the player can travel
+        canvas.drawCircle(marginX + currentSystem.x * scaleFactor, marginY + currentSystem.y * scaleFactor, viewModel.getCurrentShipFuel() * scaleFactor, travelBoundPaint);
     }
 
     public void setViewModel(ISpaceMapViewModel viewModel) {

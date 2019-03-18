@@ -11,13 +11,19 @@ public abstract class Ship {
     String type;
     HashMap<TradeGood, Integer> inventory;
     int totalCargoBays;
-    int maxJumpDistance;
+    int maxFuel; // 1 fuel = 1 unit
+    int currentFuel = 0;
 
-    public Ship () {
+    public Ship (String type, int totalCargoBays, int maxFuel) {
         this.inventory = new HashMap<>();
         for (TradeGood good : TradeGood.values()) {
             inventory.put(good, 0);
         }
+
+        this.type = type;
+        this.totalCargoBays = totalCargoBays;
+        this.maxFuel = maxFuel;
+        this.currentFuel = maxFuel;
     }
 
     @Override
@@ -86,5 +92,9 @@ public abstract class Ship {
      */
     protected void setInventory(HashMap<TradeGood, Integer> inventory) {
         this.inventory = inventory;
+    }
+
+    public int getCurrentFuel() {
+        return currentFuel;
     }
 }
