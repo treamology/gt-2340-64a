@@ -19,6 +19,7 @@ public class Universe {
     public static final int SIZE_X = 150; //sizeX and sizeY are the maximum coordinates of the map
     public static final int SIZE_Y = 100;
     private static final int maxDistance = 30;
+    private static final int minDistance = 10;
     private List<SolarSystem> systems;
     private HashSet<Position> takenPositions;
     private HashSet<Integer> takenNames;
@@ -77,8 +78,9 @@ public class Universe {
         ArrayList<Position> choices = new ArrayList<>();
         for (int i = Math.max(0, neighbor.getX() - maxDistance); i <= Math.min(SIZE_X, neighbor.getX() + maxDistance); i++) {
             for (int j = Math.max(0, neighbor.getY() - maxDistance); j <= Math.min(SIZE_Y, neighbor.getY() + maxDistance); j++) {
-                if (Math.sqrt(Math.pow((double) (i - neighbor.getX()), 2) +
-                        Math.pow((double) (j - neighbor.getY()), 2)) <= maxDistance) {
+                double dist = Math.sqrt(Math.pow((double) (i - neighbor.getX()), 2) +
+                             Math.pow((double) (j - neighbor.getY()), 2));
+                if (dist <= maxDistance && dist >= minDistance) {
                     choices.add(new Position(i, j));
                 }
             }

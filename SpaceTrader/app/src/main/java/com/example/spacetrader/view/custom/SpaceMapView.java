@@ -5,11 +5,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.spacetrader.model.Universe;
+import com.example.spacetrader.model.system.SolarSystem;
 import com.example.spacetrader.viewmodel.ISpaceMapViewModel;
 import com.example.spacetrader.viewmodel.modeldisplay.DisplayedSolarSystem;
 
@@ -48,6 +52,21 @@ public class SpaceMapView extends View {
     private Paint currentSystemDotPaint;
     private Paint textPaint;
     private Paint travelBoundPaint;
+
+    int paddingLeft;
+    int paddingTop;
+    int paddingRight;
+    int paddingBottom;
+
+    int contentWidth;
+    int contentHeight;
+
+    float scaleFactor;
+    float marginX;
+    float marginY;
+
+    private Rect[] systemRects;
+
 
     public SpaceMapView(Context context) {
         super(context);
@@ -104,10 +123,15 @@ public class SpaceMapView extends View {
         textPaint.setTextSize(48);
 
         travelBoundPaint = new Paint();
-        travelBoundPaint.setStrokeWidth(2.0f);
+        travelBoundPaint.setStrokeWidth(4.0f);
         travelBoundPaint.setStyle(Paint.Style.STROKE);
-        travelBoundPaint.setColor(Color.BLACK);
+        travelBoundPaint.setColor(Color.DKGRAY);
         travelBoundPaint.setPathEffect(new DashPathEffect(new float[] {10,20}, 0));
+
+        systemRects = new Rect[SolarSystem.MAX_SYSTEMS];
+        for (int i = 0; i < systemRects.length; i++) {
+            systemRects[i] = new Rect(0, 0, 0, 0);
+        }
 
         setZoomType(ZoomType.UNIVERSE);
     }
@@ -115,20 +139,6 @@ public class SpaceMapView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
-        int paddingBottom = getPaddingBottom();
-
-        int contentWidth = getWidth() - paddingLeft - paddingRight;
-        int contentHeight = getHeight() - paddingTop - paddingBottom;
-
-        float scaleFactor = contentHeight > contentWidth
-                ? (float)contentWidth / viewportWidth
-                : (float)contentHeight / viewportHeight;
-        float marginX = (contentWidth - (viewportWidth * scaleFactor)) / 2.0f;
-        float marginY = (contentHeight - (viewportHeight * scaleFactor)) / 2.0f;
 
         // Draw map boundary
         canvas.drawRect(marginX, marginY, marginX + viewportWidth * scaleFactor, marginY + viewportHeight * scaleFactor, boundaryPaint);
@@ -149,17 +159,60 @@ public class SpaceMapView extends View {
         // Draw the planets.
         for (int i = 0; i < systems.size(); i++) {
             DisplayedSolarSystem system = systems.get(i);
-            canvas.drawText(system.name, marginX + system.x * scaleFactor, marginY + system.y * scaleFactor + 48, textPaint);
+            float realX = marginX + system.x * scaleFactor;
+            float realY = marginY + system.y * scaleFactor;
+            canvas.drawText(system.name, realX, realY + 48, textPaint);
             if (system.currentlyVisiting) {
-                canvas.drawCircle(marginX + system.x * scaleFactor, marginY + system.y * scaleFactor, 8, currentSystemDotPaint);
+                canvas.drawCircle(realX, realY, 8, currentSystemDotPaint);
                 currentSystem = system;
             } else {
-                canvas.drawCircle(marginX + system.x * scaleFactor, marginY + system.y * scaleFactor, 8, dotPaint);
+                canvas.drawCircle(realX, realY, 8, dotPaint);
             }
+            systemRects[i].bottom = (int)realY + 32;
+            systemRects[i].top = (int)realY - 32;
+            systemRects[i].right = (int)realX + 32;
+            systemRects[i].left = (int)realX - 32;
         }
 
         // Draw circle indicating where the player can travel
         canvas.drawCircle(marginX + currentSystem.x * scaleFactor, marginY + currentSystem.y * scaleFactor, viewModel.getCurrentShipFuel() * scaleFactor, travelBoundPaint);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+
+        paddingLeft = getPaddingLeft();
+        paddingTop = getPaddingTop();
+        paddingRight = getPaddingRight();
+        paddingBottom = getPaddingBottom();
+
+        contentWidth = getWidth() - paddingLeft - paddingRight;
+        contentHeight = getHeight() - paddingTop - paddingBottom;
+
+        scaleFactor = contentHeight > contentWidth
+                ? (float)contentWidth / viewportWidth
+                : (float)contentHeight / viewportHeight;
+        marginX = (contentWidth - (viewportWidth * scaleFactor)) / 2.0f;
+        marginY = (contentHeight - (viewportHeight * scaleFactor)) / 2.0f;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            int viewX = (int)event.getX();
+            int viewY = (int)event.getY();
+
+            for (int i = 0; i < systemRects.length; i++) {
+                Rect touchRect = systemRects[i];
+                if (touchRect.contains(viewX, viewY)) {
+                    Log.d("APP", String.format("Touched system %s", viewModel.getSystems().get(i).name));
+                }
+            }
+        }
+        return true;
     }
 
     public void setViewModel(ISpaceMapViewModel viewModel) {
