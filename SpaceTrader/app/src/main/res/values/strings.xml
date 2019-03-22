@@ -40,4 +40,11 @@
     <string name="shop_quantity_sell_suffix">in cargo hold</string>
     <string name="shop_remaining_cargo">Remaining cargo space: %d/%d</string>
     <string name="shop_cash">Credits: $%d</string>
+
+    <!-- Quick System Info -->
+    <string name="qsi_warp_button">Warp</string>
+    <string name="qsi_location">Location: %d, %d</string>
+    <string name="qsi_tech">Tech Level: %s</string>
+    <string name="qsi_resources">Resources: %s</string>
+    <string name="qsi_no_fuel">Not enough fuel!</string>
 </resources>

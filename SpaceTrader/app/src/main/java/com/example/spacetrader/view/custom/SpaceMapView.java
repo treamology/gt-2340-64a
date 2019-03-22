@@ -16,6 +16,7 @@ import com.example.spacetrader.model.Universe;
 import com.example.spacetrader.model.system.SolarSystem;
 import com.example.spacetrader.viewmodel.ISpaceMapViewModel;
 import com.example.spacetrader.viewmodel.modeldisplay.DisplayedSolarSystem;
+import com.example.spacetrader.viewmodel.modeldisplay.SolarSystemInfo;
 
 import java.util.List;
 
@@ -66,6 +67,8 @@ public class SpaceMapView extends View {
     float marginY;
 
     private Rect[] systemRects;
+    private SolarSystemInfo lastTouchedSystem;
+    private View.OnClickListener clickListener;
 
 
     public SpaceMapView(Context context) {
@@ -208,7 +211,8 @@ public class SpaceMapView extends View {
             for (int i = 0; i < systemRects.length; i++) {
                 Rect touchRect = systemRects[i];
                 if (touchRect.contains(viewX, viewY)) {
-                    Log.d("APP", String.format("Touched system %s", viewModel.getSystems().get(i).name));
+                    lastTouchedSystem = viewModel.getSystemInfo(i);
+                    clickListener.onClick(this);
                 }
             }
         }
@@ -217,5 +221,13 @@ public class SpaceMapView extends View {
 
     public void setViewModel(ISpaceMapViewModel viewModel) {
         this.viewModel = viewModel;
+    }
+
+    public SolarSystemInfo getLastTouchedSystem() {
+        return lastTouchedSystem;
+    }
+
+    public void setClickListener(OnClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 }
