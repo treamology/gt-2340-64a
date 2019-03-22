@@ -13,6 +13,7 @@ import com.example.spacetrader.R;
 import com.example.spacetrader.view.custom.QuickSystemInfoView;
 import com.example.spacetrader.view.custom.SpaceMapView;
 import com.example.spacetrader.viewmodel.UniverseViewModel;
+import com.example.spacetrader.viewmodel.event.GameEvents;
 import com.example.spacetrader.viewmodel.modeldisplay.SolarSystemInfo;
 
 public class UniverseFragment extends Fragment {
@@ -42,12 +43,18 @@ public class UniverseFragment extends Fragment {
         spaceMapView.setClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SolarSystemInfo info = spaceMapView.getLastTouchedSystem();
+                final SolarSystemInfo info = spaceMapView.getLastTouchedSystem();
                 systemInfoView.animate()
                         .alpha(1.0f)
                         .setDuration(100);
                 systemInfoView.setAttributes(info.name, info.x, info.y, info.techLevel, info.resources);
                 systemInfoView.setNotEnoughFuel(mViewModel.getCurrentShipFuel() < mViewModel.getSystemDistanceFromPlayer(info));
+                systemInfoView.setWarpHandler(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        GameEvents.warpToSystem(info.index);
+                    }
+                });
             }
         });
     }

@@ -18,7 +18,7 @@ import com.example.spacetrader.R;
 import com.example.spacetrader.model.system.TechLevel;
 import com.example.spacetrader.viewmodel.SystemInfoViewModel;
 
-public class SystemInfoFragment extends Fragment {
+public class SystemInfoFragment extends Fragment implements GameFragment {
 
     private SystemInfoViewModel mViewModel;
 
@@ -52,6 +52,11 @@ public class SystemInfoFragment extends Fragment {
         increaseEventTextView = view.findViewById(R.id.increaseEventValue);
         systemImageView = view.findViewById(R.id.systemImage);
 
+        refreshInfo();
+    }
+
+    @Override
+    public void refreshInfo() {
         systemNameTextView.setText(mViewModel.getSystemName());
         positionTextView.setText(String.format("%d, %d", mViewModel.getSystemX(), mViewModel.getSystemY()));
         resourcesTextView.setText(mViewModel.getResourceBias());

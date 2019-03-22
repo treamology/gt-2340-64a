@@ -96,4 +96,7 @@ public class Player {
         credits += quantity;
     }
 
+    public void setCurrentSystemIndex(int currentSystemIndex) {
+        this.currentSystemIndex = currentSystemIndex;
+    }
 }

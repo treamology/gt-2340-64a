@@ -51,4 +51,8 @@ public class QuickSystemInfoView extends FrameLayout {
         warpButton.setEnabled(!notEnoughFuel);
         noFuelText.setAlpha(notEnoughFuel ? 1.0f : 0.0f);
     }
+
+    public void setWarpHandler(View.OnClickListener listener) {
+        warpButton.setOnClickListener(listener);
+    }
 }
