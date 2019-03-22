@@ -208,4 +208,7 @@ public class SolarSystem {
     public PriceIncreaseEvent getCurrentIncreaseEvent() {
         return currentIncreaseEvent;
     }
+    public int getDistanceFromPlayer() {
+        return position.getManhattanDistanceTo(GameState.getState().getPlayer().getCurrentSystem().getPosition());
+    }
 }
