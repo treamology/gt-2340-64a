@@ -51,6 +51,7 @@ public class SpaceMapView extends View {
     private Paint gridlinePaint;
     private Paint dotPaint;
     private Paint currentSystemDotPaint;
+    private Paint visitedSystemDotPaint;
     private Paint textPaint;
     private Paint travelBoundPaint;
 
@@ -122,6 +123,10 @@ public class SpaceMapView extends View {
         currentSystemDotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         currentSystemDotPaint.setColor(Color.RED);
 
+        visitedSystemDotPaint = new Paint();
+        visitedSystemDotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        visitedSystemDotPaint.setColor(Color.GREEN);
+
         textPaint = new TextPaint();
         textPaint.setTextSize(48);
 
@@ -168,6 +173,8 @@ public class SpaceMapView extends View {
             if (system.currentlyVisiting) {
                 canvas.drawCircle(realX, realY, 8, currentSystemDotPaint);
                 currentSystem = system;
+            } else if (system.visited) {
+                canvas.drawCircle(realX, realY, 8, visitedSystemDotPaint);
             } else {
                 canvas.drawCircle(realX, realY, 8, dotPaint);
             }

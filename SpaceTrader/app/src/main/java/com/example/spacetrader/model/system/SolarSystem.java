@@ -178,6 +178,10 @@ public class SolarSystem {
     }
     public boolean getVisited() { return visited; }
 
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
     public Map<TradeGood, Integer> getResourceCount() {
         return quantities;
     }

@@ -97,6 +97,7 @@ public class Player {
     }
 
     public void setCurrentSystemIndex(int currentSystemIndex) {
+        GameState.getState().getUniverse().getSystems().get(currentSystemIndex).setVisited(true);
         this.currentSystemIndex = currentSystemIndex;
     }
 }
