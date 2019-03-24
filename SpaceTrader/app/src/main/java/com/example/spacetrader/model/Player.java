@@ -96,8 +96,12 @@ public class Player {
         credits += quantity;
     }
 
-    public void setCurrentSystemIndex(int currentSystemIndex) {
-        GameState.getState().getUniverse().getSystems().get(currentSystemIndex).setVisited(true);
-        this.currentSystemIndex = currentSystemIndex;
+    public void travelToSystem(int newSystemIndex) {
+        SolarSystem oldSystem = GameState.getState().getPlayer().getCurrentSystem();
+        SolarSystem newSystem = GameState.getState().getUniverse().getSystems().get(newSystemIndex);
+
+        oldSystem.setVisited(true);
+        getShip().subtractFuel(oldSystem.getPosition().getManhattanDistanceTo(newSystem.getPosition()));
+        this.currentSystemIndex = newSystemIndex;
     }
 }

@@ -97,4 +97,20 @@ public abstract class Ship {
     public int getCurrentFuel() {
         return currentFuel;
     }
+
+    public int getMaxFuel() {
+        return maxFuel;
+    }
+
+    public void subtractFuel(int amount) {
+        currentFuel -= amount;
+    }
+
+    public void addFuel(int amount) {
+        currentFuel += amount;
+    }
+
+    public void setCurrentFuel(int currentFuel) {
+        this.currentFuel = currentFuel;
+    }
 }

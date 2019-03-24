@@ -21,14 +21,28 @@
     <string name="empty_name_notify">You need to enter a name!</string>
 
     <!-- Tabs -->
-    <string name="title_planet_info">System Info</string>
+    <string name="title_planet_info">Info</string>
     <string name="title_universe">Map</string>
+
+    <!-- Info Container -->
+    <string name="info_system_tab">System</string>
+    <string name="info_player_tab">Player</string>
+    <string name="info_system_info">System Info</string>
+    <string name="info_player_info">Player Info</string>
 
     <!-- System Info -->
     <string name="si_location_header">Location:</string>
     <string name="si_tech_level_header">Tech Level:</string>
     <string name="si_resources_header">Resources:</string>
     <string name="si_increaseevents_header">Special Event:</string>
+
+    <!-- Player Info -->
+    <string name="pi_shiptype">Ship Type: %s</string>
+    <string name="pi_cash">Credits: $%d</string>
+    <string name="pi_fuel">You currently have enough fuel to fly %d parsecs</string>
+    <string name="pi_max_fuel">(%d max)</string>
+    <string name="pi_buy1">Buy 1</string>
+    <string name="pi_buyall">Buy All</string>
 
     <!-- Map -->
     <string name="map_system_type">System</string>

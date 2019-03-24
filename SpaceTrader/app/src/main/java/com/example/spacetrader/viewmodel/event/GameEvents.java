@@ -3,7 +3,6 @@ package com.example.spacetrader.viewmodel.event;
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.Player;
 import com.example.spacetrader.model.system.SolarSystem;
-import com.example.spacetrader.viewmodel.modeldisplay.DisplayedSolarSystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class GameEvents {
     public static void warpToSystem(int index) {
         SolarSystem system = GameState.getState().getUniverse().getSystems().get(index);
         Player player = GameState.getState().getPlayer();
-        player.setCurrentSystemIndex(index);
+        player.travelToSystem(index);
         for (WarpEventHandler event : warpEvents) {
             event.onWarp(index);
         }

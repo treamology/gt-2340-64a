@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/playerinfo_ship_image"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/doggo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/playerinfo_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="Player Name"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/playerinfo_ship_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/playerinfo_ship_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/pi_shiptype"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/playerinfo_ship_image"
+        app:layout_constraintTop_toBottomOf="@+id/playerinfo_name" />
+
+    <TextView
+        android:id="@+id/playerinfo_cash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/pi_cash"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/playerinfo_ship_image"
+        app:layout_constraintTop_toBottomOf="@+id/playerinfo_ship_type" />
+
+    <TextView
+        android:id="@+id/playerinfo_fuel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/pi_fuel"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerinfo_ship_image" />
+
+    <Button
+        android:id="@+id/playerinfo_buy1_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/pi_buy1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerinfo_fuel" />
+
+    <Button
+        android:id="@+id/playerinfo_buyall_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/pi_buyall"
+        app:layout_constraintStart_toEndOf="@+id/playerinfo_buy1_button"
+        app:layout_constraintTop_toBottomOf="@+id/playerinfo_fuel" />
+
+    <TextView
+        android:id="@+id/playerinfo_max_fuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/pi_max_fuel"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/playerinfo_buyall_button"
+        app:layout_constraintStart_toEndOf="@+id/playerinfo_buyall_button"
+        app:layout_constraintTop_toTopOf="@+id/playerinfo_buyall_button" />
+</android.support.constraint.ConstraintLayout>

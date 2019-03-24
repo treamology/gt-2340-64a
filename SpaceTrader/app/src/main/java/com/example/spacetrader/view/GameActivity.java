@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.example.spacetrader.R;
 import com.example.spacetrader.view.fragment.BuySellFragment;
 import com.example.spacetrader.view.fragment.GameFragment;
+import com.example.spacetrader.view.fragment.InfoContainerFragment;
 import com.example.spacetrader.view.fragment.SystemInfoFragment;
 import com.example.spacetrader.view.fragment.UniverseFragment;
 import com.example.spacetrader.viewmodel.event.GameEvents;
@@ -39,7 +40,7 @@ public class GameActivity extends FragmentActivity implements WarpEventHandler {
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        fragmentMap.put(R.id.navigation_planet_info, new SystemInfoFragment());
+        fragmentMap.put(R.id.navigation_planet_info, new InfoContainerFragment());
         fragmentMap.put(R.id.navigation_warp, new UniverseFragment());
         fragmentMap.put(R.id.navigation_buysell, new BuySellFragment());
 
@@ -57,10 +58,9 @@ public class GameActivity extends FragmentActivity implements WarpEventHandler {
 
     @Override
     public void onWarp(int newSystem) {
-        SystemInfoFragment infoFragment = (SystemInfoFragment) fragmentMap.get(R.id.navigation_planet_info);
+        InfoContainerFragment infoFragment = (InfoContainerFragment) fragmentMap.get(R.id.navigation_planet_info);
         replaceCurrentFragment(infoFragment);
         navigation.setSelectedItemId(R.id.navigation_planet_info);
-        infoFragment.refreshInfo();
     }
 
 }
