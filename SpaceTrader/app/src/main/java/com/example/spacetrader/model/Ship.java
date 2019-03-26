@@ -107,7 +107,7 @@ public abstract class Ship {
     }
 
     public void addFuel(int amount) {
-        currentFuel += amount;
+        currentFuel = Math.min(currentFuel + amount, maxFuel);
     }
 
     public void setCurrentFuel(int currentFuel) {

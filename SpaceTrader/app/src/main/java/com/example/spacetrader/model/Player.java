@@ -101,7 +101,7 @@ public class Player {
         SolarSystem newSystem = GameState.getState().getUniverse().getSystems().get(newSystemIndex);
 
         oldSystem.setVisited(true);
-        getShip().subtractFuel(oldSystem.getPosition().getManhattanDistanceTo(newSystem.getPosition()));
+        getShip().subtractFuel(oldSystem.getPosition().getEuclideanDistanceTo(newSystem.getPosition()));
         this.currentSystemIndex = newSystemIndex;
     }
 }
