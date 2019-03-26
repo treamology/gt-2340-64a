@@ -26,15 +26,18 @@ public class SolarSystem {
             , "Triacus", "Turkana", "Tyrus", "Umberlee", "Utopia", "Vadera", "Vagra", "Vandor"
             , "Ventax", "Xenon", "Xerxes", "Yew", "Yojimbo", "Zalkon", "Zuul"};
 
+    // Constant state through the whole game
     String name;
     Position position;
     TechLevel techLevel;
     ResourceBias resourceBias;
-    boolean visited;
+    int imageIndex;
+
+    // State that changes each turn
     LinkedHashMap<TradeGood, Integer> quantities;
     LinkedHashMap<TradeGood, Integer> prices;
-    boolean IE;
-    int imageIndex;
+    PriceIncreaseEvent currentIncreaseEvent;
+    boolean visited;
 
     public SolarSystem(String name, Position position, TechLevel techLevel, ResourceBias resourceBias) {
         this.name = name;
@@ -133,9 +136,9 @@ public class SolarSystem {
 
         int IEChance = rand.nextInt(100);
         if (IEChance < 15) {
-            IE = true;
+            currentIncreaseEvent = PriceIncreaseEvent.values()[rand.nextInt(PriceIncreaseEvent.values().length - 2) + 1];
         } else {
-            IE = false;
+            currentIncreaseEvent = PriceIncreaseEvent.NONE;
         }
 
         int waterPrice = water.getPrice(this);
@@ -175,11 +178,12 @@ public class SolarSystem {
     }
     public boolean getVisited() { return visited; }
 
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
     public Map<TradeGood, Integer> getResourceCount() {
         return quantities;
-    }
-    public boolean getIE() {
-        return IE;
     }
     public int getImageIndex() {
         return imageIndex;
@@ -203,5 +207,12 @@ public class SolarSystem {
 
     public void increaseQuantity(TradeGood good, int quantity) {
         quantities.put(good, quantities.get(good) + quantity);
+    }
+
+    public PriceIncreaseEvent getCurrentIncreaseEvent() {
+        return currentIncreaseEvent;
+    }
+    public int getDistanceFromPlayer() {
+        return position.getManhattanDistanceTo(GameState.getState().getPlayer().getCurrentSystem().getPosition());
     }
 }
