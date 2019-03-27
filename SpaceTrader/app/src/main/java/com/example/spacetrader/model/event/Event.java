@@ -5,7 +5,7 @@ import com.example.spacetrader.model.GameState;
 public abstract class Event {
 
     String description;
-
+    String consequence;
 
     /**
      * Executes the random event
