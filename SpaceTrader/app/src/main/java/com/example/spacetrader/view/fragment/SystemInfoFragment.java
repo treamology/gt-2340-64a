@@ -18,7 +18,7 @@ import com.example.spacetrader.R;
 import com.example.spacetrader.model.system.TechLevel;
 import com.example.spacetrader.viewmodel.SystemInfoViewModel;
 
-public class SystemInfoFragment extends Fragment {
+public class SystemInfoFragment extends Fragment implements GameFragment {
 
     private SystemInfoViewModel mViewModel;
 
@@ -26,6 +26,7 @@ public class SystemInfoFragment extends Fragment {
     private TextView positionTextView;
     private TextView resourcesTextView;
     private TextView techLevelTextView;
+    private TextView increaseEventTextView;
     private ImageView systemImageView;
 
     public static SystemInfoFragment newInstance() {
@@ -48,12 +49,19 @@ public class SystemInfoFragment extends Fragment {
         positionTextView = view.findViewById(R.id.locationValue);
         resourcesTextView = view.findViewById(R.id.resourcesValue);
         techLevelTextView = view.findViewById(R.id.techLevelValue);
+        increaseEventTextView = view.findViewById(R.id.increaseEventValue);
         systemImageView = view.findViewById(R.id.systemImage);
 
+        refreshInfo();
+    }
+
+    @Override
+    public void refreshInfo() {
         systemNameTextView.setText(mViewModel.getSystemName());
         positionTextView.setText(String.format("%d, %d", mViewModel.getSystemX(), mViewModel.getSystemY()));
         resourcesTextView.setText(mViewModel.getResourceBias());
         techLevelTextView.setText(mViewModel.getTechLevel());
+        increaseEventTextView.setText(mViewModel.getCurrentIncreaseEvent());
 
         int imageID = getResources().getIdentifier(String.format("planet%d", mViewModel.getImageIndex()), "drawable", "com.example.spacetrader");
         BitmapDrawable image = (BitmapDrawable)getResources().getDrawable(imageID);

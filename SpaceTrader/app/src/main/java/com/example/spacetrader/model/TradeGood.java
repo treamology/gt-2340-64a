@@ -1,7 +1,10 @@
 package com.example.spacetrader.model;
 
+import com.example.spacetrader.model.system.PriceIncreaseEvent;
 import com.example.spacetrader.model.system.ResourceBias;
 import com.example.spacetrader.model.system.SolarSystem;
+
+import java.util.Random;
 
 /**
  * Holds the 10 trade goods in the game, incluing their names, base prices, and if they
@@ -9,25 +12,25 @@ import com.example.spacetrader.model.system.SolarSystem;
  */
 public enum TradeGood {
 
-    WATER("Water", 0, 0, 2, 30, 3, 4, "drought",
+    WATER("Water", 0, 0, 2, 30, 3, 4, PriceIncreaseEvent.DROUGHT,
             ResourceBias.LOTSOFWATER, ResourceBias.DESERT, 30, 50),
-    FURS("Furs", 0,0, 0, 250, 10, 10, "cold",
+    FURS("Furs", 0,0, 0, 250, 10, 10, PriceIncreaseEvent.COLD,
             ResourceBias.RICHFAUNA, ResourceBias.LIFELESS, 230, 280),
-    ORE("Ore", 2, 2, 3, 350, 20, 10, "war",
+    ORE("Ore", 2, 2, 3, 350, 20, 10, PriceIncreaseEvent.WAR,
             ResourceBias.MINERALRICH, ResourceBias.MINERALPOOR, 350, 420),
-    FOOD("Food", 1, 0, 1, 100, 5, 5, "cropFail",
+    FOOD("Food", 1, 0, 1, 100, 5, 5, PriceIncreaseEvent.CROPFAIL,
             ResourceBias.RICHSOIL, ResourceBias.POORSOIL, 90, 160),
-    GAMES("Games", 3, 1, 6, 250, -10, 5, "boredom",
+    GAMES("Games", 3, 1, 6, 250, -10, 5, PriceIncreaseEvent.BOREDOM,
             ResourceBias.ARTISTIC, null, 160, 270),
-    FIREWARMS("Firearms", 3, 1, 5, 1250, -75, 100, "war",
+    FIREARMS("Firearms", 3, 1, 5, 1250, -75, 100, PriceIncreaseEvent.WAR,
             ResourceBias.WARLIKE, null, 600, 1100),
-    MEDICINE("Medicine", 4, 1, 6, 650, -20, 10, "plague",
+    MEDICINE("Medicine", 4, 1, 6, 650, -20, 10, PriceIncreaseEvent.PLAGUE,
             ResourceBias.LOTSOFHERBS, null, 400, 700),
-    NARCOTICS("Narcotics", 5, 0, 5, 3500, -125, 150, "boredom",
+    NARCOTICS("Narcotics", 5, 0, 5, 3500, -125, 150, PriceIncreaseEvent.BOREDOM,
             ResourceBias.WEIRDMUSHROOMS, null, 2000, 3000),
-    ROBOTS("Robots", 6, 4, 7, 5000, -150, 100, "lackOfWorkers",
+    ROBOTS("Robots", 6, 4, 7, 5000, -150, 100, PriceIncreaseEvent.LACKOFWORKERS,
             null, null, 3500, 5000),
-    MACHINES("Machines", 4, 3, 5, 900, -30, 5, "lackOfWorkers",
+    MACHINES("Machines", 4, 3, 5, 900, -30, 5, PriceIncreaseEvent.LACKOFWORKERS,
                      null,null, 600,800);
 
     private String name;
@@ -37,7 +40,7 @@ public enum TradeGood {
     private int basePrice;
     private int IPL;
     private int var;
-    private String IE;
+    private PriceIncreaseEvent IE;
     private ResourceBias CR;
     private ResourceBias ER;
     private int MTL;
@@ -59,7 +62,7 @@ public enum TradeGood {
      * @param MTH highest price a space trader can value it
      */
 
-    TradeGood(String name, int MTLP, int MTLU, int TPP, int basePrice, int IPL, int var, String IE,
+    TradeGood(String name, int MTLP, int MTLU, int TPP, int basePrice, int IPL, int var, PriceIncreaseEvent IE,
               ResourceBias CR, ResourceBias ER, int MTL, int MTH) {
         this.name = name;
         this.MTLP = MTLP;
@@ -74,8 +77,7 @@ public enum TradeGood {
         this.MTL = MTL;
         this.MTH = MTH;
     }
-
-    //IE has yet to be implemented on a planet scale and should be updated in price change if so.
+        
     //Price for space traders also needs to be implemented when we add random events.
     /**
      * returns the price of each good depending on the planets factors
@@ -83,9 +85,12 @@ public enum TradeGood {
      * @return int representation of the items price
      */
     public int getPrice(SolarSystem planet) {
+        Random rng = GameState.getState().rng;
+
         int price = basePrice;
-        int maxPrice = basePrice + var;
-        int minPrice = basePrice - var;
+        int range = (int)((float)basePrice * ((float)var / 100));
+        int maxPrice = basePrice + range;
+        int minPrice = basePrice - range;
 
         //the higher the tech level, the more expensive the good.
         if (planet.getTechLevel().level > 0) {
@@ -94,14 +99,18 @@ public enum TradeGood {
 
         //checks if planets resource makes the item cheaper
         if (planet.getResourceBias() == CR) {
-            price -= Math.random() * var;
+            price -= rng.nextInt(var);
         }
 
         //checks if planets resource makes the item more expensive
         if (planet.getResourceBias() == ER) {
-            price += Math.random() * var;
+            price += rng.nextInt(var);
         }
 
+        //compares IE of planet to the IE that effects the price of the good
+        if (IE == planet.getCurrentIncreaseEvent()) {
+            price = price + rng.nextInt(range);
+        }
         //prevents the price from exceeding the set max price or falling below the set min price
         if (price > maxPrice) {
             price = maxPrice;
@@ -109,10 +118,6 @@ public enum TradeGood {
             price = minPrice;
         }
 
-        boolean IE = planet.getIE();
-        if (IE) {
-            price = price * 10;
-        }
         return price;
     }
 

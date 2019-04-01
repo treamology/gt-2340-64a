@@ -31,5 +31,8 @@ public class SystemInfoViewModel extends ViewModel {
     public String getTechLevel() {
         return currentSystem.getTechLevel().name;
     }
+    public String getCurrentIncreaseEvent() {
+        return currentSystem.getCurrentIncreaseEvent().name;
+    }
     public int getImageIndex() { return currentSystem.getImageIndex(); }
 }
