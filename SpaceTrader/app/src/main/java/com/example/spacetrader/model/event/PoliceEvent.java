@@ -90,6 +90,7 @@ public class PoliceEvent extends Event {
         if (fine > 0) {
             consequence = "Transporting illegal goods is in violation of Galactic Law 63-4A. Your illegal goods are confiscated. The " +
                     "corrupt officers take " + fine + " credits from you and decide not to bring you to space prison. Count your blessings. ";
+            GameState.getState().getPlayer().removeCredits(fine);
         } else {
             consequence = "The police find no illegal goods on your ship. You continue on your way";
         }
