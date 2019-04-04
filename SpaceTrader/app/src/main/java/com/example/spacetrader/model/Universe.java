@@ -53,7 +53,7 @@ public class Universe {
         Position position = generateSystemPosition(previousLocation);
         String name = generateSystemName();
 
-        Log.d("APP", String.format("Generated system with name %s and position (%d, %d).", name, position.getX(), position.getY()));
+        //Log.d("APP", String.format("Generated system with name %s and position (%d, %d).", name, position.getX(), position.getY()));
 
         return new SolarSystem(name, position, techLevel, resourceBias);
     }

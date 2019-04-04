@@ -38,7 +38,7 @@ public class PirateEvent extends Event {
             description = "You are beset by pirates!"
                     + " They demand any fuel you don't need for safe passage!";
         }
-        Log.d("Random Event", "you ran a pirate event");
+        //Log.d("Random Event", "you ran a pirate event");
     }
 
     @Override
@@ -62,7 +62,7 @@ public class PirateEvent extends Event {
             consequence = "You were not a good enough fighter to beat the pirates."
                 + " Since you resisted, they took all of your trade goods and unneeded fuel.";
         }
-        Log.d("Random Event", "you fought the pirate");
+        //Log.d("Random Event", "you fought the pirate");
     }
 
     @Override
@@ -77,7 +77,7 @@ public class PirateEvent extends Event {
             consequence = "You were not a good enough pilot to escape the pirates."
                     + " Since you resisted, they took all of your trade goods and unneeded fuel";
         }
-        Log.d("Random Event", "you tried to escape the pirate");
+        //Log.d("Random Event", "you tried to escape the pirate");
     }
 
     @Override
@@ -89,6 +89,6 @@ public class PirateEvent extends Event {
             GameState.getState().getPlayer().getShip().removeFromInventory(demands, quantity);
         }
         consequence = "You complied with the pirates' demands.";
-        Log.d("Random Event", "you gave in to the pirate's demands");
+        //Log.d("Random Event", "you gave in to the pirate's demands");
     }
 }
