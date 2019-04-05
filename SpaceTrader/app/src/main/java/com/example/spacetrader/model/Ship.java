@@ -94,6 +94,13 @@ public abstract class Ship {
         this.inventory = inventory;
     }
 
+    /**
+     * If you resist pirates and fail, you lose all trade goods
+     */
+    public void loseInventory() {
+        inventory.clear();
+    }
+
     public int getCurrentFuel() {
         return currentFuel;
     }
@@ -107,7 +114,7 @@ public abstract class Ship {
     }
 
     public void addFuel(int amount) {
-        currentFuel += amount;
+        currentFuel = Math.min(currentFuel + amount, maxFuel);
     }
 
     public void setCurrentFuel(int currentFuel) {

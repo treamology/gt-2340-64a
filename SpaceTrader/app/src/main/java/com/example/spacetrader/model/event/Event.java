@@ -7,7 +7,6 @@ public abstract class Event {
     String description;
     String consequence;
 
-
     /**
      * Executes the random event
      */

@@ -124,5 +124,16 @@ public enum TradeGood {
     public String getName() {
         return name;
     }
+
+    /**
+     * Randomly generates a trade good
+     * @return the chosen trade good
+     */
+    public static TradeGood getRandom() {
+        TradeGood[] options = new TradeGood[] {WATER, FURS, ORE, FOOD, GAMES, FIREARMS,
+            MEDICINE, NARCOTICS, ROBOTS, MACHINES};
+        int index = GameState.getState().rng.nextInt(10);
+        return options[index];
+    }
 }
 

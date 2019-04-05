@@ -213,6 +213,6 @@ public class SolarSystem {
         return currentIncreaseEvent;
     }
     public int getDistanceFromPlayer() {
-        return position.getManhattanDistanceTo(GameState.getState().getPlayer().getCurrentSystem().getPosition());
+        return position.getEuclideanDistanceTo(GameState.getState().getPlayer().getCurrentSystem().getPosition());
     }
 }
