@@ -75,6 +75,7 @@ public class Player {
     public int getCredits() {return credits;}
     public void setCredits(int credits) {this.credits = credits;}
     public SolarSystem getCurrentSystem() {return GameState.getState().getUniverse().getSystems().get(currentSystemIndex);}
+    public void setCurrentSystemIndex(int currentSystemIndex) {this.currentSystemIndex = currentSystemIndex;}
     public int getCurrentSystemIndex() {return currentSystemIndex;}
     /**
      * Used to calculate the number of skill points the player has

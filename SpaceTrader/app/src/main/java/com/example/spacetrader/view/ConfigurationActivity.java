@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.media.MediaPlayer;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.model.GameState;
@@ -25,6 +26,8 @@ public class ConfigurationActivity extends AppCompatActivity {
     private TextView skillPointsTextview;
     private Spinner difficultySpinner;
     private Button createGameButton;
+    private MediaPlayer mediaPlayer;
+    private Button musicButton;
 
     private int[] skillPoints = new int[Player.Skill.values().length];
     private Button[] plusButtons = new Button[Player.Skill.values().length];
@@ -44,6 +47,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         skillPointsTextview = findViewById(R.id.skillPointsText);
         difficultySpinner = findViewById(R.id.difficultySpinner);
         createGameButton = findViewById(R.id.createButton);
+        musicButton = findViewById(R.id.music_button);
 
         plusButtons[0] = findViewById(R.id.pilotPlusButton);
         minusButtons[0] = findViewById(R.id.pilotMinusButton);
@@ -59,6 +63,22 @@ public class ConfigurationActivity extends AppCompatActivity {
         pointTextViews[3] = findViewById(R.id.engineerPoints);
 
         setSupportActionBar((Toolbar)findViewById(R.id.newGameToolbar));
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.customdesign);
+        mediaPlayer.start();
+        mediaPlayer.setLooping(true);
+        musicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                } else {
+                    mediaPlayer.start();
+                    mediaPlayer.setLooping(true);
+                }
+            }
+        });
+
 
         for (int i = 0; i < plusButtons.length; i++) {
             final int finali = i; // this is stupid
