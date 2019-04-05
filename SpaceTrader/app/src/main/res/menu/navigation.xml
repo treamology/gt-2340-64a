@@ -17,7 +17,7 @@
         android:title="Buy/Sell" />
 
     <item
-        android:id="@+id/navigation_save"
+        android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_settings_applications_black_24dp"
         android:title="Settings" />
 

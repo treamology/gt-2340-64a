@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.view.fragment.BuySellFragment;
+import com.example.spacetrader.view.fragment.SettingsFragment;
 import com.example.spacetrader.view.fragment.SystemInfoFragment;
 import com.example.spacetrader.view.fragment.UniverseFragment;
 
@@ -37,6 +38,7 @@ public class GameActivity extends FragmentActivity {
         fragmentMap.put(R.id.navigation_planet_info, new SystemInfoFragment());
         fragmentMap.put(R.id.navigation_warp, new UniverseFragment());
         fragmentMap.put(R.id.navigation_buysell, new BuySellFragment());
+        fragmentMap.put(R.id.navigation_settings, new SettingsFragment());
 
         replaceCurrentFragment(fragmentMap.get(R.id.navigation_planet_info));
     }
