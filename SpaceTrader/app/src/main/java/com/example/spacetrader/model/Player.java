@@ -1,5 +1,6 @@
 package com.example.spacetrader.model;
 
+import com.example.spacetrader.model.event.Event;
 import com.example.spacetrader.model.system.SolarSystem;
 
 /**
@@ -33,6 +34,7 @@ public class Player {
     private Ship ship;
     private int credits;
     private int currentSystemIndex;
+    private Event currentEvent;
 
     /**
      * Initializes a player class, including a Gnat ship and 1000 credits
@@ -76,6 +78,7 @@ public class Player {
     public void setCredits(int credits) {this.credits = credits;}
     public SolarSystem getCurrentSystem() {return GameState.getState().getUniverse().getSystems().get(currentSystemIndex);}
     public int getCurrentSystemIndex() {return currentSystemIndex;}
+    public Event getCurrentEvent() { return currentEvent;}
     /**
      * Used to calculate the number of skill points the player has
      * @return the number of skill points allocated

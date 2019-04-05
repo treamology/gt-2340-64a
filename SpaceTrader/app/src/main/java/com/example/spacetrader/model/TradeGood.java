@@ -77,8 +77,31 @@ public enum TradeGood {
         this.MTL = MTL;
         this.MTH = MTH;
     }
-        
-    //Price for space traders also needs to be implemented when we add random events.
+
+    /**
+     * returns the price of goods for traders
+     * @return int representation of the items price
+     */
+    public int getPrice() {
+        Random rng = GameState.getState().rng;
+
+        int range = (int)((float)basePrice * ((float)var / 100));
+        int maxPrice = basePrice + range;
+        int minPrice = basePrice - range;
+
+        //randomly assigns a price to each good
+        int price = minPrice + rng.nextInt(range * 2);
+
+        //prevents the price from exceeding the set max price or falling below the set min price
+        if (price > maxPrice) {
+            price = maxPrice;
+        } else if (price < minPrice || price < 15) {
+            price = minPrice;
+        }
+
+        return price;
+    }
+
     /**
      * returns the price of each good depending on the planets factors
      * @param planet represents the current planet the player is on
