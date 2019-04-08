@@ -25,14 +25,12 @@ public class ConfigurationActivity extends AppCompatActivity {
     private EditText nameTextbox;
     private TextView skillPointsTextview;
     private Spinner difficultySpinner;
-    private Button createGameButton;
     private MediaPlayer mediaPlayer;
-    private Button musicButton;
 
-    private int[] skillPoints = new int[Player.Skill.values().length];
-    private Button[] plusButtons = new Button[Player.Skill.values().length];
-    private Button[] minusButtons = new Button[Player.Skill.values().length];
-    private TextView[] pointTextViews = new TextView[Player.Skill.values().length];
+    private final int[] skillPoints = new int[Player.Skill.values().length];
+    private final Button[] plusButtons = new Button[Player.Skill.values().length];
+    private final Button[] minusButtons = new Button[Player.Skill.values().length];
+    private final TextView[] pointTextViews = new TextView[Player.Skill.values().length];
 
     private ConfigurationViewModel viewModel;
 
@@ -46,8 +44,8 @@ public class ConfigurationActivity extends AppCompatActivity {
         nameTextbox = findViewById(R.id.nameTextbox);
         skillPointsTextview = findViewById(R.id.skillPointsText);
         difficultySpinner = findViewById(R.id.difficultySpinner);
-        createGameButton = findViewById(R.id.createButton);
-        musicButton = findViewById(R.id.music_button);
+        Button createGameButton = findViewById(R.id.createButton);
+        Button musicButton = findViewById(R.id.music_button);
 
         plusButtons[0] = findViewById(R.id.pilotPlusButton);
         minusButtons[0] = findViewById(R.id.pilotMinusButton);
@@ -146,7 +144,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         });
     }
 
-    void transitionToGameState() {
+    private void transitionToGameState() {
         // The flags being set indicate that we don't want to go back to the previous activity
         // when we press the back button. Once the game starts, it's started.
         Intent intent = new Intent(this, GameActivity.class);
@@ -155,7 +153,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         finish();
     }
 
-    void changeSkillPoints(int byAmount, Player.Skill skillType) {
+    private void changeSkillPoints(int byAmount, Player.Skill skillType) {
         // Do nothing if we're already at the max skill point amount, or would go below zero.
         if (getTotalSkill() + byAmount > Player.SKILL_POINT_MAX
             || skillPoints[skillType.ordinal()] + byAmount < 0) {
@@ -166,7 +164,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         skillPointsTextview.setText(getSkillPointsString());
     }
 
-    int getTotalSkill() {
+    private int getTotalSkill() {
         int total = 0;
         for (int points : skillPoints) {
             total += points;
@@ -174,7 +172,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         return total;
     }
 
-    String getSkillPointsString() {
+    private String getSkillPointsString() {
         return String.format(getResources().getString(R.string.skill_points_option),
                              Player.SKILL_POINT_MAX - getTotalSkill());
     }

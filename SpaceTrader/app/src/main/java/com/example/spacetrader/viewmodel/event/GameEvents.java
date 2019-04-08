@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameEvents {
-    private static List<WarpEventHandler> warpEvents = new ArrayList<>();
+    private static final List<WarpEventHandler> warpEvents = new ArrayList<>();
 
     public static void addWarpEvent(WarpEventHandler warpEventHandler) {
         warpEvents.add(warpEventHandler);
@@ -18,7 +18,7 @@ public class GameEvents {
         Player player = GameState.getState().getPlayer();
         player.travelToSystem(index);
         for (WarpEventHandler event : warpEvents) {
-            event.onWarp(index);
+            event.onWarp();
         }
     }
 }

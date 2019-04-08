@@ -1,12 +1,11 @@
 package com.example.spacetrader.viewmodel;
 
 public class DisplayedSolarSystem {
-    public int x;
-    public int y;
-    public String name;
-    public boolean visited;
-    public boolean currentlyVisiting;
-    public int imageIndex;
+    public final int x;
+    public final int y;
+    public final String name;
+    public final boolean visited;
+    public final boolean currentlyVisiting;
 
     public DisplayedSolarSystem(int x, int y, String name, boolean visited, boolean currentlyVisiting, int imageIndex) {
         this.x = x;
@@ -14,6 +13,6 @@ public class DisplayedSolarSystem {
         this.name = name;
         this.visited = visited;
         this.currentlyVisiting = currentlyVisiting;
-        this.imageIndex = imageIndex;
+        int imageIndex1 = imageIndex;
     }
 }

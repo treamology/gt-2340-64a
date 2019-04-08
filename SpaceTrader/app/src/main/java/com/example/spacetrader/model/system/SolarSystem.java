@@ -2,9 +2,7 @@ package com.example.spacetrader.model.system;
 
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.TradeGood;
-import com.example.spacetrader.model.system.shop.Transaction;
 import com.example.spacetrader.model.system.shop.TransactionParty;
-import com.example.spacetrader.viewmodel.BuySellViewModel;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,17 +28,17 @@ public class SolarSystem implements TransactionParty {
             , "Ventax", "Xenon", "Xerxes", "Yew", "Yojimbo", "Zalkon", "Zuul"};
 
     // Constant state through the whole game
-    String name;
-    Position position;
-    TechLevel techLevel;
-    ResourceBias resourceBias;
-    int imageIndex;
+    private final String name;
+    private final Position position;
+    private final TechLevel techLevel;
+    private final ResourceBias resourceBias;
+    private final int imageIndex;
 
     // State that changes each turn
-    LinkedHashMap<TradeGood, Integer> quantities;
-    LinkedHashMap<TradeGood, Integer> prices;
-    PriceIncreaseEvent currentIncreaseEvent;
-    boolean visited;
+    private final LinkedHashMap<TradeGood, Integer> quantities;
+    private final LinkedHashMap<TradeGood, Integer> prices;
+    private PriceIncreaseEvent currentIncreaseEvent;
+    private boolean visited;
 
     public SolarSystem(String name, Position position, TechLevel techLevel, ResourceBias resourceBias) {
         this.name = name;

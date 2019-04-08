@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Space Trader</string>
-    <string name="new_game_header">New Game</string>
     <string name="name_option">Name</string>
     <string name="name_textbox_placeholder">Your Name</string>
     <string name="skill_points_option">Skill Points (%d remaining)</string>
@@ -45,8 +44,6 @@
     <string name="pi_buyall">Buy All</string>
 
     <!-- Map -->
-    <string name="map_system_type">System</string>
-    <string name="map_universe_type">Universe</string>
 
     <!-- Shop -->
     <string name="shop_item_status">$%d, %d</string>

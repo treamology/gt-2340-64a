@@ -5,13 +5,13 @@ import java.util.Random;
 public class GameState {
 
     public enum Difficulty {
-        BEGINNER, EASY, NORMAL, HARD, IMPOSSIBLE;
+        BEGINNER, EASY, NORMAL, HARD, IMPOSSIBLE
     }
 
     public Random rng;
     private Universe universe;
     private Player player;
-    private Difficulty currentDifficulty;
+    private final Difficulty currentDifficulty;
 
     private static GameState sharedGameState;
 

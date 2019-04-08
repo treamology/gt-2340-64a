@@ -3,11 +3,11 @@ package com.example.spacetrader.viewmodel;
 import com.example.spacetrader.model.TradeGood;
 
 public class TradeGoodInfo {
-    String name;
-    int price;
+    private final String name;
+    private final int price;
     int quantity;
     int shipQuantity;
-    private TradeGood good;
+    private final TradeGood good;
 
     public TradeGoodInfo(String name, int price, int quantity, int shipQuantity, TradeGood good) {
         this.name = name;
