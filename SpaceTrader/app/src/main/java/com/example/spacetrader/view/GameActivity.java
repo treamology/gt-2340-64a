@@ -10,12 +10,9 @@ import android.view.MenuItem;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.view.fragment.BuySellFragment;
-<<<<<<< HEAD
 import com.example.spacetrader.view.fragment.GameFragment;
 import com.example.spacetrader.view.fragment.InfoContainerFragment;
-=======
 import com.example.spacetrader.view.fragment.SettingsFragment;
->>>>>>> Eric
 import com.example.spacetrader.view.fragment.SystemInfoFragment;
 import com.example.spacetrader.view.fragment.UniverseFragment;
 import com.example.spacetrader.viewmodel.event.GameEvents;
