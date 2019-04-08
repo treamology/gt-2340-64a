@@ -10,14 +10,11 @@ import android.view.MenuItem;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.view.fragment.BuySellFragment;
-import com.example.spacetrader.view.fragment.GameFragment;
 import com.example.spacetrader.view.fragment.InfoContainerFragment;
 import com.example.spacetrader.view.fragment.SettingsFragment;
-import com.example.spacetrader.view.fragment.SystemInfoFragment;
 import com.example.spacetrader.view.fragment.UniverseFragment;
 import com.example.spacetrader.viewmodel.event.GameEvents;
 import com.example.spacetrader.viewmodel.event.WarpEventHandler;
-import com.example.spacetrader.viewmodel.modeldisplay.DisplayedSolarSystem;
 
 public class GameActivity extends FragmentActivity implements WarpEventHandler {
     private BottomNavigationView navigation;

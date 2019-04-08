@@ -25,11 +25,10 @@ public class ConfigurationViewModel extends AndroidViewModel {
                            int engineerSkill,
                            GameState.Difficulty difficulty) {
 
-        //Sets player attributes
-        Player player = new Player(playerName, pilotSkill, fighterSkill, traderSkill, engineerSkill);
-
         //Sets game attributes
-        GameState game = GameState.generateGame(player, difficulty);
+        GameState game = GameState.generateGame(playerName, pilotSkill, fighterSkill, traderSkill, engineerSkill, difficulty);
+        Player player = game.getPlayer();
+
         Log.d("APP",String.format("Player name: %s\n Pilot: %d\n Fighter: %d\n Trader: %d\n Engineer: %d\n Difficulty: %s",
                 player.getName(), player.getPilot(), player.getFighter(),
                 player.getTrader(), player.getEngineer(), game.getDifficulty().toString()));

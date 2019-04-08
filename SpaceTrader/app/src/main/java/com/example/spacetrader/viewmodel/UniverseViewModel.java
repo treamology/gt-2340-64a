@@ -4,10 +4,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.Player;
-import com.example.spacetrader.model.system.Position;
 import com.example.spacetrader.model.system.SolarSystem;
-import com.example.spacetrader.viewmodel.modeldisplay.DisplayedSolarSystem;
-import com.example.spacetrader.viewmodel.modeldisplay.SolarSystemInfo;
 
 import java.util.ArrayList;
 import java.util.List;

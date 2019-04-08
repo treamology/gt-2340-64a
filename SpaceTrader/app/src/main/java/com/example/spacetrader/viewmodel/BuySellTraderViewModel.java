@@ -6,7 +6,6 @@ import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.Player;
 import com.example.spacetrader.model.TradeGood;
 import com.example.spacetrader.model.event.TraderEvent;
-import com.example.spacetrader.viewmodel.modeldisplay.DisplayedTradeGood;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -17,7 +16,7 @@ public class BuySellTraderViewModel extends ViewModel {
         BUY, SELL
     }
 
-    List<DisplayedTradeGood> goods;
+    List<TradeGoodInfo> goods;
 
     public BuySellTraderViewModel() {
         goods = new ArrayList<>();
@@ -30,7 +29,7 @@ public class BuySellTraderViewModel extends ViewModel {
             int quantity = quantities.get(good);
             int shipQuantity = GameState.getState().getPlayer().getShip().getQuantityOfTradeGood(good);
             int price = prices.get(good);
-            DisplayedTradeGood displayedGood = new DisplayedTradeGood(good.getName(), price, quantity, shipQuantity);
+            TradeGoodInfo displayedGood = new TradeGoodInfo(good.getName(), price, quantity, shipQuantity, good);
             goods.add(displayedGood);
         }
     }
@@ -43,7 +42,7 @@ public class BuySellTraderViewModel extends ViewModel {
                 if (player.getCurrentSystem().decreaseQuantity(good, quantity)) {
                     if (player.removeCredits(good.getPrice(player.getCurrentSystem()) * quantity)) {
                         if (player.getShip().addToInventory(good, quantity)) {
-                            DisplayedTradeGood displayedGood = goods.get(goodIndex);
+                            TradeGoodInfo displayedGood = goods.get(goodIndex);
                             displayedGood.setQuantity(displayedGood.getQuantity() - quantity);
                             displayedGood.setShipQuantity(displayedGood.getShipQuantity() + quantity);
                             return true;
@@ -62,7 +61,7 @@ public class BuySellTraderViewModel extends ViewModel {
                 if (player.getShip().removeFromInventory(good, quantity)) {
                     player.addCredits(good.getPrice(player.getCurrentSystem()) * quantity);
                     player.getCurrentSystem().increaseQuantity(good, quantity);
-                    DisplayedTradeGood displayedGood = goods.get(goodIndex);
+                    TradeGoodInfo displayedGood = goods.get(goodIndex);
                     displayedGood.setQuantity(displayedGood.getQuantity() + quantity);
                     displayedGood.setShipQuantity(displayedGood.getShipQuantity() - quantity);
                     return true;
@@ -72,7 +71,7 @@ public class BuySellTraderViewModel extends ViewModel {
         return false;
     }
 
-    public List<DisplayedTradeGood> getGoods() {
+    public List<TradeGoodInfo> getGoods() {
         return goods;
     }
 

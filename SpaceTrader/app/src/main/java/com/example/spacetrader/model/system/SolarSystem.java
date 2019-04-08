@@ -2,12 +2,15 @@ package com.example.spacetrader.model.system;
 
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.TradeGood;
+import com.example.spacetrader.model.system.shop.Transaction;
+import com.example.spacetrader.model.system.shop.TransactionParty;
+import com.example.spacetrader.viewmodel.BuySellViewModel;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class SolarSystem {
+public class SolarSystem implements TransactionParty {
 
     public static final int MAX_SYSTEMS = 10;
     public static final String[] NAMES = new String[]{"Acamar", "Adahn", "Aldea", "Campor", "Deneb"
@@ -50,11 +53,10 @@ public class SolarSystem {
 
         Random rng = GameState.getState().rng;
         this.imageIndex = rng.nextInt(10) + 1;
-
-        generateNewTradeGoods();
     }
 
-    public void generateNewTradeGoods() {
+    @Override
+    public void generateGoodsAndPrices() {
         TradeGood water = TradeGood.WATER;
         TradeGood furs = TradeGood.FURS;
         TradeGood food = TradeGood.FOOD;
@@ -164,6 +166,16 @@ public class SolarSystem {
         prices.put(machines, machinesPrice);
     }
 
+    @Override
+    public int getBuyPrice(TradeGood good) {
+        return getPrices().get(good);
+    }
+
+    @Override
+    public int getSellPrice(TradeGood good) {
+        return getPrices().get(good);
+    }
+
     public TechLevel getTechLevel() {
         return techLevel;
     }
@@ -214,5 +226,15 @@ public class SolarSystem {
     }
     public int getDistanceFromPlayer() {
         return position.getEuclideanDistanceTo(GameState.getState().getPlayer().getCurrentSystem().getPosition());
+    }
+
+    @Override
+    public int getInventoryQuantity(TradeGood good) {
+        return getQuantities().get(good);
+    }
+
+    @Override
+    public void changeInventoryQuantityByAmount(TradeGood good, int amount) {
+        increaseQuantity(good, amount);
     }
 }

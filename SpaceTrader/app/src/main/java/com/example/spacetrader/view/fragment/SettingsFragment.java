@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 
 import android.content.Context;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements GameFragment {
 
     private Button musicSettingsButton;
     private Button saveButton;
@@ -99,5 +99,10 @@ public class SettingsFragment extends Fragment {
         player.setShip(gson.fromJson(json, Ship.class));
         player.setCredits(sharedPreferences.getInt("credits", 0));
         player.setCurrentSystemIndex(sharedPreferences.getInt("currentSystemIndex", 0));
+    }
+
+    @Override
+    public void refreshInfo() {
+
     }
 }

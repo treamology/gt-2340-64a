@@ -36,11 +36,10 @@ public class TradeGoodItemView extends ConstraintLayout {
         buyButton = findViewById(R.id.buyButton);
     }
 
-    public void setAttributes(String itemName, int price, int amount, BuySellViewModel.ShopMode mode) {
+    public void setAttributes(String itemName, int price, int amount, String buttonText, String suffixText) {
         itemNameTextView.setText(itemName);
-        int suffixResource = mode == BuySellViewModel.ShopMode.BUY ? R.string.shop_quantity_buy_suffix : R.string.shop_quantity_sell_suffix;
-        itemDescriptionTextView.setText(String.format(getResources().getString(R.string.shop_item_status) + " " + getResources().getString(suffixResource), price, amount));
-        buyButton.setText(mode.name());
+        itemDescriptionTextView.setText(String.format(getResources().getString(R.string.shop_item_status) + " " + suffixText, price, amount));
+        buyButton.setText(buttonText);
     }
 
     public Button getActionButton() {

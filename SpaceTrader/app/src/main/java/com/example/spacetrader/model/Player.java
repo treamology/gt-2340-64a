@@ -2,6 +2,8 @@ package com.example.spacetrader.model;
 
 import com.example.spacetrader.model.event.Event;
 import com.example.spacetrader.model.system.SolarSystem;
+import com.example.spacetrader.model.system.shop.Transaction;
+import com.example.spacetrader.model.system.shop.TransactionParty;
 
 /**
  * Class that  holds information about the player character
@@ -53,6 +55,7 @@ public class Player {
         ship = new Gnat();
         credits = 10000;
         currentSystemIndex = 0;
+        getCurrentSystem().generateGoodsAndPrices();
     }
 
     /**
@@ -101,11 +104,52 @@ public class Player {
     }
 
     public void travelToSystem(int newSystemIndex) {
-        SolarSystem oldSystem = GameState.getState().getPlayer().getCurrentSystem();
+        SolarSystem oldSystem = getCurrentSystem();
         SolarSystem newSystem = GameState.getState().getUniverse().getSystems().get(newSystemIndex);
 
-        oldSystem.setVisited(true);
-        getShip().subtractFuel(oldSystem.getPosition().getEuclideanDistanceTo(newSystem.getPosition()));
+        if (oldSystem != null) {
+            oldSystem.setVisited(true);
+            getShip().subtractFuel(oldSystem.getPosition().getEuclideanDistanceTo(newSystem.getPosition()));
+        }
+
         this.currentSystemIndex = newSystemIndex;
+
+        newSystem.generateGoodsAndPrices();
+    }
+
+    public Transaction.Result performTransaction(Transaction transaction, TransactionParty otherParty) {
+        switch (transaction.type) {
+            case BUY:
+                int price = otherParty.getBuyPrice(transaction.good);
+                // Check if we have enough money.
+                if (getCredits() < price) {
+                    return Transaction.Result.NOT_ENOUGH_MONEY;
+                }
+                // Check if we have enough inventory space.
+                if (getShip().getNumOpenCargoBays() < transaction.quantity) {
+                    return Transaction.Result.INVENTORY_FULL;
+                }
+                // Check if the system actually has the item.
+                if (otherParty.getInventoryQuantity(transaction.good) < transaction.quantity) {
+                    return Transaction.Result.NO_GOODS_LEFT;
+                }
+                // Now we can complete the transaction.
+                otherParty.changeInventoryQuantityByAmount(transaction.good, -transaction.quantity);
+                getShip().addToInventory(transaction.good, transaction.quantity);
+                removeCredits(price);
+                break;
+            case SELL:
+                int sellPrice = otherParty.getSellPrice(transaction.good);
+                // Check that we have enough of the item
+                if (getShip().getQuantityOfTradeGood(transaction.good) < transaction.quantity) {
+                    return Transaction.Result.NO_GOODS_LEFT;
+                }
+                // Complete the transaction.
+                otherParty.changeInventoryQuantityByAmount(transaction.good, transaction.quantity);
+                getShip().removeFromInventory(transaction.good, transaction.quantity);
+                addCredits(sellPrice);
+                break;
+        }
+        return Transaction.Result.SUCCESS;
     }
 }
