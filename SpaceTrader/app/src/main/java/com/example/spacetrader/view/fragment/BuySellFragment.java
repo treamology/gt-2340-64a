@@ -45,8 +45,6 @@ public class BuySellFragment extends Fragment implements GameFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(BuySellViewModel.class);
 
-        refreshInfo();
-
         View view = getView();
         final LinearLayout verticalLayout = view.findViewById(R.id.tradeItemsLayout);
         final LinkedHashMap<String, TradeGoodInfo> goods = mViewModel.getGoods();
@@ -132,6 +130,10 @@ public class BuySellFragment extends Fragment implements GameFragment {
             });
             verticalLayout.addView(tradeGoodItemView, verticalLayout.getChildCount());
         }
+    }
+
+    public void setmViewModel(BuySellViewModel viewModel) {
+        mViewModel = viewModel;
     }
 
 }

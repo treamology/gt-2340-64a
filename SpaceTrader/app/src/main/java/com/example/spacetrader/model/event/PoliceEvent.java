@@ -17,8 +17,9 @@ public class PoliceEvent extends Event {
 
     @Override
     public void run() {
+        name = "police officer";
         Log.d("Random Event", "you ran a police event");
-        this.description = "You encounter police. They want to search your ship. I hope you don't have any illegal goods";
+        this.description = "You encounter police. They want to search your ship. I hope you don't have any illegal goods!";
     }
 
     @Override

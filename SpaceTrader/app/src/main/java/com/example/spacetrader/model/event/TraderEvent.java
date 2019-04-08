@@ -20,10 +20,14 @@ public class TraderEvent extends Event {
 
     public TraderEvent() {
         this.description = "You find a space trader";
+
+        quantities = new LinkedHashMap<>();
+        prices = new LinkedHashMap<>();
     }
 
     @Override
     public void run() {
+        name = "trader";
         Log.d("Random Event", "you ran a trader event");
         this.description = "A trader has docked to your ship, what would you like to do?";
     }
@@ -72,6 +76,7 @@ public class TraderEvent extends Event {
 
     @Override
     public void talk() {
+        this.consequence = "The trader enthusiastically shows you his wares.";
         Log.d("Random Event", "you opened the trade menu");
         generateNewTradeGoods();
     }

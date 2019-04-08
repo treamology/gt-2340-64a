@@ -20,6 +20,7 @@ public class PirateEvent extends Event {
     @Override
     public void run() {
         demands = null;
+        name = "pirate";
         TradeGood chosen;
         if (GameState.getState().getPlayer().getShip().getNumOpenCargoBays() <
                 GameState.getState().getPlayer().getShip().getTotalCargoBays()) {
