@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import com.example.spacetrader.R;
+import com.example.spacetrader.model.GameState;
+import com.example.spacetrader.model.Gnat;
 import com.example.spacetrader.model.Player;
 import com.example.spacetrader.model.Ship;
 import com.google.gson.Gson;
@@ -72,6 +74,7 @@ public class SettingsFragment extends Fragment {
     }
 
     public void save() {
+        player = GameState.getState().getPlayer();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("name", player.getName());
@@ -84,10 +87,12 @@ public class SettingsFragment extends Fragment {
         editor.putString("ship", json);
         editor.putInt("credits", player.getCredits());
         editor.putInt("currentSystemIndex", player.getCurrentSystemIndex());
+        editor.putInt("fuel", player.getShip().getCurrentFuel());
         editor.apply();
     }
 
     public void load() {
+        player = GameState.getState().getPlayer();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
         player.setName(sharedPreferences.getString("name", "Default"));
         player.setPilot(sharedPreferences.getInt("pilot", 0));
@@ -96,8 +101,9 @@ public class SettingsFragment extends Fragment {
         player.setEngineer(sharedPreferences.getInt("engineer", 0));
         Gson gson = new Gson();
         String json = sharedPreferences.getString("ship", "Default");
-        player.setShip(gson.fromJson(json, Ship.class));
+        player.setShip(gson.fromJson(json, Gnat.class));
         player.setCredits(sharedPreferences.getInt("credits", 0));
         player.setCurrentSystemIndex(sharedPreferences.getInt("currentSystemIndex", 0));
+        player.getShip().setCurrentFuel(sharedPreferences.getInt("fuel", 0));
     }
 }

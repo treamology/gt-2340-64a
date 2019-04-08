@@ -90,7 +90,7 @@ public abstract class Ship {
      * when purchasing a new ship.
      * @param inventory The old ship's inventory.
      */
-    protected void setInventory(HashMap<TradeGood, Integer> inventory) {
+    public void setInventory(HashMap<TradeGood, Integer> inventory) {
         this.inventory = inventory;
     }
 
@@ -100,6 +100,8 @@ public abstract class Ship {
     public void loseInventory() {
         inventory.clear();
     }
+
+    public HashMap<TradeGood, Integer> getInventory() {return inventory;}
 
     public int getCurrentFuel() {
         return currentFuel;
