@@ -3,20 +3,16 @@ package com.example.spacetrader.view.custom;
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.spacetrader.R;
-import com.example.spacetrader.view.fragment.BuySellFragment;
-import com.example.spacetrader.viewmodel.BuySellViewModel;
 
 public class TradeGoodItemView extends ConstraintLayout {
 
-    TextView itemNameTextView;
-    TextView itemDescriptionTextView;
-    Button buyButton;
+    private TextView itemNameTextView;
+    private TextView itemDescriptionTextView;
+    private Button buyButton;
 
     public TradeGoodItemView(Context context, AttributeSet attrs) {
         super(context, attrs);

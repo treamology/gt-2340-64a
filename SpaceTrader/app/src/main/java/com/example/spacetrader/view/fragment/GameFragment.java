@@ -1,5 +1,5 @@
 package com.example.spacetrader.view.fragment;
 
-public interface GameFragment {
+interface GameFragment {
     void refreshInfo();
 }

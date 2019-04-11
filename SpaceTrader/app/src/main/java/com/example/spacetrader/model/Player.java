@@ -22,7 +22,7 @@ public class Player {
         TRADER("Trader"),
         ENGINEER("Engineer");
 
-        private String stringRep;
+        private final String stringRep;
         Skill(String stringRep) {
             this.stringRep = stringRep;
         }

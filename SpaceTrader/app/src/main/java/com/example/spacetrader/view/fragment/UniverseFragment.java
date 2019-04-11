@@ -16,6 +16,8 @@ import com.example.spacetrader.viewmodel.UniverseViewModel;
 import com.example.spacetrader.viewmodel.event.GameEvents;
 import com.example.spacetrader.viewmodel.SolarSystemInfo;
 
+import java.util.Objects;
+
 public class UniverseFragment extends Fragment implements GameFragment {
 
     private UniverseViewModel mViewModel;
@@ -35,7 +37,7 @@ public class UniverseFragment extends Fragment implements GameFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(UniverseViewModel.class);
 
-        final SpaceMapView spaceMapView = getView().findViewById(R.id.spaceMap);
+        final SpaceMapView spaceMapView = Objects.requireNonNull(getView()).findViewById(R.id.spaceMap);
         spaceMapView.setViewModel(mViewModel);
 
         final QuickSystemInfoView systemInfoView = getView().findViewById(R.id.quickSystemInfo);

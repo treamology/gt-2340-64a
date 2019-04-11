@@ -1,16 +1,13 @@
 package com.example.spacetrader.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.system.SolarSystem;
 
 public class SystemInfoViewModel extends ViewModel {
 
-    private SolarSystem currentSystem;
+    private final SolarSystem currentSystem;
 
     public SystemInfoViewModel() {
         super();

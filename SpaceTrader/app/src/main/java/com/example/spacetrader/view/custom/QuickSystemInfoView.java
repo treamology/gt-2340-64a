@@ -1,7 +1,6 @@
 package com.example.spacetrader.view.custom;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;

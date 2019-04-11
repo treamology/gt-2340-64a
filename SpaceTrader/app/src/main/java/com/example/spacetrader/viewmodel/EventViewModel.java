@@ -5,13 +5,15 @@ import android.arch.lifecycle.ViewModel;
 import com.example.spacetrader.model.event.Event;
 import com.example.spacetrader.model.event.TraderEvent;
 
+import java.util.Objects;
+
 public class EventViewModel extends ViewModel {
 
-    Event currentEvent;
+    private Event currentEvent;
 
     public void generateNewEvent() {
         currentEvent = Event.randomEvent();
-        currentEvent.run();
+        Objects.requireNonNull(currentEvent).run();
     }
 
     public EventInfo getEventInfo() {

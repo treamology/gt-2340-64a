@@ -33,18 +33,13 @@ public enum TradeGood {
     MACHINES("Machines", 4, 3, 5, 900, -30, 5, PriceIncreaseEvent.LACKOFWORKERS,
                      null,null, 600,800);
 
-    private String name;
-    private int MTLP;
-    private int MTLU;
-    private int TPP;
-    private int basePrice;
-    private int IPL;
-    private int var;
-    private PriceIncreaseEvent IE;
-    private ResourceBias CR;
-    private ResourceBias ER;
-    private int MTL;
-    private int MTH;
+    private final String name;
+    private final int basePrice;
+    private final int IPL;
+    private final int var;
+    private final PriceIncreaseEvent IE;
+    private final ResourceBias CR;
+    private final ResourceBias ER;
 
     /**
      * Initializes a trade good
@@ -65,17 +60,12 @@ public enum TradeGood {
     TradeGood(String name, int MTLP, int MTLU, int TPP, int basePrice, int IPL, int var, PriceIncreaseEvent IE,
               ResourceBias CR, ResourceBias ER, int MTL, int MTH) {
         this.name = name;
-        this.MTLP = MTLP;
-        this.MTLU = MTLU;
-        this.TPP = TPP;
         this.basePrice = basePrice;
         this.IPL = IPL;
         this.var = var;
         this.IE = IE;
         this.CR = CR;
         this.ER = ER;
-        this.MTL = MTL;
-        this.MTH = MTH;
     }
 
     /**
