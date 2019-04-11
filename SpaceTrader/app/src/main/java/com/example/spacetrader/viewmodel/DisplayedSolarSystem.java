@@ -1,4 +1,4 @@
-package com.example.spacetrader.viewmodel.modeldisplay;
+package com.example.spacetrader.viewmodel;
 
 public class DisplayedSolarSystem {
     public int x;

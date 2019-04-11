@@ -8,15 +8,14 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.spacetrader.model.Universe;
 import com.example.spacetrader.model.system.SolarSystem;
 import com.example.spacetrader.viewmodel.ISpaceMapViewModel;
-import com.example.spacetrader.viewmodel.modeldisplay.DisplayedSolarSystem;
-import com.example.spacetrader.viewmodel.modeldisplay.SolarSystemInfo;
+import com.example.spacetrader.viewmodel.DisplayedSolarSystem;
+import com.example.spacetrader.viewmodel.SolarSystemInfo;
 
 import java.util.List;
 

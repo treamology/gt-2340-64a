@@ -243,9 +243,15 @@
                 android:entries="@array/difficulty"
                 android:spinnerMode="dropdown" />
 
+            <Button
+                android:id="@+id/music_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Play/Pause Music" />
+
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="71dp"
                 android:layout_weight="1" />
 
             <Button

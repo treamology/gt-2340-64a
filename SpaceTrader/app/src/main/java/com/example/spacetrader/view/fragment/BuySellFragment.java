@@ -13,12 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.spacetrader.R;
-import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.view.custom.TradeGoodItemView;
 import com.example.spacetrader.viewmodel.BuySellViewModel;
-import com.example.spacetrader.viewmodel.modeldisplay.DisplayedTradeGood;
+import com.example.spacetrader.viewmodel.TradeGoodInfo;
 
-import java.util.List;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class BuySellFragment extends Fragment implements GameFragment {
 
@@ -44,22 +45,19 @@ public class BuySellFragment extends Fragment implements GameFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(BuySellViewModel.class);
 
-        refreshInfo();
-
         View view = getView();
         final LinearLayout verticalLayout = view.findViewById(R.id.tradeItemsLayout);
-        final List<DisplayedTradeGood> goods = mViewModel.getGoods();
+        final LinkedHashMap<String, TradeGoodInfo> goods = mViewModel.getGoods();
         final TabLayout shopTabBar = view.findViewById(R.id.shopTabBar);
 
         // Wire up buy/sell buttons to change the shop mode.
         shopTabBar.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                BuySellViewModel.ShopMode mode = tab.getPosition() == 0 ? BuySellViewModel.ShopMode.BUY : BuySellViewModel.ShopMode.SELL;
                 for (int i = 0; i < goods.size(); i++) {
                     TradeGoodItemView itemView = (TradeGoodItemView)verticalLayout.getChildAt(i);
-                    DisplayedTradeGood item = goods.get(i);
-                    updateItemView(itemView, item, mode);
+                    TradeGoodInfo item = goods.get(goods.keySet().toArray()[i]);
+                    updateItemView(itemView, item, tab.getPosition());
                 }
             }
 
@@ -77,16 +75,19 @@ public class BuySellFragment extends Fragment implements GameFragment {
         remainingCargoText = view.findViewById(R.id.remainingCargoText);
         creditsText = view.findViewById(R.id.shopCashText);
 
+        refreshInfo();
         updateStatusText();
     }
 
-    private void updateItemView(TradeGoodItemView itemView, DisplayedTradeGood item, BuySellViewModel.ShopMode mode) {
-        switch (mode) {
-            case BUY:
-                itemView.setAttributes(item.getName(), item.getPrice(), item.getQuantity(), BuySellViewModel.ShopMode.BUY);
+    private void updateItemView(TradeGoodItemView itemView, TradeGoodInfo item, int tabBarIndex) {
+        switch (tabBarIndex) {
+            case 0:
+                itemView.setAttributes(item.getName(), item.getPrice(), item.getQuantity(), "BUY", getResources().getString(R.string.shop_quantity_buy_suffix));
                 break;
-            case SELL:
-                itemView.setAttributes(item.getName(), item.getPrice(), item.getShipQuantity(), BuySellViewModel.ShopMode.SELL);
+            case 1:
+                itemView.setAttributes(item.getName(), item.getPrice(), item.getShipQuantity(), "SELL", getResources().getString(R.string.shop_quantity_sell_suffix));
+                break;
+            default:
                 break;
         }
     }
@@ -104,25 +105,35 @@ public class BuySellFragment extends Fragment implements GameFragment {
     public void refreshInfo() {
         View view = getView();
         final LinearLayout verticalLayout = view.findViewById(R.id.tradeItemsLayout);
-        final List<DisplayedTradeGood> goods = mViewModel.getGoods();
+        final Map<String, TradeGoodInfo> goods = mViewModel.getGoods();
         final TabLayout shopTabBar = view.findViewById(R.id.shopTabBar);
 
-        for (int i = 0; i < goods.size(); i++) {
-            final int index = i;
-            final DisplayedTradeGood good = goods.get(index);
+        Iterator<String> it = goods.keySet().iterator();
+        while (it.hasNext()) {
+            final TradeGoodInfo good = goods.get(it.next());
             final TradeGoodItemView tradeGoodItemView = new TradeGoodItemView(getContext(), null);
-            tradeGoodItemView.setAttributes(good.getName(), good.getPrice(), good.getQuantity(), BuySellViewModel.ShopMode.BUY);
+
+            updateItemView(tradeGoodItemView, good, 0);
+
             tradeGoodItemView.getActionButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BuySellViewModel.ShopMode mode = shopTabBar.getSelectedTabPosition() == 0 ? BuySellViewModel.ShopMode.BUY : BuySellViewModel.ShopMode.SELL;
-                    mViewModel.performShopAction(mode, index, 1);
-                    updateItemView(tradeGoodItemView, good, mode);
+                    if (shopTabBar.getSelectedTabPosition() == 0) {
+                        mViewModel.buyItem(good, 1);
+                    } else {
+                        mViewModel.sellItem(good, 1);
+                    }
+
+                    updateItemView(tradeGoodItemView, good, shopTabBar.getSelectedTabPosition());
                     updateStatusText();
                 }
             });
             verticalLayout.addView(tradeGoodItemView, verticalLayout.getChildCount());
         }
+    }
+
+    public void setmViewModel(BuySellViewModel viewModel) {
+        mViewModel = viewModel;
     }
 
 }

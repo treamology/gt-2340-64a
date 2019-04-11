@@ -14,9 +14,9 @@ import com.example.spacetrader.view.custom.QuickSystemInfoView;
 import com.example.spacetrader.view.custom.SpaceMapView;
 import com.example.spacetrader.viewmodel.UniverseViewModel;
 import com.example.spacetrader.viewmodel.event.GameEvents;
-import com.example.spacetrader.viewmodel.modeldisplay.SolarSystemInfo;
+import com.example.spacetrader.viewmodel.SolarSystemInfo;
 
-public class UniverseFragment extends Fragment {
+public class UniverseFragment extends Fragment implements GameFragment {
 
     private UniverseViewModel mViewModel;
 
@@ -59,4 +59,8 @@ public class UniverseFragment extends Fragment {
         });
     }
 
+    @Override
+    public void refreshInfo() {
+
+    }
 }

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.spacetrader.R;
 
-public class InfoContainerFragment extends Fragment {
+public class InfoContainerFragment extends Fragment implements GameFragment {
 
     private TabLayout tabBar;
     private Toolbar toolbar;
@@ -46,7 +46,7 @@ public class InfoContainerFragment extends Fragment {
 
             }
         });
-        updateFrames();
+        refreshInfo();
     }
 
     private void updateFrames() {
@@ -61,5 +61,10 @@ public class InfoContainerFragment extends Fragment {
         getFragmentManager().beginTransaction()
                 .replace(R.id.info_container, fragment)
                 .commit();
+    }
+
+    @Override
+    public void refreshInfo() {
+        updateFrames();
     }
 }

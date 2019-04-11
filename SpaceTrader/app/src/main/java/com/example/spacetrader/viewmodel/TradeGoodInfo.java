@@ -1,17 +1,20 @@
-package com.example.spacetrader.viewmodel.modeldisplay;
+package com.example.spacetrader.viewmodel;
 
-public class DisplayedTradeGood {
+import com.example.spacetrader.model.TradeGood;
+
+public class TradeGoodInfo {
     String name;
     int price;
     int quantity;
     int shipQuantity;
+    private TradeGood good;
 
-    public DisplayedTradeGood(String name, int price, int quantity, int shipQuantity) {
+    public TradeGoodInfo(String name, int price, int quantity, int shipQuantity, TradeGood good) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.shipQuantity = shipQuantity;
-
+        this.good = good;
     }
 
     public String getName() {
@@ -36,5 +39,9 @@ public class DisplayedTradeGood {
 
     public void setShipQuantity(int shipQuantity) {
         this.shipQuantity = shipQuantity;
+    }
+
+    TradeGood getGood() {
+        return good;
     }
 }

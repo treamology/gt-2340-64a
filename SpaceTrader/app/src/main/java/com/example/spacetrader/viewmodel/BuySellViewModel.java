@@ -4,26 +4,19 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.Player;
-import com.example.spacetrader.model.Ship;
 import com.example.spacetrader.model.TradeGood;
 import com.example.spacetrader.model.system.SolarSystem;
-import com.example.spacetrader.viewmodel.modeldisplay.DisplayedTradeGood;
+import com.example.spacetrader.model.system.shop.ShopMode;
+import com.example.spacetrader.model.system.shop.Transaction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 public class BuySellViewModel extends ViewModel {
-    public enum ShopMode {
-        BUY, SELL
-    }
 
-    List<DisplayedTradeGood> goods;
+    LinkedHashMap<String, TradeGoodInfo> goods;
 
     public BuySellViewModel() {
-        goods = new ArrayList<>();
+        goods = new LinkedHashMap<>();
 
         SolarSystem playerSystem = GameState.getState().getPlayer().getCurrentSystem();
         LinkedHashMap<TradeGood, Integer> quantities = playerSystem.getQuantities();
@@ -33,49 +26,34 @@ public class BuySellViewModel extends ViewModel {
             int quantity = quantities.get(good);
             int shipQuantity = GameState.getState().getPlayer().getShip().getQuantityOfTradeGood(good);
             int price = prices.get(good);
-            DisplayedTradeGood displayedGood = new DisplayedTradeGood(good.getName(), price, quantity, shipQuantity);
-            goods.add(displayedGood);
+            TradeGoodInfo displayedGood = new TradeGoodInfo(good.getName(), price, quantity, shipQuantity, good);
+            goods.put(good.getName(), displayedGood);
         }
     }
 
-    public boolean performShopAction(ShopMode mode, int goodIndex, int quantity) {
+    public boolean buyItem(TradeGoodInfo good, int quantity) {
+        Transaction transaction = new Transaction(ShopMode.BUY, good.getGood(), quantity);
         Player player = GameState.getState().getPlayer();
-        TradeGood good = TradeGood.values()[goodIndex];
-        switch (mode) {
-            case BUY:
-                if (player.getCurrentSystem().decreaseQuantity(good, quantity)) {
-                    if (player.removeCredits(good.getPrice(player.getCurrentSystem()) * quantity)) {
-                        if (player.getShip().addToInventory(good, quantity)) {
-                            DisplayedTradeGood displayedGood = goods.get(goodIndex);
-                            displayedGood.setQuantity(displayedGood.getQuantity() - quantity);
-                            displayedGood.setShipQuantity(displayedGood.getShipQuantity() + quantity);
-                            return true;
-                        } else {
-                            // Undo what we just did.
-                            player.getCurrentSystem().increaseQuantity(good, quantity);
-                            player.addCredits(good.getPrice(player.getCurrentSystem()) * quantity);
-                        }
-                    } else {
-                        // Undo what we just did.
-                        player.getCurrentSystem().increaseQuantity(good, quantity);
-                    }
-                }
-                return false;
-            case SELL:
-                if (player.getShip().removeFromInventory(good, quantity)) {
-                    player.addCredits(good.getPrice(player.getCurrentSystem()) * quantity);
-                    player.getCurrentSystem().increaseQuantity(good, quantity);
-                    DisplayedTradeGood displayedGood = goods.get(goodIndex);
-                    displayedGood.setQuantity(displayedGood.getQuantity() + quantity);
-                    displayedGood.setShipQuantity(displayedGood.getShipQuantity() - quantity);
-                    return true;
-                }
-                return false;
+        if (player.performTransaction(transaction, player.getCurrentSystem()) == Transaction.Result.SUCCESS) {
+            good.shipQuantity += quantity;
+            good.quantity -= quantity;
+            return true;
         }
         return false;
     }
 
-    public List<DisplayedTradeGood> getGoods() {
+    public boolean sellItem(TradeGoodInfo good, int quantity) {
+        Transaction transaction = new Transaction(ShopMode.SELL, good.getGood(), quantity);
+        Player player = GameState.getState().getPlayer();
+        if (player.performTransaction(transaction, player.getCurrentSystem()) == Transaction.Result.SUCCESS) {
+            good.shipQuantity -= quantity;
+            good.quantity += quantity;
+            return true;
+        }
+        return false;
+    }
+
+    public LinkedHashMap<String, TradeGoodInfo> getGoods() {
         return goods;
     }
 

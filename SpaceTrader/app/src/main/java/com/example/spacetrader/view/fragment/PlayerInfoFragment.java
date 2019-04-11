@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.spacetrader.R;
 import com.example.spacetrader.viewmodel.PlayerInfoViewModel;
 
-public class PlayerInfoFragment extends Fragment {
+public class PlayerInfoFragment extends Fragment implements GameFragment {
 
     private TextView nameTextView;
     private TextView shipTextView;
@@ -50,21 +50,21 @@ public class PlayerInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 viewModel.add1Fuel();
-                refreshText();
+                refreshInfo();
             }
         });
         buyAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewModel.maxOutFuel();
-                refreshText();
+                refreshInfo();
             }
         });
-
-        refreshText();
+        refreshInfo();
     }
 
-    public void refreshText() {
+    @Override
+    public void refreshInfo() {
         nameTextView.setText(viewModel.getPlayerName());
         shipTextView.setText(String.format(getResources().getString(R.string.pi_shiptype), viewModel.getShipName()));
         cashTextView.setText(String.format(getResources().getString(R.string.pi_cash), viewModel.getPlayerCash()));
