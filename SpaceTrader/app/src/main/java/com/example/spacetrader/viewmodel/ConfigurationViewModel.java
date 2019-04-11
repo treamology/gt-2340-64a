@@ -6,9 +6,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import com.example.spacetrader.model.Player;
 import com.example.spacetrader.model.GameState;
-import com.example.spacetrader.model.Gnat;
-import com.example.spacetrader.model.Ship;
-
 
 
 public class ConfigurationViewModel extends AndroidViewModel {

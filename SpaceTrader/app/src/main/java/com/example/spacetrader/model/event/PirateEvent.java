@@ -1,19 +1,15 @@
 package com.example.spacetrader.model.event;
 
-import android.util.Log;
-
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.TradeGood;
-
-import java.util.LinkedHashMap;
 
 /**
  * Pirates demand some of your trade goods or they attack
  */
 public class PirateEvent extends Event {
 
-    TradeGood demands;
-    int quantity;
+    private TradeGood demands;
+    private int quantity;
 
     public PirateEvent() {}
 

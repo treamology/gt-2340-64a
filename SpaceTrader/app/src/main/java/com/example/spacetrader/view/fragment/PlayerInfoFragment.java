@@ -1,6 +1,5 @@
 package com.example.spacetrader.view.fragment;
 
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +14,8 @@ import android.widget.TextView;
 import com.example.spacetrader.R;
 import com.example.spacetrader.viewmodel.PlayerInfoViewModel;
 
+import java.util.Objects;
+
 public class PlayerInfoFragment extends Fragment implements GameFragment {
 
     private TextView nameTextView;
@@ -22,8 +23,6 @@ public class PlayerInfoFragment extends Fragment implements GameFragment {
     private TextView cashTextView;
     private TextView fuelTextView;
     private TextView maxFuelTextView;
-    private Button buy1Button;
-    private Button buyAllButton;
 
     private PlayerInfoViewModel viewModel;
 
@@ -38,13 +37,13 @@ public class PlayerInfoFragment extends Fragment implements GameFragment {
         viewModel = ViewModelProviders.of(this).get(PlayerInfoViewModel.class);
 
         final View view = getView();
-        nameTextView = view.findViewById(R.id.playerinfo_name);
+        nameTextView = Objects.requireNonNull(view).findViewById(R.id.playerinfo_name);
         shipTextView = view.findViewById(R.id.playerinfo_ship_type);
         cashTextView = view.findViewById(R.id.playerinfo_cash);
         fuelTextView = view.findViewById(R.id.playerinfo_fuel);
         maxFuelTextView = view.findViewById(R.id.playerinfo_max_fuel);
-        buy1Button = view.findViewById(R.id.playerinfo_buy1_button);
-        buyAllButton = view.findViewById(R.id.playerinfo_buyall_button);
+        Button buy1Button = view.findViewById(R.id.playerinfo_buy1_button);
+        Button buyAllButton = view.findViewById(R.id.playerinfo_buyall_button);
 
         buy1Button.setOnClickListener(new View.OnClickListener() {
             @Override

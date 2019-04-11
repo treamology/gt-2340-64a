@@ -1,5 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="com.example.spacetrader.model.Player currentEvent" />
+      <entry_point TYPE="field" FQNAME="com.example.spacetrader.viewmodel.DisplayedSolarSystem imageIndex" />
+      <entry_point TYPE="field" FQNAME="com.example.spacetrader.model.system.shop.Transaction.Result NO_ITEMS_TO_SELL" />
+      <entry_point TYPE="field" FQNAME="com.example.spacetrader.model.Player.Skill stringRep" />
+    </entry_points>
+    <pattern value="com.example.spacetrader.ExampleUnitTest" method="addition_isCorrect" />
+    <pattern value="com.example.spacetrader.view.fragment.BuySellFragment" />
+    <pattern value="com.example.spacetrader.viewmodel.BuySellTraderViewModel" />
+    <pattern value="com.example.spacetrader.viewmodel.BuySellTraderViewModel" method="BuySellTraderViewModel" />
+    <pattern value="com.example.spacetrader.view.ConfigurationActivity" />
+    <pattern value="com.example.spacetrader.model.event.TraderEvent" method="decreaseQuantity" />
+    <pattern value="com.example.spacetrader.viewmodel.DisplayedSolarSystem" />
+    <pattern value="com.example.spacetrader.view.custom.EventContainerView" />
+    <pattern value="com.example.spacetrader.view.custom.EventContainerView" method="EventContainerView" />
+    <pattern value="com.example.spacetrader.ExampleInstrumentedTest" />
+    <pattern value="com.example.spacetrader.ExampleUnitTest" />
+    <pattern value="com.example.spacetrader.view.GameActivity" />
+    <pattern value="com.example.spacetrader.viewmodel.event.GameEvents" />
+    <pattern value="com.example.spacetrader.view.fragment.GameFragment" />
+    <pattern value="com.example.spacetrader.model.system.shop.TransactionParty" method="generateGoodsAndPrices" />
+    <pattern value="com.example.spacetrader.viewmodel.BuySellTraderViewModel" method="getAvailableCargo" />
+    <pattern value="com.example.spacetrader.viewmodel.BuySellTraderViewModel" method="getCash" />
+    <pattern value="com.example.spacetrader.view.custom.EventContainerView" method="getEventFrame" />
+    <pattern value="com.example.spacetrader.viewmodel.BuySellTraderViewModel" method="getGoods" />
+    <pattern value="com.example.spacetrader.model.Ship" method="getInventory" />
+    <pattern value="com.example.spacetrader.model.system.Position" method="getManhattanDistanceTo" />
+    <pattern value="com.example.spacetrader.model.system.SolarSystem" method="getResourceCount" />
+    <pattern value="com.example.spacetrader.viewmodel.ISpaceMapViewModel" method="getSystemDistanceFromPlayer" />
+    <pattern value="com.example.spacetrader.viewmodel.ISpaceMapViewModel" method="getSystems" />
+    <pattern value="com.example.spacetrader.viewmodel.BuySellTraderViewModel" method="getTotalCargo" />
+    <pattern value="com.example.spacetrader.PirateJUnit" />
+    <pattern value="com.example.spacetrader.model.event.TraderEvent" method="increaseQuantity" />
+    <pattern value="com.example.spacetrader.view.custom.SpaceMapView" method="init" />
+    <pattern value="com.example.spacetrader.viewmodel.ISpaceMapViewModel" />
+    <pattern value="com.example.spacetrader.view.fragment.BuySellFragment" method="newInstance" />
+    <pattern value="com.example.spacetrader.view.fragment.SettingsFragment" method="newInstance" />
+    <pattern value="com.example.spacetrader.view.fragment.SystemInfoFragment" method="newInstance" />
+    <pattern value="com.example.spacetrader.view.fragment.UniverseFragment" method="newInstance" />
+    <pattern value="com.example.spacetrader.viewmodel.event.WarpEventHandler" method="onWarp" />
+    <pattern value="com.example.spacetrader.viewmodel.BuySellTraderViewModel" method="performShopAction" />
+    <pattern value="com.example.spacetrader.model.Player" />
+    <pattern value="com.example.spacetrader.model.Player" method="Player" />
+    <pattern value="com.example.spacetrader.model.system.Position" />
+    <pattern value="com.example.spacetrader.view.custom.QuickSystemInfoView" />
+    <pattern value="com.example.spacetrader.view.custom.QuickSystemInfoView" method="QuickSystemInfoView" />
+    <pattern value="com.example.spacetrader.view.fragment.GameFragment" method="refreshInfo" />
+    <pattern value="com.example.spacetrader.model.system.shop.Transaction.Result" />
+    <pattern value="com.example.spacetrader.model.Ship" method="setInventory" />
+    <pattern value="com.example.spacetrader.view.fragment.BuySellFragment" method="setmViewModel" />
+    <pattern value="com.example.spacetrader.view.fragment.SettingsFragment" />
+    <pattern value="com.example.spacetrader.model.system.Position" method="setX" />
+    <pattern value="com.example.spacetrader.model.system.Position" method="setY" />
+    <pattern value="com.example.spacetrader.model.Ship" />
+    <pattern value="com.example.spacetrader.model.Player.Skill" />
+    <pattern value="com.example.spacetrader.model.Player" method="skillPointSum" />
+    <pattern value="com.example.spacetrader.model.system.SolarSystem" />
+    <pattern value="com.example.spacetrader.view.custom.SpaceMapView" />
+    <pattern value="com.example.spacetrader.view.custom.SpaceMapView" method="SpaceMapView" />
+    <pattern value="com.example.spacetrader.view.fragment.SystemInfoFragment" />
+    <pattern value="com.example.spacetrader.PirateJUnit" method="testAll" />
+    <pattern value="com.example.spacetrader.model.TradeGood" />
+    <pattern value="com.example.spacetrader.view.custom.TradeGoodItemView" />
+    <pattern value="com.example.spacetrader.view.custom.TradeGoodItemView" method="TradeGoodItemView" />
+    <pattern value="com.example.spacetrader.model.event.TraderEvent" />
+    <pattern value="com.example.spacetrader.model.system.shop.Transaction" />
+    <pattern value="com.example.spacetrader.model.system.shop.TransactionParty" />
+    <pattern value="com.example.spacetrader.view.fragment.UniverseFragment" />
+    <pattern value="com.example.spacetrader.ExampleInstrumentedTest" method="useAppContext" />
+    <pattern value="com.example.spacetrader.viewmodel.event.WarpEventHandler" />
+    <pattern value="com.example.spacetrader.viewmodel.event.GameEvents" method="warpToSystem" />
+    <pattern value="com.example.spacetrader.model.event.TraderEvent" method="attack" />
+    <pattern value="com.example.spacetrader.model.system.SolarSystem" method="changeInventoryQuantityByAmount" />
+    <pattern value="com.example.spacetrader.viewmodel.ConfigurationViewModel" />
+    <pattern value="com.example.spacetrader.viewmodel.ConfigurationViewModel" method="ConfigurationViewModel" />
+    <pattern value="com.example.spacetrader.viewmodel.DisplayedSolarSystem" method="DisplayedSolarSystem" />
+    <pattern value="com.example.spacetrader.view.fragment.EventFragment" />
+    <pattern value="com.example.spacetrader.viewmodel.EventInfo" />
+    <pattern value="com.example.spacetrader.viewmodel.EventInfo" method="EventInfo" />
+    <pattern value="com.example.spacetrader.viewmodel.EventViewModel" />
+    <pattern value="com.example.spacetrader.model.event.TraderEvent" method="flee" />
+    <pattern value="com.example.spacetrader.model.system.SolarSystem" method="getBuyPrice" />
+    <pattern value="com.example.spacetrader.model.system.SolarSystem" method="getInventoryQuantity" />
+    <pattern value="com.example.spacetrader.model.system.SolarSystem" method="getSellPrice" />
+    <pattern value="com.example.spacetrader.viewmodel.UniverseViewModel" method="getSystemInfo" />
+    <pattern value="com.example.spacetrader.viewmodel.UniverseViewModel" method="getSystems" />
+    <pattern value="com.example.spacetrader.view.GameActivity" method="handleEventDone" />
+    <pattern value="com.example.spacetrader.view.fragment.InfoContainerFragment" />
+    <pattern value="com.example.spacetrader.view.fragment.PlayerInfoFragment" />
+    <pattern value="com.example.spacetrader.viewmodel.PlayerInfoViewModel" />
+    <pattern value="com.example.spacetrader.viewmodel.UniverseViewModel" />
+    <pattern value="com.example.spacetrader.view.fragment.BuySellFragment" method="onActivityCreated" />
+    <pattern value="com.example.spacetrader.view.fragment.SettingsFragment" method="onActivityCreated" />
+    <pattern value="com.example.spacetrader.view.fragment.SystemInfoFragment" method="onActivityCreated" />
+    <pattern value="com.example.spacetrader.view.fragment.UniverseFragment" method="onActivityCreated" />
+    <pattern value="com.example.spacetrader.view.ConfigurationActivity" method="onCreate" />
+    <pattern value="com.example.spacetrader.view.GameActivity" method="onCreate" />
+    <pattern value="com.example.spacetrader.view.fragment.BuySellFragment" method="onCreateView" />
+    <pattern value="com.example.spacetrader.view.fragment.SettingsFragment" method="onCreateView" />
+    <pattern value="com.example.spacetrader.view.fragment.SystemInfoFragment" method="onCreateView" />
+    <pattern value="com.example.spacetrader.view.fragment.UniverseFragment" method="onCreateView" />
+    <pattern value="com.example.spacetrader.view.custom.SpaceMapView" method="onDraw" />
+    <pattern value="com.example.spacetrader.view.custom.SpaceMapView" method="onLayout" />
+    <pattern value="com.example.spacetrader.view.custom.SpaceMapView" method="onTouchEvent" />
+    <pattern value="com.example.spacetrader.view.GameActivity" method="onWarp" />
+    <pattern value="com.example.spacetrader.model.system.Position" method="Position" />
+    <pattern value="com.example.spacetrader.view.fragment.SettingsFragment" method="refreshInfo" />
+    <pattern value="com.example.spacetrader.view.fragment.UniverseFragment" method="refreshInfo" />
+    <pattern value="com.example.spacetrader.model.event.TraderEvent" method="run" />
+    <pattern value="com.example.spacetrader.view.custom.SpaceMapView" method="setZoomType" />
+    <pattern value="com.example.spacetrader.model.Ship" method="Ship" />
+    <pattern value="com.example.spacetrader.model.Player.Skill" method="Skill" />
+    <pattern value="com.example.spacetrader.model.system.SolarSystem" method="SolarSystem" />
+    <pattern value="com.example.spacetrader.viewmodel.SolarSystemInfo" />
+    <pattern value="com.example.spacetrader.viewmodel.SolarSystemInfo" method="SolarSystemInfo" />
+    <pattern value="com.example.spacetrader.model.event.TraderEvent" method="talk" />
+    <pattern value="com.example.spacetrader.model.system.Position" method="toString" />
+    <pattern value="com.example.spacetrader.model.TradeGood" method="TradeGood" />
+    <pattern value="com.example.spacetrader.model.event.TraderEvent" method="TraderEvent" />
+    <pattern value="com.example.spacetrader.model.system.shop.Transaction" method="Transaction" />
+  </component>
+  <component name="NullableNotNullManager">
+    <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
+    <option name="myDefaultNotNull" value="androidx.annotation.RecentlyNonNull" />
+    <option name="myNullables">
+      <value>
+        <list size="10">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
+          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+          <item index="2" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
+          <item index="3" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+          <item index="4" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
+          <item index="5" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
+          <item index="6" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
+          <item index="7" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
+          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
+          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
+        </list>
+      </value>
+    </option>
+    <option name="myNotNulls">
+      <value>
+        <list size="9">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
+          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
+          <item index="3" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
+          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
+          <item index="5" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
+          <item index="6" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
+          <item index="7" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
+          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
+        </list>
+      </value>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

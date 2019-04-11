@@ -2,12 +2,10 @@ package com.example.spacetrader.view.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.spacetrader.R;
-import com.example.spacetrader.model.system.TechLevel;
 import com.example.spacetrader.viewmodel.SystemInfoViewModel;
+
+import java.util.Locale;
+import java.util.Objects;
 
 public class SystemInfoFragment extends Fragment implements GameFragment {
 
@@ -45,7 +45,7 @@ public class SystemInfoFragment extends Fragment implements GameFragment {
         mViewModel = ViewModelProviders.of(this).get(SystemInfoViewModel.class);
 
         View view = getView();
-        systemNameTextView = view.findViewById(R.id.systemName);
+        systemNameTextView = Objects.requireNonNull(view).findViewById(R.id.systemName);
         positionTextView = view.findViewById(R.id.locationValue);
         resourcesTextView = view.findViewById(R.id.resourcesValue);
         techLevelTextView = view.findViewById(R.id.techLevelValue);
@@ -58,12 +58,12 @@ public class SystemInfoFragment extends Fragment implements GameFragment {
     @Override
     public void refreshInfo() {
         systemNameTextView.setText(mViewModel.getSystemName());
-        positionTextView.setText(String.format("%d, %d", mViewModel.getSystemX(), mViewModel.getSystemY()));
+        positionTextView.setText(String.format(Locale.getDefault(),"%d, %d", mViewModel.getSystemX(), mViewModel.getSystemY()));
         resourcesTextView.setText(mViewModel.getResourceBias());
         techLevelTextView.setText(mViewModel.getTechLevel());
         increaseEventTextView.setText(mViewModel.getCurrentIncreaseEvent());
 
-        int imageID = getResources().getIdentifier(String.format("planet%d", mViewModel.getImageIndex()), "drawable", "com.example.spacetrader");
+        int imageID = getResources().getIdentifier(String.format(Locale.getDefault(), "planet%d", mViewModel.getImageIndex()), "drawable", "com.example.spacetrader");
         BitmapDrawable image = (BitmapDrawable)getResources().getDrawable(imageID);
         image.getPaint().setFilterBitmap(false);
         systemImageView.setImageDrawable(image);

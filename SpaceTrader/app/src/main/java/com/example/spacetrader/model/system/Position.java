@@ -1,9 +1,5 @@
 package com.example.spacetrader.model.system;
 
-import com.example.spacetrader.model.GameState;
-
-import java.util.ArrayList;
-
 /**
  * Holds the x, y position of a planet in space
  */

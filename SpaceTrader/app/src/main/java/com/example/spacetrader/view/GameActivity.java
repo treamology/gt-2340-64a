@@ -22,10 +22,10 @@ import com.example.spacetrader.viewmodel.event.WarpEventHandler;
 
 public class GameActivity extends FragmentActivity implements WarpEventHandler, EventDoneHandler {
     private BottomNavigationView navigation;
-    private SparseArray<Fragment> fragmentMap = new SparseArray<>();
+    private final SparseArray<Fragment> fragmentMap = new SparseArray<>();
     private EventContainerView eventContainerView;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -64,7 +64,7 @@ public class GameActivity extends FragmentActivity implements WarpEventHandler, 
     }
 
     @Override
-    public void onWarp(int newSystem) {
+    public void onWarp() {
         eventContainerView.setVisibility(View.VISIBLE);
         EventFragment fragment = new EventFragment();
         fragment.setDoneEventHandler(this);

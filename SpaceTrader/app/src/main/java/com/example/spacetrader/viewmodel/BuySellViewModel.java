@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 
 public class BuySellViewModel extends ViewModel {
 
-    LinkedHashMap<String, TradeGoodInfo> goods;
+    private final LinkedHashMap<String, TradeGoodInfo> goods;
 
     public BuySellViewModel() {
         goods = new LinkedHashMap<>();
@@ -31,26 +31,22 @@ public class BuySellViewModel extends ViewModel {
         }
     }
 
-    public boolean buyItem(TradeGoodInfo good, int quantity) {
+    public void buyItem(TradeGoodInfo good, int quantity) {
         Transaction transaction = new Transaction(ShopMode.BUY, good.getGood(), quantity);
         Player player = GameState.getState().getPlayer();
         if (player.performTransaction(transaction, player.getCurrentSystem()) == Transaction.Result.SUCCESS) {
             good.shipQuantity += quantity;
             good.quantity -= quantity;
-            return true;
         }
-        return false;
     }
 
-    public boolean sellItem(TradeGoodInfo good, int quantity) {
+    public void sellItem(TradeGoodInfo good, int quantity) {
         Transaction transaction = new Transaction(ShopMode.SELL, good.getGood(), quantity);
         Player player = GameState.getState().getPlayer();
         if (player.performTransaction(transaction, player.getCurrentSystem()) == Transaction.Result.SUCCESS) {
             good.shipQuantity -= quantity;
             good.quantity += quantity;
-            return true;
         }
-        return false;
     }
 
     public LinkedHashMap<String, TradeGoodInfo> getGoods() {

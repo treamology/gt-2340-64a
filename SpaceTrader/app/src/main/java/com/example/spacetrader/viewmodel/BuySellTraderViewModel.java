@@ -16,7 +16,7 @@ public class BuySellTraderViewModel extends ViewModel {
         BUY, SELL
     }
 
-    List<TradeGoodInfo> goods;
+    private final List<TradeGoodInfo> goods;
 
     public BuySellTraderViewModel() {
         goods = new ArrayList<>();

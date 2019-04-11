@@ -16,17 +16,19 @@ import com.example.spacetrader.viewmodel.EventInfo;
 import com.example.spacetrader.viewmodel.EventViewModel;
 import com.example.spacetrader.viewmodel.event.EventDoneHandler;
 
+import java.util.Objects;
+
 public class EventFragment extends Fragment {
 
-    TextView titleView;
-    TextView descriptionView;
-    Button attackButton;
-    Button fleeButton;
-    Button talkButton;
-    Button doneButton;
-    boolean trading;
+    private TextView titleView;
+    private TextView descriptionView;
+    private Button attackButton;
+    private Button fleeButton;
+    private Button talkButton;
+    private Button doneButton;
+    private boolean trading;
 
-    EventDoneHandler eventHandler;
+    private EventDoneHandler eventHandler;
 
     private EventViewModel mViewModel;
 
@@ -34,8 +36,7 @@ public class EventFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.event_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.event_fragment, container, false);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class EventFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
 
         View v = getView();
-        titleView = v.findViewById(R.id.ef_event_title);
+        titleView = Objects.requireNonNull(v).findViewById(R.id.ef_event_title);
         descriptionView = v.findViewById(R.id.ef_event_desc);
         attackButton = v.findViewById(R.id.ef_attack_button);
         fleeButton = v.findViewById(R.id.ef_flee_button);
@@ -82,7 +83,7 @@ public class EventFragment extends Fragment {
         });
     }
 
-    public void updateText(EventInfo info) {
+    private void updateText(EventInfo info) {
         titleView.setText(info.getEventTitle());
         descriptionView.setText(info.getEventDescription());
         if (info.getDone()) {

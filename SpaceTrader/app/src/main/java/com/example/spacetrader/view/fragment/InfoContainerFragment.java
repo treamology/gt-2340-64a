@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.example.spacetrader.R;
 
+import java.util.Objects;
+
 public class InfoContainerFragment extends Fragment implements GameFragment {
 
     private TabLayout tabBar;
@@ -27,7 +29,7 @@ public class InfoContainerFragment extends Fragment implements GameFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        tabBar = getView().findViewById(R.id.info_tabs);
+        tabBar = Objects.requireNonNull(getView()).findViewById(R.id.info_tabs);
         toolbar = getView().findViewById(R.id.info_toolbar);
 
         tabBar.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
@@ -58,7 +60,7 @@ public class InfoContainerFragment extends Fragment implements GameFragment {
             fragment = new PlayerInfoFragment();
             toolbar.setTitle(R.string.info_player_info);
         }
-        getFragmentManager().beginTransaction()
+        Objects.requireNonNull(getFragmentManager()).beginTransaction()
                 .replace(R.id.info_container, fragment)
                 .commit();
     }

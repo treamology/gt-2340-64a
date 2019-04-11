@@ -1,12 +1,12 @@
 package com.example.spacetrader.viewmodel;
 
 public class SolarSystemInfo {
-    public String name;
-    public int x;
-    public int y;
-    public String techLevel;
-    public String resources;
-    public int index;
+    public final String name;
+    public final int x;
+    public final int y;
+    public final String techLevel;
+    public final String resources;
+    public final int index;
 
     public SolarSystemInfo(String name, int x, int y, String techLevel, String resources, int index) {
         this.name = name;

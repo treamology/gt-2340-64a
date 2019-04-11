@@ -17,9 +17,9 @@ import com.example.spacetrader.view.custom.TradeGoodItemView;
 import com.example.spacetrader.viewmodel.BuySellViewModel;
 import com.example.spacetrader.viewmodel.TradeGoodInfo;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class BuySellFragment extends Fragment implements GameFragment {
 
@@ -36,8 +36,7 @@ public class BuySellFragment extends Fragment implements GameFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.buy_sell_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.buy_sell_fragment, container, false);
     }
 
     @Override
@@ -46,7 +45,7 @@ public class BuySellFragment extends Fragment implements GameFragment {
         mViewModel = ViewModelProviders.of(this).get(BuySellViewModel.class);
 
         View view = getView();
-        final LinearLayout verticalLayout = view.findViewById(R.id.tradeItemsLayout);
+        final LinearLayout verticalLayout = Objects.requireNonNull(view).findViewById(R.id.tradeItemsLayout);
         final LinkedHashMap<String, TradeGoodInfo> goods = mViewModel.getGoods();
         final TabLayout shopTabBar = view.findViewById(R.id.shopTabBar);
 
@@ -56,7 +55,7 @@ public class BuySellFragment extends Fragment implements GameFragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 for (int i = 0; i < goods.size(); i++) {
                     TradeGoodItemView itemView = (TradeGoodItemView)verticalLayout.getChildAt(i);
-                    TradeGoodInfo item = goods.get(goods.keySet().toArray()[i]);
+                    TradeGoodInfo item = goods.get(Objects.requireNonNull(goods.keySet().toArray())[i]);
                     updateItemView(itemView, item, tab.getPosition());
                 }
             }
@@ -104,13 +103,12 @@ public class BuySellFragment extends Fragment implements GameFragment {
     @Override
     public void refreshInfo() {
         View view = getView();
-        final LinearLayout verticalLayout = view.findViewById(R.id.tradeItemsLayout);
+        final LinearLayout verticalLayout = Objects.requireNonNull(view).findViewById(R.id.tradeItemsLayout);
         final Map<String, TradeGoodInfo> goods = mViewModel.getGoods();
         final TabLayout shopTabBar = view.findViewById(R.id.shopTabBar);
 
-        Iterator<String> it = goods.keySet().iterator();
-        while (it.hasNext()) {
-            final TradeGoodInfo good = goods.get(it.next());
+        for (String s : goods.keySet()) {
+            final TradeGoodInfo good = goods.get(s);
             final TradeGoodItemView tradeGoodItemView = new TradeGoodItemView(getContext(), null);
 
             updateItemView(tradeGoodItemView, good, 0);

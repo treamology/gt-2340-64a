@@ -15,8 +15,8 @@ import java.util.Random;
  */
 public class TraderEvent extends Event {
 
-    LinkedHashMap<TradeGood, Integer> quantities;
-    LinkedHashMap<TradeGood, Integer> prices;
+    private final LinkedHashMap<TradeGood, Integer> quantities;
+    private final LinkedHashMap<TradeGood, Integer> prices;
 
     public TraderEvent() {
         this.description = "You find a space trader";
