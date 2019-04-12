@@ -1,5 +1,7 @@
 package com.example.spacetrader.model.system;
-
+/**
+ * Enum for Tech Level
+ */
 public enum TechLevel {
     PREAGRICULTURAL (0, "Pre-agricultural"),
     AGRICULTURAL (1, "Agricultural"),
@@ -12,6 +14,11 @@ public enum TechLevel {
 
     public final int level;
     public final String name;
+    /**
+     * Sets Tech Level's name and level to the given values
+     * @param level the level to set
+     * @param name the name to set
+     */
     TechLevel(int level, String name) {
         this.level = level;
         this.name = name;

@@ -7,7 +7,9 @@ import com.example.spacetrader.model.system.shop.TransactionParty;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
-
+/**
+ * Class for the Solar System
+ */
 public class SolarSystem implements TransactionParty {
 
     public static final int MAX_SYSTEMS = 10;
@@ -40,6 +42,13 @@ public class SolarSystem implements TransactionParty {
     private PriceIncreaseEvent currentIncreaseEvent;
     private boolean visited;
 
+    /**
+     * Initializes the Solar System
+     * @param name sets the name
+     * @param position the position of the system
+     * @param techLevel the techlevel of the system
+     * @param resourceBias the resource bias of the system
+     */
     public SolarSystem(String name, Position position, TechLevel techLevel, ResourceBias resourceBias) {
         this.name = name;
         this.position = position;
@@ -174,39 +183,91 @@ public class SolarSystem implements TransactionParty {
         return getPrices().get(good);
     }
 
+
+    /**
+     * Gets the Tech Level of a system
+     * @return the Tech Level of a system
+     */
     public TechLevel getTechLevel() {
         return techLevel;
     }
+
+    /**
+     * Gets the Resource Bias of a system
+     * @return the Resource Bias of a system
+     */
     public ResourceBias getResourceBias() {
         return resourceBias;
     }
+
+    /**
+     * Gets the name of a system
+     * @return the name of a system
+     */
     public String getName() {
         return name;
     }
+
+    /**
+     * Gets the position of a system
+     * @return the position of a system
+     */
     public Position getPosition() {
         return position;
     }
+
+    /**
+     * Gets whether a system has been visited or not
+     * @return whether or not a system has been visited
+     */
     public boolean getVisited() { return visited; }
 
+    /**
+     * Sets whether a system has been visited or not
+     * @param visited whether or not a system has been visited
+     */
     public void setVisited(boolean visited) {
         this.visited = visited;
     }
 
+    /**
+     * Gets the solar system's resources
+     * @return A map of a solar system's resources
+     */
     public Map<TradeGood, Integer> getResourceCount() {
         return quantities;
     }
+
+    /**
+     * Gets the image index of a system
+     * @return the image index of a system
+     */
     public int getImageIndex() {
         return imageIndex;
     }
 
+    /**
+     * Gets the quantities of the resources
+     * @return a linked hash map of the trade goods and their quantities
+     */
     public LinkedHashMap<TradeGood, Integer> getQuantities() {
         return quantities;
     }
 
+    /**
+     * Gets the prices of resources
+     * @return a linked hash map of the trade goods and their prices
+     */
     public LinkedHashMap<TradeGood, Integer> getPrices() {
         return prices;
     }
 
+    /**
+     * decreases the quantity of a trade good by an amount
+     * @param good the TradeGood to reduce the quantity of
+     * @param quantity the amount to reduce the trade good buy
+     * @return whether or not the trade good was reduced
+     */
     public boolean decreaseQuantity(TradeGood good, int quantity) {
         if (quantities.get(good) - quantity >= 0) {
             quantities.put(good, quantities.get(good) - quantity);
@@ -214,14 +275,27 @@ public class SolarSystem implements TransactionParty {
         }
         return false;
     }
-
+    /**
+     * Increases the quantity of a trade good
+     * @param good the TradeGood to increase quantity of
+     * @param quantity the amount to increase the trade good by
+     */
     public void increaseQuantity(TradeGood good, int quantity) {
         quantities.put(good, quantities.get(good) + quantity);
     }
 
+    /**
+     * Gets what price increase event is going on
+     * @return the price increase event that is going on
+     */
     public PriceIncreaseEvent getCurrentIncreaseEvent() {
         return currentIncreaseEvent;
     }
+
+    /**
+     * Gets how far away a system is from the player
+     * @return how far a system is from the player
+     */
     public int getDistanceFromPlayer() {
         return position.getEuclideanDistanceTo(GameState.getState().getPlayer().getCurrentSystem().getPosition());
     }

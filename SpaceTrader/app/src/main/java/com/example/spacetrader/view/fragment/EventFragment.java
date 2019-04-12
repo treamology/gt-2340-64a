@@ -17,7 +17,9 @@ import com.example.spacetrader.viewmodel.EventViewModel;
 import com.example.spacetrader.viewmodel.event.EventDoneHandler;
 
 import java.util.Objects;
-
+/**
+ * Class for Event fragment
+ */
 public class EventFragment extends Fragment {
 
     private TextView titleView;
@@ -95,6 +97,10 @@ public class EventFragment extends Fragment {
         }
     }
 
+    /**
+     * Sets the doneEventHandler
+     * @param eventHandler what to set the event handler to
+     */
     public void setDoneEventHandler(EventDoneHandler eventHandler) {
         this.eventHandler = eventHandler;
     }

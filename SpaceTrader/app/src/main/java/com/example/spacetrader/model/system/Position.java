@@ -16,10 +16,28 @@ public class Position {
         this.x = x;
         this.y = y;
     }
-
+    /**
+     * Gets the X-coordinate of a position
+     * @return the X-coordinate of a position
+     */
     public int getX () {return x;}
+
+    /**
+     * Sets the X-coordinate of a position
+     * @param x the X-coordinate to set a position to
+     */
     public void setX(int x) {this.x = x;}
+
+    /**
+     * Gets the Y-coordinate of a position
+     * @return the Y-coordinate of a position
+     */
     public int getY() {return y;}
+
+    /**
+     * Sets the Y-coordinate of a position
+     * @param y the Y-coordinate to set a position to
+     */
     public void setY(int y) {this.y = y;}
 
     /**

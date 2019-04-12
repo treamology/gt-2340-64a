@@ -7,7 +7,7 @@ import com.example.spacetrader.model.system.SolarSystem;
 import java.util.Random;
 
 /**
- * Holds the 10 trade goods in the game, incluing their names, base prices, and if they
+ * Holds the 10 trade goods in the game, including their names, base prices, and if they
  * are illegal
  */
 public enum TradeGood {
@@ -133,7 +133,10 @@ public enum TradeGood {
 
         return price;
     }
-
+    /**
+     * Gets the name of a trade good
+     * @return the name of a trade good
+     */
     public String getName() {
         return name;
     }

@@ -19,7 +19,9 @@ import com.example.spacetrader.view.fragment.UniverseFragment;
 import com.example.spacetrader.viewmodel.event.EventDoneHandler;
 import com.example.spacetrader.viewmodel.event.GameEvents;
 import com.example.spacetrader.viewmodel.event.WarpEventHandler;
-
+/**
+ * Class for GameActivity
+ */
 public class GameActivity extends FragmentActivity implements WarpEventHandler, EventDoneHandler {
     private BottomNavigationView navigation;
     private final SparseArray<Fragment> fragmentMap = new SparseArray<>();

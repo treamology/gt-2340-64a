@@ -17,7 +17,9 @@ public class TraderEvent extends Event {
 
     private final LinkedHashMap<TradeGood, Integer> quantities;
     private final LinkedHashMap<TradeGood, Integer> prices;
-
+    /**
+     * The trader event
+     */
     public TraderEvent() {
         this.description = "You find a space trader";
 
@@ -184,15 +186,28 @@ public class TraderEvent extends Event {
         }
         return null;
     }
-
+    /**
+     * Gets the quantities of the trade goods
+     * @return a hashmap of the trade good quantities
+     */
     public LinkedHashMap<TradeGood, Integer> getQuantities() {
         return quantities;
     }
 
+    /**
+     * Gets the prices of the trade goods
+     * @return a hashmap of the trade good prices
+     */
     public LinkedHashMap<TradeGood, Integer> getPrices() {
         return prices;
     }
 
+    /**
+     * Decreases the quantity of a trade good
+     * @param good the good to decrease quantity of
+     * @param quantity how much to decrease the quantity by
+     * @return whether or not it was successful
+     */
     public boolean decreaseQuantity(TradeGood good, int quantity) {
         if (quantities.get(good) - quantity >= 0) {
             quantities.put(good, quantities.get(good) - quantity);
@@ -200,7 +215,11 @@ public class TraderEvent extends Event {
         }
         return false;
     }
-
+    /**
+     * Increases the quantity of a trade good
+     * @param quantity the amount to increase by
+     * @param good the good to increase quantity of
+     */
     public void increaseQuantity(TradeGood good, int quantity) {
         quantities.put(good, quantities.get(good) + quantity);
     }

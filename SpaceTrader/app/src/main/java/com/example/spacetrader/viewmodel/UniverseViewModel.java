@@ -9,6 +9,9 @@ import com.example.spacetrader.model.system.SolarSystem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Universe view model class
+ */
 public class UniverseViewModel extends ViewModel implements ISpaceMapViewModel {
 
     @Override

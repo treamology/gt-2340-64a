@@ -17,7 +17,9 @@ import com.example.spacetrader.viewmodel.SystemInfoViewModel;
 
 import java.util.Locale;
 import java.util.Objects;
-
+/**
+ * Class for the system info fragment
+ */
 public class SystemInfoFragment extends Fragment implements GameFragment {
 
     private SystemInfoViewModel mViewModel;
@@ -29,6 +31,10 @@ public class SystemInfoFragment extends Fragment implements GameFragment {
     private TextView increaseEventTextView;
     private ImageView systemImageView;
 
+    /**
+     * Gets a new instance of the system info fragment
+     * @return a new instance of the system info fragment
+     */
     public static SystemInfoFragment newInstance() {
         return new SystemInfoFragment();
     }

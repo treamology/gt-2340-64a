@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import com.example.spacetrader.R;
 
 import java.util.Objects;
-
+/**
+ * Class for InfoContainer Fragment
+ */
 public class InfoContainerFragment extends Fragment implements GameFragment {
 
     private TabLayout tabBar;
@@ -52,7 +54,7 @@ public class InfoContainerFragment extends Fragment implements GameFragment {
     }
 
     private void updateFrames() {
-        Fragment fragment = null;
+        Fragment fragment;
         if (tabBar.getSelectedTabPosition() == 0) {
             fragment = new SystemInfoFragment();
             toolbar.setTitle(R.string.info_system_info);

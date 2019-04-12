@@ -64,24 +64,111 @@ public class Player {
     public Player() {
         this("Enter Name", 4, 4, 4, 4);
     }
-
+    /**
+     * Gets the player's name
+     * @return the player's name
+     */
     public String getName() {return name;}
+
+    /**
+     * Sets the player's name
+     * @param name the player's name to set
+     */
     public void setName(String name) {this.name = name;}
+
+    /**
+     * Gets the player's pilot skill
+     * @return the player's pilot skill
+     */
     public int getPilot() {return pilot;}
+
+    /**
+     * Sets the player's pilot skill
+     * @param pilot the player's pilot skill to set
+     */
     public void setPilot(int pilot) {this.pilot = pilot;}
+
+    /**
+     * Gets the player's fighter skill
+     * @return the player's fighter skill
+     */
     public int getFighter() {return fighter;}
+
+    /**
+     * Sets the player's fighter skill
+     * @param fighter the player's fighter skill to set
+     */
     public void setFighter(int fighter) {this.fighter = fighter;}
+
+    /**
+     * Gets the player's trader skill
+     * @return the player's trader skill
+     */
     public int getTrader() {return trader;}
+
+    /**
+     * Sets the player's trader skill
+     * @param trader the player's trader skill to set
+     */
     public void setTrader(int trader) {this.trader = trader;}
+
+    /**
+     * Gets the player's engineer skill
+     * @return the player's engineer skill
+     */
     public int getEngineer() {return engineer;}
+
+    /**
+     * Sets the player's engineer skill
+     * @param engineer the player's engineer skill to set
+     */
     public void setEngineer(int engineer) {this.engineer = engineer;}
+    /**
+     * Gets the player's ship
+     * @return the player's ship
+     */
     public Ship getShip() {return ship;}
+
+    /**
+     * Sets the player's ship
+     * @param ship the player's ship to set
+     */
     public void setShip(Ship ship) {this.ship = ship;}
+
+    /**
+     * Gets the player's credits
+     * @return the player's credits
+     */
     public int getCredits() {return credits;}
+
+    /**
+     * Sets the player's credits
+     * @param credits the player's credits to set
+     */
     public void setCredits(int credits) {this.credits = credits;}
+
+    /**
+     * Gets the current system
+     * @return the current system
+     */
     public SolarSystem getCurrentSystem() {return GameState.getState().getUniverse().getSystems().get(currentSystemIndex);}
+
+    /**
+     * Sets the current system
+     * @param currentSystemIndex what to set the current system to
+     */
     public void setCurrentSystemIndex(int currentSystemIndex) {this.currentSystemIndex = currentSystemIndex;}
+
+    /**
+     * Gets the current system index
+     * @return the current system index
+     */
     public int getCurrentSystemIndex() {return currentSystemIndex;}
+
+    /**
+     * Gets the current Event
+     * @return the current event
+     */
     public Event getCurrentEvent() { return currentEvent;}
     /**
      * Used to calculate the number of skill points the player has
@@ -90,7 +177,11 @@ public class Player {
     public int skillPointSum() {
         return pilot + fighter + trader + engineer;
     }
-
+    /**
+     * Removes a specified number of credits from the player
+     * @param quantity the amount of credits to remove
+     * @return whether or not the credits where removed
+     */
     public boolean removeCredits(int quantity) {
         if (credits - quantity >= 0) {
             credits -= quantity;
@@ -98,11 +189,17 @@ public class Player {
         }
         return false;
     }
-
+    /**
+     * Adds a specified number of credits to the player
+     * @param quantity the number of credits to add
+     */
     public void addCredits(int quantity) {
         credits += quantity;
     }
-
+    /**
+     * Player travels to system
+     * @param newSystemIndex the index of the system the player is traveling to
+     */
     public void travelToSystem(int newSystemIndex) {
         SolarSystem oldSystem = getCurrentSystem();
         SolarSystem newSystem = GameState.getState().getUniverse().getSystems().get(newSystemIndex);
@@ -116,7 +213,12 @@ public class Player {
 
         newSystem.generateGoodsAndPrices();
     }
-
+    /**
+     * Player attempts to make a monetary transaction with another entity
+     * @param transaction the transaction that is being made
+     * @param otherParty the other party that is participating in the transaction
+     * @return Transaction.Result the result of the transaction
+     */
     public Transaction.Result performTransaction(Transaction transaction, TransactionParty otherParty) {
         switch (transaction.type) {
             case BUY:

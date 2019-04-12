@@ -7,14 +7,28 @@ import android.util.Log;
 import com.example.spacetrader.model.Player;
 import com.example.spacetrader.model.GameState;
 
-
+/**
+ * Class for the Configuration ViewModel
+ */
 public class ConfigurationViewModel extends AndroidViewModel {
 
+    /**
+     * Initializes the configuration ViewModel
+     * @param application the application to use
+     */
     public ConfigurationViewModel(@NonNull Application application) {
         super(application);
     }
 
-    //Creates the game and the player
+    /**
+     * Creates the game and the player
+     * @param playerName the name of the player
+     * @param pilotSkill the pilot skill level
+     * @param fighterSkill the fighter skill level
+     * @param traderSkill the trader skill level
+     * @param engineerSkill the engineer skill level
+     * @param difficulty the difficulty level of the game
+     */
     public void createGame(String playerName,
                            int pilotSkill,
                            int fighterSkill,

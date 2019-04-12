@@ -13,7 +13,8 @@
         android:layout_marginTop="24dp"
         android:src="@drawable/doggo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Player's Ship" />
 
     <TextView
         android:id="@+id/playerinfo_name"

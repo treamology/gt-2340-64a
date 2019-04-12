@@ -10,7 +10,9 @@ public class PirateEvent extends Event {
 
     private TradeGood demands;
     private int quantity;
-
+    /**
+     * The pirate event
+     */
     public PirateEvent() {}
 
     @Override

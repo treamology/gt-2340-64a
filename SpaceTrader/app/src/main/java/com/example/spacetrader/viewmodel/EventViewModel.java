@@ -6,30 +6,46 @@ import com.example.spacetrader.model.event.Event;
 import com.example.spacetrader.model.event.TraderEvent;
 
 import java.util.Objects;
-
+/**
+ * Class for EventViewModel
+ */
 public class EventViewModel extends ViewModel {
 
     private Event currentEvent;
-
+    /**
+     * Generates a new event
+     */
     public void generateNewEvent() {
         currentEvent = Event.randomEvent();
         Objects.requireNonNull(currentEvent).run();
     }
-
+    /**
+     * Gets the event info
+     * @return the event info
+     */
     public EventInfo getEventInfo() {
         return new EventInfo(String.format("A %s approaches!", currentEvent.getName()), currentEvent.getDescription(), false, false);
     }
-
+    /**
+     * Gets the attack info
+     * @return the attack info
+     */
     public EventInfo attack() {
         currentEvent.attack();
         return new EventInfo(String.format("You attack the %s", currentEvent.getName()), currentEvent.getConsequence(), false, true);
     }
-
+    /**
+     * Gets the flee info
+     * @return the flee info
+     */
     public EventInfo flee() {
         currentEvent.flee();
         return new EventInfo(String.format("You flee the %s", currentEvent.getName()), currentEvent.getConsequence(), false, true);
     }
-
+    /**
+     * Gets the talk info
+     * @return the talk info
+     */
     public EventInfo talk() {
         currentEvent.talk();
         boolean trading = currentEvent.getClass() == TraderEvent.class;

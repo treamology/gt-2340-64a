@@ -10,7 +10,9 @@ import com.example.spacetrader.model.event.Event;
  * Police stop your ship and may ask to search it or arrest you (if a criminal)
  */
 public class PoliceEvent extends Event {
-
+    /**
+     * The police event
+     */
     public PoliceEvent() {
 
     }

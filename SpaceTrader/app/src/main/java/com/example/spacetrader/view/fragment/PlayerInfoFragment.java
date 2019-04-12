@@ -16,6 +16,9 @@ import com.example.spacetrader.viewmodel.PlayerInfoViewModel;
 
 import java.util.Objects;
 
+/**
+ * The PlayerInfo fragment class
+ */
 public class PlayerInfoFragment extends Fragment implements GameFragment {
 
     private TextView nameTextView;

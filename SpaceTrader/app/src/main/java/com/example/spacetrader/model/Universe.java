@@ -112,7 +112,10 @@ public class Universe {
         }
         return name;
     }
-
+    /**
+     * Gets a List of solar systems
+     * @return List<SolarSystem> the  List of solar systems
+     */
     public List<SolarSystem> getSystems() {
         return systems;
     }

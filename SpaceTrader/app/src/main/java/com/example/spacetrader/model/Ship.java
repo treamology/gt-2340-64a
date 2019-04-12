@@ -11,7 +11,7 @@ public abstract class Ship {
     private HashMap<TradeGood, Integer> inventory;
     private final int totalCargoBays;
     private final int maxFuel; // 1 fuel = 1 unit
-    private int currentFuel = 0;
+    private int currentFuel;
 
     Ship(String type, int totalCargoBays, int maxFuel) {
         this.inventory = new HashMap<>();
@@ -29,7 +29,10 @@ public abstract class Ship {
     public String toString() {
         return type;
     }
-
+    /**
+     * Returns the number of cargo bays
+     * @return the number of cargo bays
+     */
     public int getTotalCargoBays() {
         return totalCargoBays;
     }
@@ -107,25 +110,43 @@ public abstract class Ship {
     public void loseInventory() {
         inventory.clear();
     }
-
+    /**
+     * Used to see what is in the inventory
+     * @return HashMap<TradeGood, Integer> a hashmap of the player's inventory
+     */
     public HashMap<TradeGood, Integer> getInventory() {return inventory;}
-
+    /**
+     * Check how much fuel a player has
+     * @return the amount of fuel a player has
+     */
     public int getCurrentFuel() {
         return currentFuel;
     }
-
+    /**
+     * Check how much fuel a player can have
+     * @return the max amount of fuel a player can have
+     */
     public int getMaxFuel() {
         return maxFuel;
     }
-
+    /**
+     * Subtracts fuel from the player, used for traveling
+     * @param amount the amount of fuel that is subtracted
+     */
     public void subtractFuel(int amount) {
         currentFuel -= amount;
     }
-
+    /**
+     * Adds fuel to the player. Used when purchasing fuel
+     * @param amount the amount of fuel to add
+     */
     public void addFuel(int amount) {
         currentFuel = Math.min(currentFuel + amount, maxFuel);
     }
-
+    /**
+     * Set's the player's current fuel to a specified value
+     * @param currentFuel the value to set the player's fuel to
+     */
     public void setCurrentFuel(int currentFuel) {
         this.currentFuel = currentFuel;
     }

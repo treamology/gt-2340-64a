@@ -17,11 +17,16 @@ import com.example.spacetrader.viewmodel.event.GameEvents;
 import com.example.spacetrader.viewmodel.SolarSystemInfo;
 
 import java.util.Objects;
-
+/**
+ * The Universe fragment class
+ */
 public class UniverseFragment extends Fragment implements GameFragment {
 
     private UniverseViewModel mViewModel;
-
+    /**
+     * Creates a new instance of the Universe fragment
+     * @return a new instance of the universe fragment
+     */
     public static UniverseFragment newInstance() {
         return new UniverseFragment();
     }

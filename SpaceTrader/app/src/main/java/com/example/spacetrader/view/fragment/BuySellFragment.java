@@ -20,14 +20,19 @@ import com.example.spacetrader.viewmodel.TradeGoodInfo;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-
+/**
+ * Class for BuySell
+ */
 public class BuySellFragment extends Fragment implements GameFragment {
 
     private BuySellViewModel mViewModel;
 
     private TextView remainingCargoText;
     private TextView creditsText;
-
+    /**
+     * Gets a new instance of a BuySellFragment
+     * @return a new BuySellFragment
+     */
     public static BuySellFragment newInstance() {
         return new BuySellFragment();
     }
@@ -129,7 +134,10 @@ public class BuySellFragment extends Fragment implements GameFragment {
             verticalLayout.addView(tradeGoodItemView, verticalLayout.getChildCount());
         }
     }
-
+    /**
+     * Sets the mViewModel
+     * @param viewModel the viewModel to set mViewModel to
+     */
     public void setmViewModel(BuySellViewModel viewModel) {
         mViewModel = viewModel;
     }

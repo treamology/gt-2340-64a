@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * TODO: document your custom view class.
+ * The class for SpaceMapView
  */
 public class SpaceMapView extends View {
 
@@ -57,22 +57,37 @@ public class SpaceMapView extends View {
     private SolarSystemInfo lastTouchedSystem;
     private View.OnClickListener clickListener;
 
-
+    /**
+     * Initializes the space map view
+     * @param context the context
+     */
     public SpaceMapView(Context context) {
         super(context);
         init();
     }
-
+    /**
+     * Initializes the space map view
+     * @param context the context
+     * @param attrs the attribute set
+     */
     public SpaceMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
-
+    /**
+     * Initializes the space map view
+     * @param context the context
+     * @param attrs the attribute set
+     * @param defStyle the style
+     */
     public SpaceMapView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
+    /**
+     * Sets the zoom type
+     */
     private void setZoomType() {
         viewportWidth = (int)(Universe.SIZE_X / ZoomType.UNIVERSE.zoomFactor);
         viewportHeight = (int)(Universe.SIZE_Y / ZoomType.UNIVERSE.zoomFactor);
@@ -90,6 +105,9 @@ public class SpaceMapView extends View {
         invalidate();
     }
 
+    /**
+     * Initializes the space map view
+     */
     private void init() {
         setWillNotDraw(false);
 
@@ -213,14 +231,26 @@ public class SpaceMapView extends View {
         return true;
     }
 
+    /**
+     * Sets the viewModel
+     * @param viewModel the viewModel to set to
+     */
     public void setViewModel(ISpaceMapViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
+    /**
+     * Gets when the solar system was last touched
+     * @return the last solar system that was touched
+     */
     public SolarSystemInfo getLastTouchedSystem() {
         return lastTouchedSystem;
     }
 
+    /**
+     * Sets the click listener
+     * @param  clickListener what to set the On Click Listener to
+     */
     public void setClickListener(OnClickListener clickListener) {
         this.clickListener = clickListener;
     }

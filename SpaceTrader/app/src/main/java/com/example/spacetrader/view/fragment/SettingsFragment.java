@@ -17,12 +17,17 @@ import com.google.gson.Gson;
 import android.content.Context;
 
 import java.util.Objects;
-
+/**
+ * Class for the settings fragment
+ */
 public class SettingsFragment extends Fragment implements GameFragment {
 
     private MediaPlayer mediaPlayer;
     private Player player;
-
+    /**
+     * returns a new settings fragment
+     * @return a new settings fragment
+     */
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
     }

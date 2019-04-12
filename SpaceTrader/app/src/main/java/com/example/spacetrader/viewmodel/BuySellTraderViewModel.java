@@ -10,14 +10,18 @@ import com.example.spacetrader.model.event.TraderEvent;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-
+/**
+ * Class for BuySellTraderViewModel
+ */
 public class BuySellTraderViewModel extends ViewModel {
     public enum ShopMode {
         BUY, SELL
     }
 
     private final List<TradeGoodInfo> goods;
-
+    /**
+     * Creates a BuySellTraderViewModel
+     */
     public BuySellTraderViewModel() {
         goods = new ArrayList<>();
 
@@ -33,7 +37,13 @@ public class BuySellTraderViewModel extends ViewModel {
             goods.add(displayedGood);
         }
     }
-
+    /**
+     * Performs a transaction
+     * @param mode the shop mode
+     * @param goodIndex the index of the trade good to perform a transaction on
+     * @param quantity how much of the good to change
+     * @return boolean whether or not the action was completed
+     */
     public boolean performShopAction(ShopMode mode, int goodIndex, int quantity) {
         Player player = GameState.getState().getPlayer();
         TradeGood good = TradeGood.values()[goodIndex];
@@ -70,19 +80,32 @@ public class BuySellTraderViewModel extends ViewModel {
         }
         return false;
     }
-
+    /**
+     * Gets a list of goods
+     * @return the list of trade goods
+     */
     public List<TradeGoodInfo> getGoods() {
         return goods;
     }
-
+    /**
+     * Gets the total number of cargo bays a player's ship has
+     * @return the total number of cargo bays
+     */
     public int getTotalCargo() {
         return GameState.getState().getPlayer().getShip().getTotalCargoBays();
     }
-
+    /**
+     * Gets the available number of cargo bays a player's ship has
+     * @return returns the number of available cargo bays
+     *
+     */
     public int getAvailableCargo() {
         return GameState.getState().getPlayer().getShip().getNumOpenCargoBays();
     }
-
+    /**
+     * Gets the amount of credits a player has
+     * @return the amount of credits a player has
+     */
     public int getCash() {
         return GameState.getState().getPlayer().getCredits();
     }

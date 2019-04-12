@@ -19,7 +19,9 @@ import com.example.spacetrader.R;
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.Player;
 import com.example.spacetrader.viewmodel.ConfigurationViewModel;
-
+/**
+ * Class for the Configuration Activity
+ * */
 public class ConfigurationActivity extends AppCompatActivity {
 
     private EditText nameTextbox;
