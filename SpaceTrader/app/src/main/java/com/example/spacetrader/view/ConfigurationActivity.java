@@ -22,8 +22,8 @@ import com.example.spacetrader.viewmodel.ConfigurationViewModel;
 
 public class ConfigurationActivity extends AppCompatActivity {
 
-    private EditText nameTextbox;
-    private TextView skillPointsTextview;
+    private EditText nameTextBox;
+    private TextView skillPointsTextView;
     private Spinner difficultySpinner;
     private Button createGameButton;
     private MediaPlayer mediaPlayer;
@@ -43,8 +43,8 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
 
-        nameTextbox = findViewById(R.id.nameTextbox);
-        skillPointsTextview = findViewById(R.id.skillPointsText);
+        nameTextBox = findViewById(R.id.nameTextBox);
+        skillPointsTextView = findViewById(R.id.skillPointsText);
         difficultySpinner = findViewById(R.id.difficultySpinner);
         createGameButton = findViewById(R.id.createButton);
         musicButton = findViewById(R.id.music_button);
@@ -81,23 +81,23 @@ public class ConfigurationActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < plusButtons.length; i++) {
-            final int finali = i; // this is stupid
+            final int finalI = i; // this is stupid
             plusButtons[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    changeSkillPoints(1, Player.Skill.values()[finali]);
+                    changeSkillPoints(1, Player.Skill.values()[finalI]);
                 }
             });
         }
         for (int i = 0; i < minusButtons.length; i++) {
-            final int finali = i;
+            final int finalI = i;
             minusButtons[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    changeSkillPoints(-1, Player.Skill.values()[finali]);
+                    changeSkillPoints(-1, Player.Skill.values()[finalI]);
                 }
             });
         }
 
-        skillPointsTextview.setText(getSkillPointsString());
+        skillPointsTextView.setText(getSkillPointsString());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -106,7 +106,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                viewModel.createGame(nameTextbox.getText().toString(),
+                viewModel.createGame(nameTextBox.getText().toString(),
                         skillPoints[0],
                         skillPoints[1],
                         skillPoints[2],
@@ -128,7 +128,7 @@ public class ConfigurationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Check that the player has entered a name.
-                if (nameTextbox.getText().toString().length() == 0) {
+                if (nameTextBox.getText().toString().length() == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.empty_name_notify, Toast.LENGTH_SHORT);
                     toast.show();
                     return;
@@ -163,7 +163,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
         skillPoints[skillType.ordinal()] += byAmount;
         pointTextViews[skillType.ordinal()].setText(Integer.toString(skillPoints[skillType.ordinal()]));
-        skillPointsTextview.setText(getSkillPointsString());
+        skillPointsTextView.setText(getSkillPointsString());
     }
 
     int getTotalSkill() {

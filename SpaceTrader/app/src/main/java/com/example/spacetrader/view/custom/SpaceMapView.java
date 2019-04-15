@@ -48,7 +48,7 @@ public class SpaceMapView extends View {
     private int systemTextSize;
 
     private Paint boundaryPaint;
-    private Paint gridlinePaint;
+    private Paint gridLinePaint;
     private Paint dotPaint;
     private Paint currentSystemDotPaint;
     private Paint textPaint;
@@ -66,7 +66,7 @@ public class SpaceMapView extends View {
     float marginX;
     float marginY;
 
-    private Rect[] systemRects;
+    private Rect[] systemRect;
     private SolarSystemInfo lastTouchedSystem;
     private View.OnClickListener clickListener;
 
@@ -110,9 +110,9 @@ public class SpaceMapView extends View {
         boundaryPaint.setStrokeWidth(4.0f);
         boundaryPaint.setColor(Color.BLACK);
 
-        gridlinePaint = new Paint();
-        gridlinePaint.setStrokeWidth(2.0f);
-        gridlinePaint.setColor(Color.LTGRAY);
+        gridLinePaint = new Paint();
+        gridLinePaint.setStrokeWidth(2.0f);
+        gridLinePaint.setColor(Color.LTGRAY);
 
         dotPaint = new Paint();
         dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -131,9 +131,9 @@ public class SpaceMapView extends View {
         travelBoundPaint.setColor(Color.DKGRAY);
         travelBoundPaint.setPathEffect(new DashPathEffect(new float[] {10,20}, 0));
 
-        systemRects = new Rect[SolarSystem.MAX_SYSTEMS];
-        for (int i = 0; i < systemRects.length; i++) {
-            systemRects[i] = new Rect(0, 0, 0, 0);
+        systemRect = new Rect[SolarSystem.MAX_SYSTEMS];
+        for (int i = 0; i < systemRect.length; i++) {
+            systemRect[i] = new Rect(0, 0, 0, 0);
         }
 
         setZoomType(ZoomType.UNIVERSE);
@@ -146,13 +146,13 @@ public class SpaceMapView extends View {
         // Draw map boundary
         canvas.drawRect(marginX, marginY, marginX + viewportWidth * scaleFactor, marginY + viewportHeight * scaleFactor, boundaryPaint);
 
-        // Draw vertical gridlines.
+        // Draw vertical gridLines.
         for (int i = 5; i < viewportWidth; i += 5) {
-            canvas.drawLine(marginX + i * scaleFactor, marginY, marginX + i * scaleFactor, marginY + viewportHeight * scaleFactor, gridlinePaint);
+            canvas.drawLine(marginX + i * scaleFactor, marginY, marginX + i * scaleFactor, marginY + viewportHeight * scaleFactor, gridLinePaint);
         }
-        // Draw horizontal gridlines.
+        // Draw horizontal gridLines.
         for (int i = 5; i < viewportHeight; i += 5) {
-            canvas.drawLine(marginX, marginY + i * scaleFactor, marginX + viewportWidth * scaleFactor, marginY + i * scaleFactor, gridlinePaint);
+            canvas.drawLine(marginX, marginY + i * scaleFactor, marginX + viewportWidth * scaleFactor, marginY + i * scaleFactor, gridLinePaint);
         }
 
         List<DisplayedSolarSystem> systems = viewModel.getSystems();
@@ -171,10 +171,10 @@ public class SpaceMapView extends View {
             } else {
                 canvas.drawCircle(realX, realY, 8, dotPaint);
             }
-            systemRects[i].bottom = (int)realY + 32;
-            systemRects[i].top = (int)realY - 32;
-            systemRects[i].right = (int)realX + 32;
-            systemRects[i].left = (int)realX - 32;
+            systemRect[i].bottom = (int)realY + 32;
+            systemRect[i].top = (int)realY - 32;
+            systemRect[i].right = (int)realX + 32;
+            systemRect[i].left = (int)realX - 32;
         }
 
         // Draw circle indicating where the player can travel
@@ -208,8 +208,8 @@ public class SpaceMapView extends View {
             int viewX = (int)event.getX();
             int viewY = (int)event.getY();
 
-            for (int i = 0; i < systemRects.length; i++) {
-                Rect touchRect = systemRects[i];
+            for (int i = 0; i < systemRect.length; i++) {
+                Rect touchRect = systemRect[i];
                 if (touchRect.contains(viewX, viewY)) {
                     lastTouchedSystem = viewModel.getSystemInfo(i);
                     clickListener.onClick(this);
