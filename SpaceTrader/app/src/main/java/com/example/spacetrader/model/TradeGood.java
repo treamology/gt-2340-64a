@@ -85,12 +85,12 @@ public enum TradeGood {
     public int getPrice() {
         Random rng = GameState.getState().rng;
 
-        int range = (int)((float)basePrice * ((float)var / 100));
-        int maxPrice = basePrice + range;
-        int minPrice = basePrice - range;
+        int maxPrice = MTH;
+        int minPrice = MTL;
+        int range = maxPrice - minPrice;
 
         //randomly assigns a price to each good
-        int price = minPrice + rng.nextInt(range * 2);
+        int price = minPrice + rng.nextInt(range);
 
         //prevents the price from exceeding the set max price or falling below the set min price
         if (price > maxPrice) {
@@ -111,29 +111,31 @@ public enum TradeGood {
         Random rng = GameState.getState().rng;
 
         int price = basePrice;
-        int range = (int)((float)basePrice * ((float)var / 100));
-        int maxPrice = basePrice + range;
-        int minPrice = basePrice - range;
 
         //the higher the tech level, the more expensive the good.
         if (planet.getTechLevel().level > 0) {
             price += IPL * planet.getTechLevel().level;
         }
 
+        int range = (int)((float)price * ((float)var / 100));
+        int maxPrice = price + range;
+        int minPrice = price - range;
+
         //checks if planets resource makes the item cheaper
         if (planet.getResourceBias() == CR) {
-            price -= rng.nextInt(var);
+            price -= rng.nextInt(var) + 1;
         }
 
         //checks if planets resource makes the item more expensive
         if (planet.getResourceBias() == ER) {
-            price += rng.nextInt(var);
+            price += rng.nextInt(var) + 1;
         }
 
         //compares IE of planet to the IE that effects the price of the good
         if (IE == planet.getCurrentIncreaseEvent()) {
-            price = price + rng.nextInt(range);
+            price += rng.nextInt(var) + 1;
         }
+
         //prevents the price from exceeding the set max price or falling below the set min price
         if (price > maxPrice) {
             price = maxPrice;
