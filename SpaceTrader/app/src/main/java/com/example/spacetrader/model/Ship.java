@@ -2,6 +2,7 @@ package com.example.spacetrader.model;
 
 import java.util.HashMap;
 
+
 /**
  * Class that holds a spaceship. The different ship types are subclasses
  */
@@ -11,7 +12,7 @@ public abstract class Ship {
     private HashMap<TradeGood, Integer> inventory;
     private final int totalCargoBays;
     private final int maxFuel; // 1 fuel = 1 unit
-    private int currentFuel = 0;
+    private int currentFuel;
 
     Ship(String type, int totalCargoBays, int maxFuel) {
         this.inventory = new HashMap<>();

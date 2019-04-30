@@ -1,5 +1,6 @@
 package com.example.spacetrader.model.system;
 
+
 /**
  * Holds the x, y position of a planet in space
  */

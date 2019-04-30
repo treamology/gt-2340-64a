@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:contentDescription="dog"
         android:id="@+id/playerinfo_ship_image"
         android:layout_width="128dp"
         android:layout_height="128dp"

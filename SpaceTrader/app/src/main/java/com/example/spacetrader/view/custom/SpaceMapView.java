@@ -77,16 +77,18 @@ public class SpaceMapView extends View {
         viewportWidth = (int)(Universe.SIZE_X / ZoomType.UNIVERSE.zoomFactor);
         viewportHeight = (int)(Universe.SIZE_Y / ZoomType.UNIVERSE.zoomFactor);
 
+        /*
         switch (ZoomType.UNIVERSE) {
             case SYSTEM:
                 break;
             case UNIVERSE:
-                int viewportCenterX = Universe.SIZE_X / 2;
-                int viewportCenterY = Universe.SIZE_Y / 2;
+                //int viewportCenterX = Universe.SIZE_X / 2;
+                //int viewportCenterY = Universe.SIZE_Y / 2;
                 // How largely points on the map should be rendered, depending on the zoom level.
-                int systemDotSize = 3;
-                int systemTextSize = 12;
+                //int systemDotSize = 3;
+                //int systemTextSize = 12;
         }
+        */
         invalidate();
     }
 
