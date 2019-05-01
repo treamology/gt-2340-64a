@@ -1,7 +1,6 @@
 package com.example.spacetrader;
 
 import com.example.spacetrader.model.GameState;
-import com.example.spacetrader.model.Player;
 import com.example.spacetrader.model.TradeGood;
 import com.example.spacetrader.model.system.Position;
 import com.example.spacetrader.model.system.PriceIncreaseEvent;
@@ -15,15 +14,13 @@ import static org.junit.Assert.*;
 
 public class getPriceUnitTest {
 
-    Player p1 = new Player("testPlayer",16,0,0,0);
-
-    GameState game = GameState.generateGame(p1, GameState.Difficulty.BEGINNER);
+    GameState game = GameState.generateGame("testPlayer", 16, 0, 0, 0, GameState.Difficulty.BEGINNER);
 
     Position ps1 = new Position(100, 200);
     Position ps2 = new Position(150, 250);
     Position ps3 = new Position(250, 300);
 
-    @Test(timeout = 200000)
+    @Test
     public void getPriceTechLevelTest() {
 
         SolarSystem planet = new SolarSystem("testPlanet1", ps1, TechLevel.AGRICULTURAL, ResourceBias.NOSPECIALRESOURCES);
@@ -39,7 +36,7 @@ public class getPriceUnitTest {
         assertTrue("Prices of goods do not increase with techLevel", TradeGood.WATER.getPrice(betterPlanet) < TradeGood.WATER.getPrice(bestPlanet));
     }
 
-    @Test(timeout = 200)
+    @Test
     public void getPriceCRTest() {
         SolarSystem waterPlanet = new SolarSystem("testPlanet1", ps1, TechLevel.AGRICULTURAL, ResourceBias.LOTSOFWATER);
         SolarSystem dryPlanet = new SolarSystem("testPlanet2", ps2, TechLevel.AGRICULTURAL, ResourceBias.NOSPECIALRESOURCES);
@@ -50,7 +47,7 @@ public class getPriceUnitTest {
         assertTrue("CR event doesn't reduce price of good.",TradeGood.WATER.getPrice(waterPlanet) < TradeGood.WATER.getPrice(dryPlanet));
     }
 
-    @Test(timeout = 200)
+    @Test
     public void getPriceERTest() {
         SolarSystem dryPlanet = new SolarSystem("testPlanet1", ps1, TechLevel.AGRICULTURAL, ResourceBias.DESERT);
         SolarSystem planet = new SolarSystem("testPlanet2", ps2, TechLevel.AGRICULTURAL, ResourceBias.NOSPECIALRESOURCES);
@@ -61,7 +58,7 @@ public class getPriceUnitTest {
         assertTrue("ER event doesn't increase price of good.",TradeGood.WATER.getPrice(planet) < TradeGood.WATER.getPrice(dryPlanet));
     }
 
-    @Test(timeout = 200)
+    @Test
     public void getPriceIETest() {
         SolarSystem planet1 = new SolarSystem("testPlanet1", ps1, TechLevel.AGRICULTURAL, ResourceBias.NOSPECIALRESOURCES);
         SolarSystem planet2 = new SolarSystem("testPlanet2", ps2, TechLevel.AGRICULTURAL, ResourceBias.NOSPECIALRESOURCES);

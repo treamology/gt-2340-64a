@@ -34,6 +34,8 @@ public class PirateJUnit {
         event = new PirateEvent();
         event.run();
         event.attack();
+        event.flee();
+        event.talk();
         assertEquals(GameState.getState().getPlayer().getShip().getTotalCargoBays() -
                 GameState.getState().getPlayer().getShip().getNumOpenCargoBays(), 0);
         assertEquals(GameState.getState().getPlayer().getShip().getCurrentFuel(), 0);

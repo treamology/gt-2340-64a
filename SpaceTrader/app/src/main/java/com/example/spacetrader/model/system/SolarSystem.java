@@ -192,6 +192,10 @@ public class SolarSystem implements TransactionParty {
         this.visited = visited;
     }
 
+    public void setCurrentIncreaseEvent(PriceIncreaseEvent currentIncreaseEvent) {
+        this.currentIncreaseEvent = currentIncreaseEvent;
+    }
+
     public Map<TradeGood, Integer> getResourceCount() {
         return quantities;
     }
@@ -208,15 +212,19 @@ public class SolarSystem implements TransactionParty {
     }
 
     public boolean decreaseQuantity(TradeGood good, int quantity) {
-        if (quantities.get(good) - quantity >= 0) {
-            quantities.put(good, quantities.get(good) - quantity);
-            return true;
+        if (quantities.containsKey(good)) {
+            if (quantities.get(good) - quantity >= 0) {
+                quantities.put(good, quantities.get(good) - quantity);
+                return true;
+            }
         }
         return false;
     }
 
     public void increaseQuantity(TradeGood good, int quantity) {
-        quantities.put(good, quantities.get(good) + quantity);
+        if (quantities.containsKey(good)) {
+            quantities.put(good, quantities.get(good) + quantity);
+        }
     }
 
     public PriceIncreaseEvent getCurrentIncreaseEvent() {
@@ -228,7 +236,10 @@ public class SolarSystem implements TransactionParty {
 
     @Override
     public int getInventoryQuantity(TradeGood good) {
-        return getQuantities().get(good);
+        if (quantities.containsKey(good)) {
+            return getQuantities().get(good);
+        }
+        return 0;
     }
 
     @Override
