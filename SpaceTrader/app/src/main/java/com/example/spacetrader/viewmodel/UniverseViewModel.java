@@ -4,10 +4,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.Player;
-import com.example.spacetrader.model.system.Position;
 import com.example.spacetrader.model.system.SolarSystem;
-import com.example.spacetrader.viewmodel.modeldisplay.DisplayedSolarSystem;
-import com.example.spacetrader.viewmodel.modeldisplay.SolarSystemInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,12 +65,11 @@ public class UniverseViewModel extends ViewModel implements ISpaceMapViewModel {
     @Override
     public SolarSystemInfo getSystemInfo(int index) {
         SolarSystem system = GameState.getState().getUniverse().getSystems().get(index);
-        return new SolarSystemInfo(system.getName(), system.getPosition().getX(), system.getPosition().getY(), system.getTechLevel().name, system.getResourceBias().name);
+        return new SolarSystemInfo(system.getName(), system.getPosition().getX(), system.getPosition().getY(), system.getTechLevel().name, system.getResourceBias().name, index);
     }
 
     @Override
     public int getSystemDistanceFromPlayer(SolarSystemInfo info) {
-        Player player = GameState.getState().getPlayer();
-        return player.getCurrentSystem().getPosition().getManhattanDistanceTo(new Position(info.x, info.y));
+        return GameState.getState().getUniverse().getSystems().get(info.index).getDistanceFromPlayer();
     }
 }

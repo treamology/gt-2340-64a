@@ -4,7 +4,7 @@ public enum PriceIncreaseEvent {
     NONE ("None"),
     DROUGHT ("Drought"),
     COLD ("Cold"),
-    CROPFAIL ("CropFail"),
+    CROPFAIL ("Cropfail"),
     WAR ("War"),
     BOREDOM ("Boredom"),
     PLAGUE ("Plague"),

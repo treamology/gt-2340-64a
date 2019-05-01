@@ -5,25 +5,25 @@ import java.util.Random;
 public class GameState {
 
     public enum Difficulty {
-        BEGINNER, EASY, NORMAL, HARD, IMPOSSIBLE;
+        BEGINNER, EASY, NORMAL, HARD, IMPOSSIBLE
     }
 
     public Random rng;
     private Universe universe;
     private Player player;
-    private Difficulty currentDifficulty;
+    private final Difficulty currentDifficulty;
 
     private static GameState sharedGameState;
 
-    private GameState(Player player, Difficulty difficulty) {
-        this.player = player;
+    private GameState(Difficulty difficulty) {
         this.currentDifficulty = difficulty;
         this.rng = new Random(); // maybe we'll add the ability to specify a seed later.
     }
 
-    public static GameState generateGame(Player player, Difficulty difficulty) {
-        sharedGameState = new GameState(player, difficulty);
+    public static GameState generateGame(String playerName, int pilotSkill, int fighterSkill, int traderSkill, int engineerSkill, Difficulty difficulty) {
+        sharedGameState = new GameState(difficulty);
         sharedGameState.universe = new Universe();
+        sharedGameState.player = new Player(playerName, pilotSkill, fighterSkill, traderSkill, engineerSkill);
         return sharedGameState;
     }
 

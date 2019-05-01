@@ -7,7 +7,7 @@ import com.example.spacetrader.model.system.SolarSystem;
 import java.util.Random;
 
 /**
- * Holds the 10 trade goods in the game, including their names, base prices, and if they
+ * Holds the 10 trade goods in the game, incluing their names, base prices, and if they
  * are illegal
  */
 public enum TradeGood {
@@ -33,18 +33,13 @@ public enum TradeGood {
     MACHINES("Machines", 4, 3, 5, 900, -30, 5, PriceIncreaseEvent.LACKOFWORKERS,
                      null,null, 600,800);
 
-    private String name;
-    private int MTLP;
-    private int MTLU;
-    private int TPP;
-    private int basePrice;
-    private int IPL;
-    private int var;
-    private PriceIncreaseEvent IE;
-    private ResourceBias CR;
-    private ResourceBias ER;
-    private int MTL;
-    private int MTH;
+    private final String name;
+    private final int basePrice;
+    private final int IPL;
+    private final int var;
+    private final PriceIncreaseEvent IE;
+    private final ResourceBias CR;
+    private final ResourceBias ER;
 
     /**
      * Initializes a trade good
@@ -65,20 +60,38 @@ public enum TradeGood {
     TradeGood(String name, int MTLP, int MTLU, int TPP, int basePrice, int IPL, int var, PriceIncreaseEvent IE,
               ResourceBias CR, ResourceBias ER, int MTL, int MTH) {
         this.name = name;
-        this.MTLP = MTLP;
-        this.MTLU = MTLU;
-        this.TPP = TPP;
         this.basePrice = basePrice;
         this.IPL = IPL;
         this.var = var;
         this.IE = IE;
         this.CR = CR;
         this.ER = ER;
-        this.MTL = MTL;
-        this.MTH = MTH;
     }
-        
-    //Price for space traders also needs to be implemented when we add random events.
+
+    /**
+     * returns the price of goods for traders
+     * @return int representation of the items price
+     */
+    public int getPrice() {
+        Random rng = GameState.getState().rng;
+
+        int range = (int)((float)basePrice * ((float)var / 100));
+        int maxPrice = basePrice + range;
+        int minPrice = basePrice - range;
+
+        //randomly assigns a price to each good
+        int price = minPrice + rng.nextInt(range * 2);
+
+        //prevents the price from exceeding the set max price or falling below the set min price
+        if (price > maxPrice) {
+            price = maxPrice;
+        } else if (price < minPrice || price < 15) {
+            price = minPrice;
+        }
+
+        return price;
+    }
+
     /**
      * returns the price of each good depending on the planets factors
      * @param planet represents the current planet the player is on
@@ -123,6 +136,17 @@ public enum TradeGood {
 
     public String getName() {
         return name;
+    }
+
+    /**
+     * Randomly generates a trade good
+     * @return the chosen trade good
+     */
+    public static TradeGood getRandom() {
+        TradeGood[] options = new TradeGood[] {WATER, FURS, ORE, FOOD, GAMES, FIREARMS,
+            MEDICINE, NARCOTICS, ROBOTS, MACHINES};
+        int index = GameState.getState().rng.nextInt(10);
+        return options[index];
     }
 }
 

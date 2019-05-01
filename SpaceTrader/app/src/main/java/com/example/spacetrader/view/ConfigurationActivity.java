@@ -22,17 +22,15 @@ import com.example.spacetrader.viewmodel.ConfigurationViewModel;
 
 public class ConfigurationActivity extends AppCompatActivity {
 
-    private EditText nameTextBox;
-    private TextView skillPointsTextView;
+    private EditText nameTextbox;
+    private TextView skillPointsTextview;
     private Spinner difficultySpinner;
-    private Button createGameButton;
     private MediaPlayer mediaPlayer;
-    private Button musicButton;
 
-    private int[] skillPoints = new int[Player.Skill.values().length];
-    private Button[] plusButtons = new Button[Player.Skill.values().length];
-    private Button[] minusButtons = new Button[Player.Skill.values().length];
-    private TextView[] pointTextViews = new TextView[Player.Skill.values().length];
+    private final int[] skillPoints = new int[Player.Skill.values().length];
+    private final Button[] plusButtons = new Button[Player.Skill.values().length];
+    private final Button[] minusButtons = new Button[Player.Skill.values().length];
+    private final TextView[] pointTextViews = new TextView[Player.Skill.values().length];
 
     private ConfigurationViewModel viewModel;
 
@@ -43,11 +41,11 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
 
-        nameTextBox = findViewById(R.id.nameTextBox);
-        skillPointsTextView = findViewById(R.id.skillPointsText);
+        nameTextbox = findViewById(R.id.nameTextbox);
+        skillPointsTextview = findViewById(R.id.skillPointsText);
         difficultySpinner = findViewById(R.id.difficultySpinner);
-        createGameButton = findViewById(R.id.createButton);
-        musicButton = findViewById(R.id.music_button);
+        Button createGameButton = findViewById(R.id.createButton);
+        Button musicButton = findViewById(R.id.music_button);
 
         plusButtons[0] = findViewById(R.id.pilotPlusButton);
         minusButtons[0] = findViewById(R.id.pilotMinusButton);
@@ -81,23 +79,23 @@ public class ConfigurationActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < plusButtons.length; i++) {
-            final int finalI = i; // this is stupid
+            final int finali = i; // this is stupid
             plusButtons[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    changeSkillPoints(1, Player.Skill.values()[finalI]);
+                    changeSkillPoints(1, Player.Skill.values()[finali]);
                 }
             });
         }
         for (int i = 0; i < minusButtons.length; i++) {
-            final int finalI = i;
+            final int finali = i;
             minusButtons[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    changeSkillPoints(-1, Player.Skill.values()[finalI]);
+                    changeSkillPoints(-1, Player.Skill.values()[finali]);
                 }
             });
         }
 
-        skillPointsTextView.setText(getSkillPointsString());
+        skillPointsTextview.setText(getSkillPointsString());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -106,7 +104,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                viewModel.createGame(nameTextBox.getText().toString(),
+                viewModel.createGame(nameTextbox.getText().toString(),
                         skillPoints[0],
                         skillPoints[1],
                         skillPoints[2],
@@ -128,7 +126,7 @@ public class ConfigurationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Check that the player has entered a name.
-                if (nameTextBox.getText().toString().length() == 0) {
+                if (nameTextbox.getText().toString().length() == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.empty_name_notify, Toast.LENGTH_SHORT);
                     toast.show();
                     return;
@@ -146,7 +144,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         });
     }
 
-    void transitionToGameState() {
+    private void transitionToGameState() {
         // The flags being set indicate that we don't want to go back to the previous activity
         // when we press the back button. Once the game starts, it's started.
         Intent intent = new Intent(this, GameActivity.class);
@@ -155,7 +153,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         finish();
     }
 
-    void changeSkillPoints(int byAmount, Player.Skill skillType) {
+    private void changeSkillPoints(int byAmount, Player.Skill skillType) {
         // Do nothing if we're already at the max skill point amount, or would go below zero.
         if (getTotalSkill() + byAmount > Player.SKILL_POINT_MAX
             || skillPoints[skillType.ordinal()] + byAmount < 0) {
@@ -163,10 +161,10 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
         skillPoints[skillType.ordinal()] += byAmount;
         pointTextViews[skillType.ordinal()].setText(Integer.toString(skillPoints[skillType.ordinal()]));
-        skillPointsTextView.setText(getSkillPointsString());
+        skillPointsTextview.setText(getSkillPointsString());
     }
 
-    int getTotalSkill() {
+    private int getTotalSkill() {
         int total = 0;
         for (int points : skillPoints) {
             total += points;
@@ -174,7 +172,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         return total;
     }
 
-    String getSkillPointsString() {
+    private String getSkillPointsString() {
         return String.format(getResources().getString(R.string.skill_points_option),
                              Player.SKILL_POINT_MAX - getTotalSkill());
     }

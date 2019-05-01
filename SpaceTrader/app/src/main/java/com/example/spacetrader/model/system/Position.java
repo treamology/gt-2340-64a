@@ -1,8 +1,5 @@
 package com.example.spacetrader.model.system;
 
-import com.example.spacetrader.model.GameState;
-
-import java.util.ArrayList;
 
 /**
  * Holds the x, y position of a planet in space
@@ -29,10 +26,20 @@ public class Position {
     /**
      * Gives the manhattan distance of x-distance plus y-distance between 2 points
      * @param other the position we measure the distance to
-     * @return the the manhattan distance of the point to this position
+     * @return the manhattan distance of the point to this position
      */
     public int getManhattanDistanceTo(Position other) {
         return Math.abs(x - other.x) + Math.abs((y - other.y));
+    }
+
+    /**
+     * Gives the rounded euclidean (true) distance between 2 points in 2d space
+     * @param other the position we measure the distance to
+     * @return the rounded euclidean distance of the point to this position
+     */
+    public int getEuclideanDistanceTo(Position other) {
+        return (int) Math.sqrt(Math.pow((double) (other.getX() - x), 2) +
+                Math.pow((double) (other.getY() - y),  2));
     }
 
     @Override

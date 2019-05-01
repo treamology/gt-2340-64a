@@ -1,20 +1,20 @@
 package com.example.spacetrader.model;
 
 import java.util.HashMap;
-import java.util.List;
+
 
 /**
  * Class that holds a spaceship. The different ship types are subclasses
  */
 public abstract class Ship {
 
-    String type;
-    HashMap<TradeGood, Integer> inventory;
-    int totalCargoBays;
-    int maxFuel; // 1 fuel = 1 unit
-    int currentFuel = 0;
+    private final String type;
+    private HashMap<TradeGood, Integer> inventory;
+    private final int totalCargoBays;
+    private final int maxFuel; // 1 fuel = 1 unit
+    private int currentFuel;
 
-    public Ship (String type, int totalCargoBays, int maxFuel) {
+    Ship(String type, int totalCargoBays, int maxFuel) {
         this.inventory = new HashMap<>();
         for (TradeGood good : TradeGood.values()) {
             inventory.put(good, 0);
@@ -58,7 +58,11 @@ public abstract class Ship {
         if (getNumOpenCargoBays() - amount < 0) {
             return false;
         }
-        inventory.put(good, inventory.get(good) + amount);
+        if (inventory.get(good) == null) {
+            inventory.put(good, amount);
+        } else {
+            inventory.put(good, inventory.get(good) + amount);
+        }
         return true;
     }
 
@@ -82,7 +86,11 @@ public abstract class Ship {
      * @return The number of goods in our cargo bay.
      */
     public int getQuantityOfTradeGood(TradeGood good) {
-        return inventory.get(good);
+        if (inventory.get(good) == null) {
+            return 0;
+        } else {
+            return inventory.get(good);
+        }
     }
 
     /**
@@ -90,11 +98,36 @@ public abstract class Ship {
      * when purchasing a new ship.
      * @param inventory The old ship's inventory.
      */
-    protected void setInventory(HashMap<TradeGood, Integer> inventory) {
+    public void setInventory(HashMap<TradeGood, Integer> inventory) {
         this.inventory = inventory;
     }
 
+    /**
+     * If you resist pirates and fail, you lose all trade goods
+     */
+    public void loseInventory() {
+        inventory.clear();
+    }
+
+    public HashMap<TradeGood, Integer> getInventory() {return inventory;}
+
     public int getCurrentFuel() {
         return currentFuel;
+    }
+
+    public int getMaxFuel() {
+        return maxFuel;
+    }
+
+    public void subtractFuel(int amount) {
+        currentFuel -= amount;
+    }
+
+    public void addFuel(int amount) {
+        currentFuel = Math.min(currentFuel + amount, maxFuel);
+    }
+
+    public void setCurrentFuel(int currentFuel) {
+        this.currentFuel = currentFuel;
     }
 }

@@ -1,7 +1,5 @@
 package com.example.spacetrader.model;
 
-import android.util.Log;
-
 import com.example.spacetrader.model.system.Position;
 import com.example.spacetrader.model.system.ResourceBias;
 import com.example.spacetrader.model.system.SolarSystem;
@@ -20,9 +18,9 @@ public class Universe {
     public static final int SIZE_Y = 100;
     private static final int maxDistance = 30;
     private static final int minDistance = 10;
-    private List<SolarSystem> systems;
-    private HashSet<Position> takenPositions;
-    private HashSet<Integer> takenNames;
+    private final List<SolarSystem> systems;
+    private final HashSet<Position> takenPositions;
+    private final HashSet<Integer> takenNames;
 
     /**
      * Generates a new universe with systems at various positions. This constructor shouldn't be
@@ -53,7 +51,7 @@ public class Universe {
         Position position = generateSystemPosition(previousLocation);
         String name = generateSystemName();
 
-        Log.d("APP", String.format("Generated system with name %s and position (%d, %d).", name, position.getX(), position.getY()));
+        //Log.d("APP", String.format("Generated system with name %s and position (%d, %d).", name, position.getX(), position.getY()));
 
         return new SolarSystem(name, position, techLevel, resourceBias);
     }

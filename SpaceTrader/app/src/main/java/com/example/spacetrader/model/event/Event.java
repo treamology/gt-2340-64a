@@ -5,7 +5,8 @@ import com.example.spacetrader.model.GameState;
 public abstract class Event {
 
     String description;
-
+    String consequence;
+    String name;
 
     /**
      * Executes the random event
@@ -28,7 +29,7 @@ public abstract class Event {
     public abstract void talk();
 
     public static Event randomEvent() {
-        int seed = GameState.getState().rng.nextInt(10);
+        int seed = GameState.getState().rng.nextInt(3);
         if (seed == 0) {
             return new TraderEvent();
         } else if (seed == 1) {
@@ -43,5 +44,8 @@ public abstract class Event {
     public String getDescription() {
         return description;
     }
-
+    public String getName() { return name; }
+    public String getConsequence() {
+        return consequence;
+    }
 }

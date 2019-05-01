@@ -2,12 +2,13 @@ package com.example.spacetrader.model.system;
 
 import com.example.spacetrader.model.GameState;
 import com.example.spacetrader.model.TradeGood;
+import com.example.spacetrader.model.system.shop.TransactionParty;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class SolarSystem {
+public class SolarSystem implements TransactionParty {
 
     public static final int MAX_SYSTEMS = 10;
     public static final String[] NAMES = new String[]{"Acamar", "Adahn", "Aldea", "Campor", "Deneb"
@@ -27,17 +28,17 @@ public class SolarSystem {
             , "Ventax", "Xenon", "Xerxes", "Yew", "Yojimbo", "Zalkon", "Zuul"};
 
     // Constant state through the whole game
-    String name;
-    Position position;
-    TechLevel techLevel;
-    ResourceBias resourceBias;
-    int imageIndex;
+    private final String name;
+    private final Position position;
+    private final TechLevel techLevel;
+    private final ResourceBias resourceBias;
+    private final int imageIndex;
 
     // State that changes each turn
-    LinkedHashMap<TradeGood, Integer> quantities;
-    LinkedHashMap<TradeGood, Integer> prices;
-    PriceIncreaseEvent currentIncreaseEvent;
-    boolean visited;
+    private final LinkedHashMap<TradeGood, Integer> quantities;
+    private final LinkedHashMap<TradeGood, Integer> prices;
+    private PriceIncreaseEvent currentIncreaseEvent;
+    private boolean visited;
 
     public SolarSystem(String name, Position position, TechLevel techLevel, ResourceBias resourceBias) {
         this.name = name;
@@ -50,11 +51,10 @@ public class SolarSystem {
 
         Random rng = GameState.getState().rng;
         this.imageIndex = rng.nextInt(10) + 1;
-
-        generateNewTradeGoods();
     }
 
-    public void generateNewTradeGoods() {
+    @Override
+    public void generateGoodsAndPrices() {
         TradeGood water = TradeGood.WATER;
         TradeGood furs = TradeGood.FURS;
         TradeGood food = TradeGood.FOOD;
@@ -164,6 +164,16 @@ public class SolarSystem {
         prices.put(machines, machinesPrice);
     }
 
+    @Override
+    public int getBuyPrice(TradeGood good) {
+        return getPrices().get(good);
+    }
+
+    @Override
+    public int getSellPrice(TradeGood good) {
+        return getPrices().get(good);
+    }
+
     public TechLevel getTechLevel() {
         return techLevel;
     }
@@ -177,6 +187,10 @@ public class SolarSystem {
         return position;
     }
     public boolean getVisited() { return visited; }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 
     public Map<TradeGood, Integer> getResourceCount() {
         return quantities;
@@ -207,5 +221,18 @@ public class SolarSystem {
 
     public PriceIncreaseEvent getCurrentIncreaseEvent() {
         return currentIncreaseEvent;
+    }
+    public int getDistanceFromPlayer() {
+        return position.getEuclideanDistanceTo(GameState.getState().getPlayer().getCurrentSystem().getPosition());
+    }
+
+    @Override
+    public int getInventoryQuantity(TradeGood good) {
+        return getQuantities().get(good);
+    }
+
+    @Override
+    public void changeInventoryQuantityByAmount(TradeGood good, int amount) {
+        increaseQuantity(good, amount);
     }
 }

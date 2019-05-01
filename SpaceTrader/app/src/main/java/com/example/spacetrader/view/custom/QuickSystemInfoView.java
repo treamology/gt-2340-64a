@@ -1,7 +1,6 @@
 package com.example.spacetrader.view.custom;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -50,5 +49,9 @@ public class QuickSystemInfoView extends FrameLayout {
     public void setNotEnoughFuel(boolean notEnoughFuel) {
         warpButton.setEnabled(!notEnoughFuel);
         noFuelText.setAlpha(notEnoughFuel ? 1.0f : 0.0f);
+    }
+
+    public void setWarpHandler(View.OnClickListener listener) {
+        warpButton.setOnClickListener(listener);
     }
 }

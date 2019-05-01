@@ -3,20 +3,16 @@ package com.example.spacetrader.view.custom;
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.spacetrader.R;
-import com.example.spacetrader.view.fragment.BuySellFragment;
-import com.example.spacetrader.viewmodel.BuySellViewModel;
 
 public class TradeGoodItemView extends ConstraintLayout {
 
-    TextView itemNameTextView;
-    TextView itemDescriptionTextView;
-    Button buyButton;
+    private TextView itemNameTextView;
+    private TextView itemDescriptionTextView;
+    private Button buyButton;
 
     public TradeGoodItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -36,11 +32,10 @@ public class TradeGoodItemView extends ConstraintLayout {
         buyButton = findViewById(R.id.buyButton);
     }
 
-    public void setAttributes(String itemName, int price, int amount, BuySellViewModel.ShopMode mode) {
+    public void setAttributes(String itemName, int price, int amount, String buttonText, String suffixText) {
         itemNameTextView.setText(itemName);
-        int suffixResource = mode == BuySellViewModel.ShopMode.BUY ? R.string.shop_quantity_buy_suffix : R.string.shop_quantity_sell_suffix;
-        itemDescriptionTextView.setText(String.format(getResources().getString(R.string.shop_item_status) + " " + getResources().getString(suffixResource), price, amount));
-        buyButton.setText(mode.name());
+        itemDescriptionTextView.setText(String.format(getResources().getString(R.string.shop_item_status) + " " + suffixText, price, amount));
+        buyButton.setText(buttonText);
     }
 
     public Button getActionButton() {

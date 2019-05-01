@@ -8,17 +8,17 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.spacetrader.model.Universe;
 import com.example.spacetrader.model.system.SolarSystem;
 import com.example.spacetrader.viewmodel.ISpaceMapViewModel;
-import com.example.spacetrader.viewmodel.modeldisplay.DisplayedSolarSystem;
-import com.example.spacetrader.viewmodel.modeldisplay.SolarSystemInfo;
+import com.example.spacetrader.viewmodel.DisplayedSolarSystem;
+import com.example.spacetrader.viewmodel.SolarSystemInfo;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * TODO: document your custom view class.
@@ -31,7 +31,7 @@ public class SpaceMapView extends View {
         SYSTEM (3.0f),
         UNIVERSE (1.0f);
 
-        private float zoomFactor;
+        private final float zoomFactor;
 
         ZoomType(float zoomFactor) {
             this.zoomFactor = zoomFactor;
@@ -40,69 +40,59 @@ public class SpaceMapView extends View {
     // The current subsection the Universe map we are viewing.
     private int viewportWidth;
     private int viewportHeight;
-    private int viewportCenterX;
-    private int viewportCenterY;
-
-    // How largely points on the map should be rendered, depending on the zoom level.
-    private int systemDotSize;
-    private int systemTextSize;
 
     private Paint boundaryPaint;
-    private Paint gridLinePaint;
+    private Paint gridlinePaint;
     private Paint dotPaint;
     private Paint currentSystemDotPaint;
+    private Paint visitedSystemDotPaint;
     private Paint textPaint;
     private Paint travelBoundPaint;
 
-    int paddingLeft;
-    int paddingTop;
-    int paddingRight;
-    int paddingBottom;
+    private float scaleFactor;
+    private float marginX;
+    private float marginY;
 
-    int contentWidth;
-    int contentHeight;
-
-    float scaleFactor;
-    float marginX;
-    float marginY;
-
-    private Rect[] systemRect;
+    private Rect[] systemRects;
     private SolarSystemInfo lastTouchedSystem;
     private View.OnClickListener clickListener;
 
 
     public SpaceMapView(Context context) {
         super(context);
-        init(null, 0);
+        init();
     }
 
     public SpaceMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
+        init();
     }
 
     public SpaceMapView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(attrs, defStyle);
+        init();
     }
 
-    public void setZoomType(ZoomType type) {
-        viewportWidth = (int)(Universe.SIZE_X / type.zoomFactor);
-        viewportHeight = (int)(Universe.SIZE_Y / type.zoomFactor);
+    private void setZoomType() {
+        viewportWidth = (int)(Universe.SIZE_X / ZoomType.UNIVERSE.zoomFactor);
+        viewportHeight = (int)(Universe.SIZE_Y / ZoomType.UNIVERSE.zoomFactor);
 
-        switch (type) {
+        /*
+        switch (ZoomType.UNIVERSE) {
             case SYSTEM:
                 break;
             case UNIVERSE:
-                viewportCenterX = Universe.SIZE_X / 2;
-                viewportCenterY = Universe.SIZE_Y / 2;
-                systemDotSize = 3;
-                systemTextSize = 12;
+                //int viewportCenterX = Universe.SIZE_X / 2;
+                //int viewportCenterY = Universe.SIZE_Y / 2;
+                // How largely points on the map should be rendered, depending on the zoom level.
+                //int systemDotSize = 3;
+                //int systemTextSize = 12;
         }
+        */
         invalidate();
     }
 
-    private void init(AttributeSet attrs, int defStyle) {
+    private void init() {
         setWillNotDraw(false);
 
         boundaryPaint = new Paint();
@@ -110,9 +100,9 @@ public class SpaceMapView extends View {
         boundaryPaint.setStrokeWidth(4.0f);
         boundaryPaint.setColor(Color.BLACK);
 
-        gridLinePaint = new Paint();
-        gridLinePaint.setStrokeWidth(2.0f);
-        gridLinePaint.setColor(Color.LTGRAY);
+        gridlinePaint = new Paint();
+        gridlinePaint.setStrokeWidth(2.0f);
+        gridlinePaint.setColor(Color.LTGRAY);
 
         dotPaint = new Paint();
         dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -121,6 +111,10 @@ public class SpaceMapView extends View {
         currentSystemDotPaint = new Paint();
         currentSystemDotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         currentSystemDotPaint.setColor(Color.RED);
+
+        visitedSystemDotPaint = new Paint();
+        visitedSystemDotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        visitedSystemDotPaint.setColor(Color.GREEN);
 
         textPaint = new TextPaint();
         textPaint.setTextSize(48);
@@ -131,12 +125,12 @@ public class SpaceMapView extends View {
         travelBoundPaint.setColor(Color.DKGRAY);
         travelBoundPaint.setPathEffect(new DashPathEffect(new float[] {10,20}, 0));
 
-        systemRect = new Rect[SolarSystem.MAX_SYSTEMS];
-        for (int i = 0; i < systemRect.length; i++) {
-            systemRect[i] = new Rect(0, 0, 0, 0);
+        systemRects = new Rect[SolarSystem.MAX_SYSTEMS];
+        for (int i = 0; i < systemRects.length; i++) {
+            systemRects[i] = new Rect(0, 0, 0, 0);
         }
 
-        setZoomType(ZoomType.UNIVERSE);
+        setZoomType();
     }
 
     @Override
@@ -146,13 +140,13 @@ public class SpaceMapView extends View {
         // Draw map boundary
         canvas.drawRect(marginX, marginY, marginX + viewportWidth * scaleFactor, marginY + viewportHeight * scaleFactor, boundaryPaint);
 
-        // Draw vertical gridLines.
+        // Draw vertical gridlines.
         for (int i = 5; i < viewportWidth; i += 5) {
-            canvas.drawLine(marginX + i * scaleFactor, marginY, marginX + i * scaleFactor, marginY + viewportHeight * scaleFactor, gridLinePaint);
+            canvas.drawLine(marginX + i * scaleFactor, marginY, marginX + i * scaleFactor, marginY + viewportHeight * scaleFactor, gridlinePaint);
         }
-        // Draw horizontal gridLines.
+        // Draw horizontal gridlines.
         for (int i = 5; i < viewportHeight; i += 5) {
-            canvas.drawLine(marginX, marginY + i * scaleFactor, marginX + viewportWidth * scaleFactor, marginY + i * scaleFactor, gridLinePaint);
+            canvas.drawLine(marginX, marginY + i * scaleFactor, marginX + viewportWidth * scaleFactor, marginY + i * scaleFactor, gridlinePaint);
         }
 
         List<DisplayedSolarSystem> systems = viewModel.getSystems();
@@ -168,34 +162,36 @@ public class SpaceMapView extends View {
             if (system.currentlyVisiting) {
                 canvas.drawCircle(realX, realY, 8, currentSystemDotPaint);
                 currentSystem = system;
+            } else if (system.visited) {
+                canvas.drawCircle(realX, realY, 8, visitedSystemDotPaint);
             } else {
                 canvas.drawCircle(realX, realY, 8, dotPaint);
             }
-            systemRect[i].bottom = (int)realY + 32;
-            systemRect[i].top = (int)realY - 32;
-            systemRect[i].right = (int)realX + 32;
-            systemRect[i].left = (int)realX - 32;
+            systemRects[i].bottom = (int)realY + 32;
+            systemRects[i].top = (int)realY - 32;
+            systemRects[i].right = (int)realX + 32;
+            systemRects[i].left = (int)realX - 32;
         }
 
         // Draw circle indicating where the player can travel
-        canvas.drawCircle(marginX + currentSystem.x * scaleFactor, marginY + currentSystem.y * scaleFactor, viewModel.getCurrentShipFuel() * scaleFactor, travelBoundPaint);
+        canvas.drawCircle(marginX + Objects.requireNonNull(currentSystem).x * scaleFactor, marginY + currentSystem.y * scaleFactor, viewModel.getCurrentShipFuel() * scaleFactor, travelBoundPaint);
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
-        paddingLeft = getPaddingLeft();
-        paddingTop = getPaddingTop();
-        paddingRight = getPaddingRight();
-        paddingBottom = getPaddingBottom();
+        int paddingLeft = getPaddingLeft();
+        int paddingTop = getPaddingTop();
+        int paddingRight = getPaddingRight();
+        int paddingBottom = getPaddingBottom();
 
-        contentWidth = getWidth() - paddingLeft - paddingRight;
-        contentHeight = getHeight() - paddingTop - paddingBottom;
+        int contentWidth = getWidth() - paddingLeft - paddingRight;
+        int contentHeight = getHeight() - paddingTop - paddingBottom;
 
         scaleFactor = contentHeight > contentWidth
-                ? (float)contentWidth / viewportWidth
-                : (float)contentHeight / viewportHeight;
+                ? (float) contentWidth / viewportWidth
+                : (float) contentHeight / viewportHeight;
         marginX = (contentWidth - (viewportWidth * scaleFactor)) / 2.0f;
         marginY = (contentHeight - (viewportHeight * scaleFactor)) / 2.0f;
     }
@@ -208,8 +204,8 @@ public class SpaceMapView extends View {
             int viewX = (int)event.getX();
             int viewY = (int)event.getY();
 
-            for (int i = 0; i < systemRect.length; i++) {
-                Rect touchRect = systemRect[i];
+            for (int i = 0; i < systemRects.length; i++) {
+                Rect touchRect = systemRects[i];
                 if (touchRect.contains(viewX, viewY)) {
                     lastTouchedSystem = viewModel.getSystemInfo(i);
                     clickListener.onClick(this);
